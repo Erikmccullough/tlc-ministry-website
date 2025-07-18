@@ -1,2 +1,2 @@
 # tlc-ministry-website
-Official website for T;C Ministry
+Official website for TLC Ministry
