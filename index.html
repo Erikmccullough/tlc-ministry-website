@@ -1,542 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TLC Ministry - Tacos, Love & Creation Foundation</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #e74c3c;
-            text-decoration: none;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: #e74c3c;
-        }
-        
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding-top: 80px;
-        }
-        
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: slideInUp 1s ease-out;
-        }
-        
-        .hero-content p {
-            font-size: 1.4rem;
-            margin-bottom: 2rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            animation: slideInUp 1s ease-out 0.2s both;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: slideInUp 1s ease-out 0.4s both;
-        }
-        
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        
-        .btn-primary {
-            background: #e74c3c;
-            color: white;
-        }
-        
-        .btn-secondary {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            border: 2px solid white;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
-        
-        /* Main Content */
-        main {
-            background: white;
-            margin-top: -50px;
-            border-radius: 50px 50px 0 0;
-            position: relative;
-            z-index: 2;
-        }
-        
-        section {
-            padding: 4rem 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-        
-        /* Mission Section */
-        .mission {
-            background: #f8f9fa;
-            padding: 6rem 0;
-        }
-        
-        .mission-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .mission-content h2 {
-            color: #e74c3c;
-            margin-bottom: 2rem;
-        }
-        
-        .mission-content p {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            color: #666;
-        }
-        
-        /* Programs Section */
-        .programs {
-            padding: 6rem 0;
-        }
-        
-        .programs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .program-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-left: 5px solid #e74c3c;
-        }
-        
-        .program-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-        
-        .program-card h3 {
-            color: #e74c3c;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-        
-        .program-card p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-        
-        .program-details {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 10px;
-            margin-top: 1rem;
-        }
-        
-        .program-details strong {
-            color: #333;
-        }
-        
-        /* Impact Section */
-        .impact {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-            color: white;
-            padding: 6rem 0;
-        }
-        
-        .impact-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-            margin-top: 3rem;
-        }
-        
-        .stat {
-            padding: 2rem;
-        }
-        
-        .stat-number {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        /* Get Involved Section */
-        .get-involved {
-            padding: 6rem 0;
-            background: #f8f9fa;
-        }
-        
-        .involvement-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .involvement-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        
-        .involvement-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .involvement-card h3 {
-            color: #e74c3c;
-            margin-bottom: 1rem;
-        }
-        
-        /* Contact Section */
-        .contact {
-            padding: 6rem 0;
-            background: #333;
-            color: white;
-        }
-        
-        .contact-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-        
-        .contact-info h3 {
-            color: #e74c3c;
-            margin-bottom: 1rem;
-        }
-        
-        .contact-info p {
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Footer */
-        footer {
-            background: #222;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-        }
-        
-        /* Animations */
-        @keyframes slideInUp {
-            from {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-content p {
-                font-size: 1.1rem;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .programs-grid,
-            .involvement-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TLC Ministry – Tacos, Love &amp; Creation</title>
+  <!-- Import Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-uXPTCdzqmTTzp7aG+2HPzBd9+5Y7GXU4RFMmeEoU4t1jVviySm/dxN/wucwIF+KMCdRGKNqkWf2wd+8WJX6kdA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <a href="#" class="logo">TLC Ministry</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#mission">Mission</a></li>
-                <li><a href="#programs">Programs</a></li>
-                <li><a href="#impact">Impact</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Early Responders to the AI Displacement Crisis</h1>
-                <p>TLC Ministry serves as first-line community response to unprecedented AI workforce displacement, building resilience through shared meals, creative arts, and grassroots organizing.</p>
-                <div class="cta-buttons">
-                    <a href="#programs" class="btn btn-primary">Join Our Next Gathering</a>
-                    <a href="#contact" class="btn btn-secondary">Get Involved</a>
-                </div>
-            </div>
+  <!-- Site Header -->
+  <header>
+    <nav>
+      <div class="nav-logo">TLC Ministry</div>
+      <div class="nav-toggle"><i class="fas fa-bars"></i></div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="programs.html">Programs</a>
+        <a href="impact.html">Impact</a>
+        <a href="partner.html">Partner</a>
+        <a href="donate.html">Donate</a>
+        <a href="contact.html">Contact</a>
+        <a href="blog.html">Blog</a>
+      </div>
+    </nav>
+  </header>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Feeding the Body. Healing the Spirit. Inspiring Creation.</h1>
+      <p>We are TLC Ministry – Tacos, Love &amp; Creation. A nonprofit dedicated to nourishing our community with food, love, and art—building resilience in a world transformed by technology.</p>
+      <a href="donate.html" class="btn">Donate Now</a>
+    </div>
+  </section>
+  <!-- Mission Snapshot -->
+  <section class="mission-snapshot">
+    <div class="container">
+      <h2>Tacos, Love, and Creation</h2>
+      <div class="pillars">
+        <div class="pillar">
+          <i class="fas fa-utensils fa-3x" style="color: var(--primary);"></i>
+          <h3>Tacos</h3>
+          <p>Weekly food distributions and taco nights nourish our neighbors and foster connection.</p>
         </div>
-    </section>
-
-    <main>
-        <section id="mission" class="mission">
-            <div class="container">
-                <div class="mission-content">
-                    <h2 class="section-title">Our Mission</h2>
-                    <p>TLC Ministry - Tacos, Love & Creation Foundation operates as early responders to the AI displacement crisis, providing immediate community-based intervention for the unprecedented economic emergency facing working families.</p>
-                    <p>As one of the first organizations specifically addressing AI workforce displacement, we demonstrate that affected communities can lead rapid response efforts that combine immediate mutual aid with long-term organizing for economic justice.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="programs" class="programs">
-            <div class="container">
-                <h2 class="section-title">Our Programs</h2>
-                <div class="programs-grid">
-                    <div class="program-card">
-                        <h3>🌮 Community Taco Gatherings</h3>
-                        <p>Weekly gatherings providing food security, social connection, and space for collective problem-solving around economic displacement.</p>
-                        <div class="program-details">
-                            <strong>When:</strong> Every [Day] from [Time]<br>
-                            <strong>Where:</strong> [Location/Rotating venues]<br>
-                            <strong>Who:</strong> All community members welcome
-                        </div>
-                    </div>
-                    
-                    <div class="program-card">
-                        <h3>🎨 Youth Arts & Leadership</h3>
-                        <p>Creative programming where young people process economic anxiety through art-making while developing organizing and leadership skills.</p>
-                        <div class="program-details">
-                            <strong>Ages:</strong> 14-24<br>
-                            <strong>Commitment:</strong> 6-month cohorts<br>
-                            <strong>Benefits:</strong> Stipends available for graduates
-                        </div>
-                    </div>
-                    
-                    <div class="program-card">
-                        <h3>💻 Technology Access & Literacy</h3>
-                        <p>Community-controlled technology training helping members navigate AI tools and advocate for community needs in technology policy.</p>
-                        <div class="program-details">
-                            <strong>Focus:</strong> Digital literacy, AI awareness<br>
-                            <strong>Format:</strong> Workshops during gatherings<br>
-                            <strong>Goal:</strong> Community empowerment through tech
-                        </div>
-                    </div>
-                    
-                    <div class="program-card">
-                        <h3>📢 Community Organizing & Advocacy</h3>
-                        <p>Community members develop expertise in local impacts of AI displacement and create policy recommendations for collective action.</p>
-                        <div class="program-details">
-                            <strong>Activities:</strong> Research, policy advocacy<br>
-                            <strong>Outcomes:</strong> Community-led campaigns<br>
-                            <strong>Impact:</strong> Real policy change
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="impact" class="impact">
-            <div class="container">
-                <h2 class="section-title">Our Impact</h2>
-                <div class="impact-stats">
-                    <div class="stat">
-                        <div class="stat-number">150+</div>
-                        <div class="stat-label">Community members served monthly</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">48</div>
-                        <div class="stat-label">Taco gatherings held annually</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">25</div>
-                        <div class="stat-label">Youth developing leadership skills</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">$50,000</div>
-                        <div class="stat-label">In mutual aid distributed</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="get-involved" class="get-involved">
-            <div class="container">
-                <h2 class="section-title">Get Involved</h2>
-                <div class="involvement-grid">
-                    <div class="involvement-card">
-                        <h3>Attend a Gathering</h3>
-                        <p>Join us for food, community, and organizing. Everyone welcome!</p>
-                        <a href="#contact" class="btn btn-primary">Learn More</a>
-                    </div>
-                    <div class="involvement-card">
-                        <h3>Volunteer</h3>
-                        <p>Help with food prep, art supplies, childcare, or technology support.</p>
-                        <a href="#contact" class="btn btn-primary">Get Started</a>
-                    </div>
-                    <div class="involvement-card">
-                        <h3>Donate</h3>
-                        <p>Support community members experiencing economic transition.</p>
-                        <a href="#contact" class="btn btn-primary">Donate Now</a>
-                    </div>
-                    <div class="involvement-card">
-                        <h3>Partner</h3>
-                        <p>Organizations interested in collaboration and mutual support.</p>
-                        <a href="#contact" class="btn btn-primary">Connect</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact">
-            <div class="container">
-                <h2 class="section-title">Contact Us</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <h3>Get in Touch</h3>
-                        <p><strong>Email:</strong> info@tacosloveandcreation.org</p>
-                        <p><strong>Address:</strong> 227 Merkle Dr, Norman, OK 73069</p>
-                        <p><strong>EIN:</strong> 33-2509318</p>
-                    </div>
-                    <div class="contact-info">
-                        <h3>Follow Us</h3>
-                        <p>Stay connected with weekly gathering updates, community stories, and advocacy opportunities.</p>
-                        <p>Social media links coming soon!</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 TLC Ministry - Tacos, Love & Creation Foundation. All rights reserved.</p>
-            <p>501(c)(3) Nonprofit Organization | EIN: 33-2509318</p>
+        <div class="pillar">
+          <i class="fas fa-heart fa-3x" style="color: var(--teal);"></i>
+          <h3>Love</h3>
+          <p>Outreach, emotional support, and community gatherings provide hope and healing.</p>
         </div>
-    </footer>
-
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add scroll effect to header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
-        });
-    </script>
+        <div class="pillar">
+          <i class="fas fa-paint-brush fa-3x" style="color: var(--secondary);"></i>
+          <h3>Creation</h3>
+          <p>Art workshops, murals, and denim upcycling celebrate creativity and self‑expression.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Impact Banner -->
+  <section class="impact-banner">
+    <div class="container">
+      <h2>The AI revolution is changing work. Millions face uncertainty. We provide stability and hope.</h2>
+    </div>
+  </section>
+  <!-- Program Highlights -->
+  <section class="program-highlights">
+    <div class="container">
+      <h2>Explore Our Programs</h2>
+      <div class="program-cards">
+        <div class="card">
+          <i class="fas fa-utensils fa-2x"></i>
+          <h3>Tacos</h3>
+          <p>We serve fresh tacos every week to those in need, nurturing both body and community.</p>
+          <a href="programs.html#tacos" class="btn-secondary">Learn More</a>
+        </div>
+        <div class="card">
+          <i class="fas fa-hands-holding-heart fa-2x"></i>
+          <h3>Love</h3>
+          <p>Through emotional support and outreach, we build meaningful relationships and uplift spirits.</p>
+          <a href="programs.html#love" class="btn-secondary">Learn More</a>
+        </div>
+        <div class="card">
+          <i class="fas fa-palette fa-2x"></i>
+          <h3>Creation</h3>
+          <p>Our art programs spark creativity—murals, workshops, and upcycling transform lives.</p>
+          <a href="programs.html#creation" class="btn-secondary">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <h2>Real Stories</h2>
+      <div class="testimonial-cards">
+        <div class="testimonial">
+          <p>“TLC Ministry changed my life by feeding my stomach and my soul.”</p>
+          <span>– Maria, Community Member</span>
+        </div>
+        <div class="testimonial">
+          <p>“The art workshops gave me confidence and a creative outlet I never knew I needed.”</p>
+          <span>– Jordan, Program Participant</span>
+        </div>
+        <div class="testimonial">
+          <p>“Our company’s partnership with TLC brings our employees joy and purpose.”</p>
+          <span>– Taylor, Corporate Partner</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Donate CTA -->
+  <section class="donate-cta">
+    <div class="container">
+      <h2>Your Gift Creates Nourishment, Love, and Hope</h2>
+      <p>Help us continue serving delicious tacos, spreading love, and fostering creativity.</p>
+      <a href="donate.html" class="btn">Donate Today</a>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-about">
+        <h4>About TLC Ministry</h4>
+        <p>TLC Ministry is a registered 501(c)(3) nonprofit dedicated to providing food, love, and art to those in need. Join us in transforming lives.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="impact.html">Impact</a></li>
+          <li><a href="partner.html">Partner</a></li>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>Noble, Oklahoma, USA</p>
+        <p>Email: <a href="mailto:info@tlcministry.org">info@tlcministry.org</a></p>
+        <p>Phone: (555) 123‑4567</p>
+      </div>
+      <div class="footer-social">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 TLC Ministry. All rights reserved.</p>
+    </div>
+  </footer>
+  <!-- Script -->
+  <script src="assets/js/script.js"></script>
 </body>
 </html>
- 
