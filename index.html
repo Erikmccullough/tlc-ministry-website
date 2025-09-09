@@ -1,166 +1,97 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TLC Ministry – Tacos, Love &amp; Creation</title>
-  <!-- Import Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-uXPTCdzqmTTzp7aG+2HPzBd9+5Y7GXU4RFMmeEoU4t1jVviySm/dxN/wucwIF+KMCdRGKNqkWf2wd+8WJX6kdA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TLC Ministry – Tacos, Love & Creation</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Site Header -->
-  <header>
-    <nav>
-      <div class="nav-logo">TLC Ministry</div>
-      <div class="nav-toggle"><i class="fas fa-bars"></i></div>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="programs.html">Programs</a>
-        <a href="impact.html">Impact</a>
-        <a href="partner.html">Partner</a>
-        <a href="donate.html">Donate</a>
-        <a href="contact.html">Contact</a>
-        <a href="blog.html">Blog</a>
-      </div>
+
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.jpg" alt="Tacos, Love & Creation logo" />
+      <strong>Tacos, Love &amp; Creation</strong>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="donate.html">Donate</a>
+      <a href="memberships.html">Memberships</a>
+      <a href="store.html">Store</a>
+      <a href="contact.html">Contact</a>
     </nav>
-  </header>
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Feeding the Body. Healing the Spirit. Inspiring Creation.</h1>
-      <p>We are TLC Ministry – Tacos, Love &amp; Creation. A nonprofit dedicated to nourishing our community with food, love, and art—building resilience in a world transformed by technology.</p>
-      <a href="donate.html" class="btn">Donate Now</a>
-    </div>
-  </section>
-  <!-- Mission Snapshot -->
-  <section class="mission-snapshot">
-    <div class="container">
-      <h2>Tacos, Love, and Creation</h2>
-      <div class="pillars">
-        <div class="pillar">
-          <i class="fas fa-utensils fa-3x" style="color: var(--primary);"></i>
-          <h3>Tacos</h3>
-          <p>Weekly food distributions and taco nights nourish our neighbors and foster connection.</p>
-        </div>
-        <div class="pillar">
-          <i class="fas fa-heart fa-3x" style="color: var(--teal);"></i>
-          <h3>Love</h3>
-          <p>Outreach, emotional support, and community gatherings provide hope and healing.</p>
-        </div>
-        <div class="pillar">
-          <i class="fas fa-paint-brush fa-3x" style="color: var(--secondary);"></i>
-          <h3>Creation</h3>
-          <p>Art workshops, murals, and denim upcycling celebrate creativity and self‑expression.</p>
-        </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container inner">
+    <div>
+      <div class="kicker">Love over fear</div>
+      <h1>Feeding people, building community, and creating art that heals.</h1>
+      <p>TLC Ministry channels creativity into tangible action: tacos for hungry bellies, community projects for connection, and art to spark joy. Every purchase and membership fuels the mission.</p>
+      <div class="cta-row">
+        <a class="btn" href="donate.html">Donate</a>
+        <a class="btn secondary" href="memberships.html">Join Memberships</a>
+        <a class="btn secondary" href="store.html">Shop & Support</a>
+      </div>
+      <div class="notice">
+        We’re building a studio-on-wheels and a network of community art events. Your support keeps the lights bright and the tacos hot.
       </div>
     </div>
-  </section>
-  <!-- Impact Banner -->
-  <section class="impact-banner">
-    <div class="container">
-      <h2>The AI revolution is changing work. Millions face uncertainty. We provide stability and hope.</h2>
-    </div>
-  </section>
-  <!-- Program Highlights -->
-  <section class="program-highlights">
-    <div class="container">
-      <h2>Explore Our Programs</h2>
-      <div class="program-cards">
-        <div class="card">
-          <i class="fas fa-utensils fa-2x"></i>
-          <h3>Tacos</h3>
-          <p>We serve fresh tacos every week to those in need, nurturing both body and community.</p>
-          <a href="programs.html#tacos" class="btn-secondary">Learn More</a>
-        </div>
-        <div class="card">
-          <i class="fas fa-hands-holding-heart fa-2x"></i>
-          <h3>Love</h3>
-          <p>Through emotional support and outreach, we build meaningful relationships and uplift spirits.</p>
-          <a href="programs.html#love" class="btn-secondary">Learn More</a>
-        </div>
-        <div class="card">
-          <i class="fas fa-palette fa-2x"></i>
-          <h3>Creation</h3>
-          <p>Our art programs spark creativity—murals, workshops, and upcycling transform lives.</p>
-          <a href="programs.html#creation" class="btn-secondary">Learn More</a>
-        </div>
+    <div>
+      <div class="card">
+        <h3>What is TLC?</h3>
+        <p>We’re a nonprofit art ministry. We feed folks, teach creative skills, and create spaces where people feel seen. Proceeds from memberships and sales go straight into the mission.</p>
       </div>
-    </div>
-  </section>
-  <!-- Testimonials -->
-  <section class="testimonials">
-    <div class="container">
-      <h2>Real Stories</h2>
-      <div class="testimonial-cards">
-        <div class="testimonial">
-          <p>“TLC Ministry changed my life by feeding my stomach and my soul.”</p>
-          <span>– Maria, Community Member</span>
-        </div>
-        <div class="testimonial">
-          <p>“The art workshops gave me confidence and a creative outlet I never knew I needed.”</p>
-          <span>– Jordan, Program Participant</span>
-        </div>
-        <div class="testimonial">
-          <p>“Our company’s partnership with TLC brings our employees joy and purpose.”</p>
-          <span>– Taylor, Corporate Partner</span>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Donate CTA -->
-  <section class="donate-cta">
-    <div class="container">
-      <h2>Your Gift Creates Nourishment, Love, and Hope</h2>
-      <p>Help us continue serving delicious tacos, spreading love, and fostering creativity.</p>
-      <a href="donate.html" class="btn">Donate Today</a>
-    </div>
-  </section>
-  <!-- Footer -->
-  <footer>
-    <div class="container footer-grid">
-      <div class="footer-about">
-        <h4>About TLC Ministry</h4>
-        <p>TLC Ministry is a registered 501(c)(3) nonprofit dedicated to providing food, love, and art to those in need. Join us in transforming lives.</p>
-      </div>
-      <div class="footer-links">
-        <h4>Quick Links</h4>
+      <div class="card" style="margin-top:12px">
+        <h3>How you can help</h3>
         <ul>
-          <li><a href="about.html">About</a></li>
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="impact.html">Impact</a></li>
-          <li><a href="partner.html">Partner</a></li>
-          <li><a href="donate.html">Donate</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="blog.html">Blog</a></li>
+          <li>Donate directly (PayPal/Stripe)</li>
+          <li>Join a monthly membership tier</li>
+          <li>Buy prints, apparel, and artist-made goods</li>
         </ul>
       </div>
-      <div class="footer-contact">
-        <h4>Contact</h4>
-        <p>Noble, Oklahoma, USA</p>
-        <p>Email: <a href="mailto:info@tlcministry.org">info@tlcministry.org</a></p>
-        <p>Phone: (555) 123‑4567</p>
-      </div>
-      <div class="footer-social">
-        <h4>Follow Us</h4>
-        <div class="social-icons">
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        </div>
-      </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 TLC Ministry. All rights reserved.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Recent Projects</h2>
+    <p class="lead">Murals, community art jams, tacos for neighbors, and kid‑friendly creative workshops.</p>
+    <div class="grid">
+      <div class="card"><span class="badge">Mural</span><h3>“Love vs Fear”</h3><p>Large-format mural exploring the choice we face every day.</p></div>
+      <div class="card"><span class="badge">Community</span><h3>Taco Pop‑Up</h3><p>Feeding friends downtown with local partners and volunteers.</p></div>
+      <div class="card"><span class="badge">Workshop</span><h3>Kids Art Jam</h3><p>Hands-on creativity with color theory, collage, and big bubbles.</p></div>
     </div>
-  </footer>
-  <!-- Script -->
-  <script src="assets/js/script.js"></script>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container cols">
+    <div>
+      <div class="brand" style="margin-bottom:10px">
+        <img src="assets/logo.jpg" alt="TLC logo" style="width:40px;height:40px;border-radius:10px">
+        <strong>Tacos, Love &amp; Creation</strong>
+      </div>
+      <p class="small">© 2025 TLC Ministry – Tacos, Love &amp; Creation Foundation. EIN: YOUR‑EIN‑HERE</p>
+      <p class="small">501(c)(3) pending/approved status details can go here.</p>
+    </div>
+    <div>
+      <strong>Quick Links</strong><br>
+      <a href="donate.html">Donate</a><br>
+      <a href="memberships.html">Memberships</a><br>
+      <a href="store.html">Store</a>
+    </div>
+    <div>
+      <strong>Contact</strong><br>
+      <a href="mailto:hello@tacosloveandcreation.org">hello@tacosloveandcreation.org</a><br>
+      Norman, Oklahoma
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Donate – TLC Ministry</title>
+  <title>Store – TLC Ministry</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -26,23 +26,10 @@
 
 <section class="section">
   <div class="container">
-    <h2>Donate</h2>
-    <p class="lead">Direct giving keeps our outreach nimble — tacos, supplies, and art materials go right where they’re needed.</p>
-    <div class="grid">
-      <div class="card">
-        <h3>Donate via PayPal</h3>
-        <p>Use a card or your PayPal balance.</p>
-        <a class="btn" data-paypal href="#" target="_blank" rel="noopener">Open PayPal</a>
-      </div>
-      <div class="card">
-        <h3>Donate via Stripe</h3>
-        <p>Fast, secure card checkout powered by Stripe.</p>
-        <a class="btn" data-stripe href="#" target="_blank" rel="noopener">Open Stripe Checkout</a>
-      </div>
-    </div>
-    <div class="notice">
-      Prefer mailing a check or donating goods? Email <a href="mailto:hello@tacosloveandcreation.org">hello@tacosloveandcreation.org</a>.
-    </div>
+    <h2>Store</h2>
+    <p class="lead">Every purchase funds community meals and creative programs.</p>
+    <div id="store-root" class="products"></div>
+    <div class="notice small">Add or edit items in <code>script.js</code> (look for <code>TLC_CONFIG.products</code>) or wire these buttons to Stripe product links.</div>
   </div>
 </section>
 
