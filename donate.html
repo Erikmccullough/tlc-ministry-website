@@ -1,75 +1,131 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Donate – TLC Ministry</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-uXPTCdzqmTTzp7aG+2HPzBd9+5Y7GXU4RFMmeEoU4t1jVviySm/dxN/wucwIF+KMCdRGKNqkWf2wd+8WJX6kdA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
-<header class="header">
-  <div class="container nav">
-    <a class="brand" href="index.html">
-      <img src="assets/logo.jpg" alt="Tacos, Love & Creation logo" />
-      <strong>Tacos, Love &amp; Creation</strong>
-    </a>
-    <nav class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="donate.html">Donate</a>
-      <a href="memberships.html">Memberships</a>
-      <a href="store.html">Store</a>
-      <a href="contact.html">Contact</a>
+  <header>
+    <nav>
+      <div class="nav-logo">TLC Ministry</div>
+      <div class="nav-toggle"><i class="fas fa-bars"></i></div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="programs.html">Programs</a>
+        <a href="impact.html">Impact</a>
+        <a href="partner.html">Partner</a>
+        <a href="donate.html">Donate</a>
+        <a href="contact.html">Contact</a>
+        <a href="blog.html">Blog</a>
+      </div>
     </nav>
-  </div>
-</header>
-
-<section class="section">
-  <div class="container">
-    <h2>Donate</h2>
-    <p class="lead">Direct giving keeps our outreach nimble — tacos, supplies, and art materials go right where they’re needed.</p>
-    <div class="grid">
-      <div class="card">
-        <h3>Donate via PayPal</h3>
-        <p>Use a card or your PayPal balance.</p>
-        <a class="btn" data-paypal href="#" target="_blank" rel="noopener">Open PayPal</a>
+  </header>
+  <!-- Page Hero -->
+  <section class="page-hero" style="background-image: url('assets/images/hero_bg.png');">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <h1>Your Gift Creates Nourishment, Love, and Hope</h1>
+    </div>
+  </section>
+  <!-- Donation Impact Levels -->
+  <section class="donation-levels">
+    <div class="container">
+      <h2>Choose Your Impact</h2>
+      <div class="donation-grid">
+        <div class="donation-card">
+          <h3>$10</h3>
+          <p>Feeds three people with a warm taco meal.</p>
+          <a href="contact.html" class="btn-secondary">Give $10</a>
+        </div>
+        <div class="donation-card">
+          <h3>$25</h3>
+          <p>Funds art supplies for one workshop session.</p>
+          <a href="contact.html" class="btn-secondary">Give $25</a>
+        </div>
+        <div class="donation-card">
+          <h3>$100</h3>
+          <p>Sponsors an entire community event.</p>
+          <a href="contact.html" class="btn-secondary">Give $100</a>
+        </div>
       </div>
-      <div class="card">
-        <h3>Donate via Stripe</h3>
-        <p>Fast, secure card checkout powered by Stripe.</p>
-        <a class="btn" data-stripe href="#" target="_blank" rel="noopener">Open Stripe Checkout</a>
+    </div>
+  </section>
+  <!-- Monthly Giving -->
+  <section class="monthly-giving" style="background-color: var(--secondary); color: #ffffff;">
+    <div class="container" style="text-align: center;">
+      <h2>Join the Creator Circle</h2>
+      <p>Make a lasting impact by becoming a monthly donor. Your recurring gift ensures a steady supply of tacos, love, and art all year long.</p>
+      <a href="contact.html" class="btn">Become a Monthly Donor</a>
+    </div>
+  </section>
+  <!-- Corporate Giving -->
+  <section class="corporate-giving">
+    <div class="container">
+      <h2>Corporate Giving</h2>
+      <p>Looking to maximize your philanthropic impact? We offer tailored giving opportunities for businesses of all sizes. Reach out to learn how your organization can sponsor a program or match employee donations.</p>
+      <a href="partner.html" class="btn-secondary">Learn About Partnership</a>
+    </div>
+  </section>
+  <!-- Trust Statement -->
+  <section class="trust-section" style="background-color: var(--light);">
+    <div class="container" style="text-align: center;">
+      <h2>Trust &amp; Transparency</h2>
+      <p>TLC Ministry is a registered 501(c)(3) organization. All donations are tax‑deductible to the fullest extent allowed by law. We steward every dollar with integrity and accountability.</p>
+    </div>
+  </section>
+  <!-- CTA -->
+  <section class="cta-section" style="background-color: var(--primary); color: #ffffff;">
+    <div class="container" style="text-align: center;">
+      <h2>Ready to Make a Difference?</h2>
+      <p>Your generosity fuels nourishment, love, and creativity in our community.</p>
+      <a href="contact.html" class="btn">Donate Securely Now</a>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-about">
+        <h4>About TLC Ministry</h4>
+        <p>TLC Ministry is a registered 501(c)(3) nonprofit dedicated to providing food, love, and art to those in need. Join us in transforming lives.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="impact.html">Impact</a></li>
+          <li><a href="partner.html">Partner</a></li>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="blog.html">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>Noble, Oklahoma, USA</p>
+        <p>Email: <a href="mailto:info@tlcministry.org">info@tlcministry.org</a></p>
+        <p>Phone: (555) 123‑4567</p>
+      </div>
+      <div class="footer-social">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
       </div>
     </div>
-    <div class="notice">
-      Prefer mailing a check or donating goods? Email <a href="mailto:hello@tacosloveandcreation.org">hello@tacosloveandcreation.org</a>.
+    <div class="footer-bottom">
+      <p>&copy; 2025 TLC Ministry. All rights reserved.</p>
     </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container cols">
-    <div>
-      <div class="brand" style="margin-bottom:10px">
-        <img src="assets/logo.jpg" alt="TLC logo" style="width:40px;height:40px;border-radius:10px">
-        <strong>Tacos, Love &amp; Creation</strong>
-      </div>
-      <p class="small">© 2025 TLC Ministry – Tacos, Love &amp; Creation Foundation. EIN: YOUR‑EIN‑HERE</p>
-      <p class="small">501(c)(3) pending/approved status details can go here.</p>
-    </div>
-    <div>
-      <strong>Quick Links</strong><br>
-      <a href="donate.html">Donate</a><br>
-      <a href="memberships.html">Memberships</a><br>
-      <a href="store.html">Store</a>
-    </div>
-    <div>
-      <strong>Contact</strong><br>
-      <a href="mailto:hello@tacosloveandcreation.org">hello@tacosloveandcreation.org</a><br>
-      Norman, Oklahoma
-    </div>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+  </footer>
+  <script src="assets/js/script.js"></script>
 </body>
 </html>
