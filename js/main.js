@@ -1,1 +1,1 @@
-// JavaScript placeholder
+// Minimal JS placeholder

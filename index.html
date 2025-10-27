@@ -1,155 +1,249 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TLC Ministry – Tacos, Love & Creation</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <script defer src="js/main.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tacos, Love & Creation Foundation</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <!-- Use the organization’s real logo. If a JPG file named logo.jpg is provided it will display automatically -->
-      <img src="assets/img/logo.jpg" alt="TLC logo">
-      <span>TLC Ministry</span>
+  <!-- Header / Nav -->
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <!-- Swap this circle for your real logo image when you're ready -->
+        <div class="logo-circle">TLC</div>
+        <!-- Example logo image hook:
+        <img src="assets/tlc-logo.png" alt="Tacos, Love & Creation logo" class="site-logo" />
+        -->
+        <div class="brand-text">
+          <div class="brand-name">Tacos, Love & Creation</div>
+          <div class="brand-tag">Feed bellies. Feed souls. Make art.</div>
+        </div>
+      </div>
+
+      <nav class="main-nav">
+        <a href="#mission" class="nav-link">Mission</a>
+        <a href="#programs" class="nav-link">Programs</a>
+        <a href="#donate" class="nav-link cta-donate">Donate</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
     </div>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#programs">Programs</a></li>
-        <li><a href="#membership">Membership</a></li>
-        <li><a href="#shop">Shop</a></li>
-        <li><a href="#donate">Donate</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
   </header>
 
-  <section id="home" class="hero">
-    <h1>Feed bellies. Feed souls. Make art together.</h1>
-    <p>TLC Ministry – Tacos, Love & Creation Foundation serves our community with warm meals, creative workshops, and collaborative projects that reconnect people to purpose.</p>
-    <!-- Mission statement front and center -->
-    <p class="mission">TLC Ministry is committed to fostering creative, compassionate solutions that nourish and uplift our community, especially youth facing risk and uncertainty.<br><br>We recognize that rapid advances in artificial intelligence and automation are reshaping the job landscape, and we are dedicated to helping those who might be displaced adapt and thrive. Through innovative programs that blend food, art, and technology, we provide supportive spaces where every individual can build skills, discover purpose, and forge meaningful connections. Our mission is to ensure that no one is left behind as our world evolves.</p>
-  </section>
-
-  <section id="about">
-    <h2>About Us</h2>
-    <p>We are a grassroots organization based in Norman, Oklahoma, dedicated to nurturing community through food and art. We share weekly meals, run creative workshops, and build spaces where people feel seen, supported, and inspired.</p>
-    <p>501(c)(3) status in formation • EIN: 33-2509318</p>
-  </section>
-
-  <section id="programs">
-    <h2>Programs</h2>
-    <div class="programs-grid">
-      <div class="program-card">
-        <h3>Taco Tuesdays</h3>
-        <p>Every Tuesday 6–8pm: share a hot meal and good vibes. All are welcome.</p>
-      </div>
-      <div class="program-card">
-        <h3>Creation Lab</h3>
-        <p>Open studio for all ages. Materials provided; curiosity required.</p>
-        <ul>
-          <li>Printmaking, denim upcycling, and LED art workshops</li>
-          <li>More classes coming soon</li>
-        </ul>
-      </div>
-      <div class="program-card">
-        <h3>Walls of Love</h3>
-        <p>We collaborate with local artists to paint murals and share community stories. Apply to host a mural or sponsor a wall.</p>
-      </div>
-      <div class="program-card">
-        <h3>Microgrants & Materials Bank</h3>
-        <p>Small grants for community projects and access to art supplies. Coming soon!</p>
+  <!-- Hero / Intro -->
+  <section class="hero-section" id="mission">
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <h1 class="hero-headline">
+          Feed bellies. Feed souls. Make art together.
+        </h1>
+        <p class="hero-body">
+          We’re a grassroots art + compassion ministry based in Oklahoma.
+          We serve hot food, create safe creative spaces, and help people –
+          especially youth and folks in crisis – build dignity, skill, and
+          community in a world getting rearranged by AI and automation.
+        </p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#donate">Support the work</a>
+          <a class="btn-secondary" href="#programs">See programs</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="membership">
-    <h2>Membership</h2>
-    <p style="text-align:center; max-width:700px; margin:0 auto 2rem;">Choose a tier that fits your budget. Every membership fuels tacos, love, and creation. Perks are being developed and will be announced soon.</p>
-    <div class="membership-cards">
-      <div class="membership-card">
-        <h3>Neighbor</h3>
-        <p><strong>$5/month</strong> or <strong>$50/year</strong></p>
-        <p>Stay connected with our newsletter and receive invites to events.</p>
-      </div>
-      <div class="membership-card">
-        <h3>Creator</h3>
-        <p><strong>$15/month</strong> or <strong>$150/year</strong></p>
-        <p>Everything in Neighbor + early access to workshops and a free taco at each event. (Coming soon)</p>
-      </div>
-      <div class="membership-card">
-        <h3>Benefactor</h3>
-        <p><strong>$50/month</strong> or <strong>$500/year</strong></p>
-        <p>Recognition on our website and an exclusive art piece. (Coming soon)</p>
+  <!-- Programs / What We Do -->
+  <section class="section-light" id="programs">
+    <div class="wrap">
+      <h2 class="section-title">What we actually do in real life</h2>
+
+      <div class="cards-grid">
+        <div class="card">
+          <h3 class="card-title">Food & Presence</h3>
+          <p class="card-text">
+            Street-level meals. Tacos, water, conversation, eye contact. People
+            are not “projects.” People are people.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">Art & Creation Labs</h3>
+          <p class="card-text">
+            Pop-up art tables, denim upcycling, spray art, drawing, sculpture.
+            Creation is medicine. We hand it out.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 class="card-title">Next-Gen Skills</h3>
+          <p class="card-text">
+            Helping youth prepare for an AI-heavy future:
+            creative problem solving, self-led income streams,
+            and “your creativity is not optional, it’s survival.”
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- AI Resources section to help visitors learn about technology and its impact -->
-  <section id="ai-resources">
-    <h2>AI Resources</h2>
-    <p style="text-align:center; max-width:700px; margin:0 auto 2rem;">As artificial intelligence and automation reshape our world, here are some resources to help understand the impact on jobs and youth and to explore creative solutions:</p>
-    <ul class="ai-resources-list">
-      <li><a href="https://futureofwork.mit.edu/" target="_blank">MIT Work of the Future</a> – research on how technology is transforming jobs.</li>
-      <li><a href="https://www.ai4all.org/" target="_blank">AI4ALL</a> – nonprofit promoting education and inclusion in AI for youth.</li>
-      <li><a href="https://www.weforum.org/focus/artificial-intelligence-and-robotics" target="_blank">World Economic Forum: AI &amp; Robotics</a> – insights on AI’s societal impact.</li>
-      <li><a href="https://www.brookings.edu/research/category/artificial-intelligence/" target="_blank">Brookings Institution AI research</a> – analysis of AI, automation, and policy.</li>
-    </ul>
-  </section>
+  <!-- Membership / Donate -->
+  <section class="section-dark" id="donate">
+    <div class="wrap">
+      <h2 class="section-title light">
+        Fuel the mission
+      </h2>
+      <p class="section-blurb light">
+        We’re small and we’re fast. Your support goes straight to tacos,
+        art supplies, and hands-on time with people who actually need it,
+        right now, where they are.
+      </p>
 
-  <section id="shop">
-    <h2>Shop</h2>
-    <p style="text-align:center; max-width:700px; margin:0 auto 2rem;">Our online shop is under construction. In the future you'll be able to purchase creative goods that support our mission.</p>
-    <div class="shop-items">
-      <div class="shop-item">
-        <img src="assets/img/denim-hat.svg" alt="Denim Hat">
-        <h3>Denim Hat</h3>
-        <p>Coming soon! Handmade and upcycled with love.</p>
-      </div>
-      <div class="shop-item">
-        <img src="assets/img/denim-bag.svg" alt="Denim Bag">
-        <h3>Denim Bag</h3>
-        <p>Coming soon! Perfect for carrying your art supplies or tacos.</p>
-      </div>
-      <div class="shop-item">
-        <img src="assets/img/print-pack.svg" alt="Print Pack">
-        <h3>Print Pack</h3>
-        <p>Coming soon! A collection of prints from our community artists.</p>
+      <div class="tiers-grid">
+        <div class="tier-card">
+          <div class="tier-name">Neighbor</div>
+          <div class="tier-price">$5/mo</div>
+          <div class="tier-desc">
+            Help us keep warm food, cold water, and clean socks in circulation.
+          </div>
+          <a class="tier-btn" href="#contact">Join as Neighbor</a>
+        </div>
+
+        <div class="tier-card">
+          <div class="tier-name">Creator</div>
+          <div class="tier-price">$15/mo</div>
+          <div class="tier-desc">
+            Fund paint, denim, sketch kits, and mobile art tables for kids who
+            need somewhere safe to put their hands.
+          </div>
+          <a class="tier-btn" href="#contact">Join as Creator</a>
+        </div>
+
+        <div class="tier-card">
+          <div class="tier-name">Benefactor</div>
+          <div class="tier-price">$50/mo</div>
+          <div class="tier-desc">
+            Help us scale. Bigger installations, more reach, more meals,
+            more nights we show up instead of vanish.
+          </div>
+          <a class="tier-btn" href="#contact">Become a Benefactor</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="donate">
-    <h2>Donate</h2>
-    <p>Your support keeps our tables full and our programs running. Donate using the button below.</p>
-    <!-- PayPal Hosted Button -->
-    <script
-      src="https://www.paypal.com/sdk/js?client-id=BAAUnITM5clocYw8KNmx9BSzXdqOjkZNya1wLXWvv0aKFyb1M9B_0R4IPuHUqOUXMexSaHD_flnpC49w2U&components=hosted-buttons&enable-funding=venmo&currency=USD">
-    </script>
-    <div id="paypal-container-Z8T6UZJQC5GTW"></div>
-    <script>
-      paypal.HostedButtons({
-        hostedButtonId: 'Z8T6UZJQC5GTW'
-      }).render('#paypal-container-Z8T6UZJQC5GTW');
-    </script>
-    <p>Note: A recurring giving option is coming soon!</p>
+  <!-- Shop Teaser -->
+  <section class="section-light">
+    <div class="wrap">
+      <h2 class="section-title">Shop (coming soon)</h2>
+      <p class="section-blurb">
+        100% of proceeds support the mission.
+        Custom denim hats, bags, prints, and one-off art pieces.
+      </p>
+
+      <div class="shop-grid">
+        <div class="shop-item">
+          <div class="shop-thumb placeholder-box">Denim Hat</div>
+          <div class="shop-name">Handmade Denim Hat</div>
+          <div class="shop-status">Coming soon</div>
+        </div>
+
+        <div class="shop-item">
+          <div class="shop-thumb placeholder-box">Denim Bag</div>
+          <div class="shop-name">Reworked Denim Bag</div>
+          <div class="shop-status">Coming soon</div>
+        </div>
+
+        <div class="shop-item">
+          <div class="shop-thumb placeholder-box">Print Pack</div>
+          <div class="shop-name">Print Pack</div>
+          <div class="shop-status">Coming soon</div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>We'd love to hear from you! Reach out to volunteer, partner, or just say hi.</p>
-    <p>Email: <a href="mailto:erik@tacosloveandcreation.org">erik@tacosloveandcreation.org</a></p>
-    <p>Mail: TLC Ministry, Norman, OK 73069</p>
-    <p>Follow us on Instagram: <a href="https://instagram.com/tacosloveandcreation" target="_blank">@tacosloveandcreation</a></p>
+  <!-- Contact -->
+  <section class="section-contact" id="contact">
+    <div class="wrap">
+      <h2 class="section-title">Contact / Partner / Help</h2>
+
+      <div class="contact-block">
+        <div class="contact-line">
+          <span class="contact-label">Phone:</span>
+          <a class="contact-value" href="tel:1-817-266-4425">817-266-4425</a>
+        </div>
+
+        <div class="contact-line">
+          <span class="contact-label">Email:</span>
+          <a class="contact-value" href="mailto:erik@tacosloveandcreation.org">
+            erik@tacosloveandcreation.org
+          </a>
+          <span class="contact-sep">/</span>
+          <a class="contact-value" href="mailto:admin@tacosloveandcreation.org">
+            admin@tacosloveandcreation.org
+          </a>
+        </div>
+
+        <div class="contact-line">
+          <span class="contact-label">Location:</span>
+          <span class="contact-value">
+            Norman, OK 73069
+          </span>
+        </div>
+
+        <div class="contact-line">
+          <span class="contact-label">Instagram:</span>
+          <a class="contact-value" href="https://instagram.com/tacosloveandcreation" target="_blank" rel="noopener noreferrer">
+            @tacosloveandcreation
+          </a>
+        </div>
+      </div>
+
+      <p class="contact-note">
+        Want to sponsor meals, donate materials, or bring us to your city for a pop-up
+        art & food activation? Reach out. This is real.
+      </p>
+    </div>
   </section>
 
-  <footer>
-    <p>&copy; 2025 TLC Ministry – Tacos, Love & Creation. All rights reserved.</p>
-    <p>Designed with love and tacos.</p>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-left">
+        <div class="footer-name">Tacos, Love & Creation Foundation</div>
+        <div class="footer-mini">
+          Nonprofit community arts & outreach.
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <div class="footer-line">
+          <span class="footer-label">Phone:</span>
+          <a class="footer-value" href="tel:1-817-266-4425">817-266-4425</a>
+        </div>
+        <div class="footer-line">
+          <span class="footer-label">Email:</span>
+          <a class="footer-value" href="mailto:erik@tacosloveandcreation.org">
+            erik@tacosloveandcreation.org
+          </a>
+          <span class="footer-sep">/</span>
+          <a class="footer-value" href="mailto:admin@tacosloveandcreation.org">
+            admin@tacosloveandcreation.org
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap footer-bottom">
+      <div class="legal">
+        © <span id="year"></span> Tacos, Love & Creation Foundation. All rights reserved.
+      </div>
+    </div>
   </footer>
+
+  <script>
+    // keep current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

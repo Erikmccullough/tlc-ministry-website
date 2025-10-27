@@ -1,0 +1,192 @@
+🎯 TLC MINISTRY - CLAUDE TASK BREAKDOWN SYSTEM
+============================================
+📅 Created: July 30, 2025
+👤 Erik McCullough, Executive Director
+🎯 Purpose: Individual Claude sessions for specific tasks
+
+📋 HOW TO USE THIS SYSTEM:
+=========================
+1. Start fresh Claude session for each major task
+2. Share relevant context from knowledge base files
+3. Grant filesystem access ONLY to C:\TLC\ folder
+4. Complete one task category per session
+5. Save results before starting new session
+
+🔥 PRIORITY TASK LIST - CLAUDE SESSIONS
+======================================
+
+SESSION 1: GRANT APPLICATION BLITZ
+-----------------------------------
+Focus: Apply to every available grant immediately
+Context Files to Share:
+- TLC_Ministry_Organization_Overview.txt
+- GRANT_STATUS_DASHBOARD.txt
+
+Tasks:
+✅ Research 5-10 new grant opportunities
+✅ Complete 2-3 priority applications 
+✅ Update grant dashboard with new prospects
+✅ Set deadlines in tracking system
+Priority: Norman Community Foundation, USDA Rural Development
+
+SESSION 2: PROPERTY ACQUISITION STRATEGY
+-----------------------------------------
+Focus: Find and acquire real property for community center
+Context Files to Share:
+- Financial_Overview_Status.txt
+- Organization overview
+
+Tasks:
+✅ Research property acquisition grants
+✅ Create property search criteria
+✅ Identify potential buildings/land
+✅ Create funding strategy for property purchase
+✅ Connect with real estate agents or commercial brokers
+
+SESSION 3: WEBSITE & DIGITAL OPTIMIZATION
+------------------------------------------
+Focus: Enhance tacosloveandcreation.org and online presence
+Context Files to Share:
+- Domain_Hosting info
+- Donation_Page_Complete_HTML.txt
+
+Tasks:
+✅ Review and improve website content
+✅ Set up Google Analytics
+✅ Create social media accounts
+✅ Optimize for grant funder viewing
+✅ Add professional contact forms
+
+SESSION 4: FINANCIAL SYSTEMS & COMPLIANCE
+------------------------------------------
+Focus: Set up proper nonprofit financial management
+Context Files to Share:
+- IRS_501c3 documents
+- Compliance_Checklist_August_2025.txt
+
+Tasks:
+✅ Set up QuickBooks for nonprofits
+✅ Create budget templates
+✅ Establish donation tracking systems
+✅ Plan annual compliance requirements
+✅ Create financial reporting templates
+
+SESSION 5: PROGRAM DEVELOPMENT & DOCUMENTATION
+-----------------------------------------------
+Focus: Develop taco gathering and youth programs
+Context Files to Share:
+- Organization overview
+- Programs folder contents
+
+Tasks:
+✅ Create program curricula for taco gatherings
+✅ Develop youth leadership program structure
+✅ Design impact measurement systems
+✅ Create volunteer management system
+✅ Document community outreach strategies
+
+SESSION 6: PARTNERSHIP & OUTREACH STRATEGY
+-------------------------------------------
+Focus: Build strategic relationships for growth
+Context Files to Share:
+- Organization overview
+- Email intelligence reports
+
+Tasks:
+✅ Identify key community partners
+✅ Create partnership proposal templates
+✅ Reach out to University of Oklahoma contacts
+✅ Connect with Norman faith communities
+✅ Develop corporate partnership strategy
+
+SESSION 7: MARKETING & COMMUNICATIONS
+--------------------------------------
+Focus: Build professional nonprofit brand
+Context Files to Share:
+- Brand_Identity_Guide.txt
+- Website files
+
+Tasks:
+✅ Create professional marketing materials
+✅ Design social media content strategy
+✅ Develop email newsletter system
+✅ Create press release templates
+✅ Build media contact database
+
+SESSION 8: LEGAL & GOVERNANCE SETUP
+------------------------------------
+Focus: Establish proper nonprofit governance
+Context Files to Share:
+- All legal documents
+- Compliance checklist
+
+Tasks:
+✅ Recruit board of directors
+✅ Create board meeting procedures
+✅ Establish committee structures
+✅ Create conflict of interest policies
+✅ Set up annual meeting procedures
+
+SESSION 9: RESEARCH & DATA COLLECTION
+--------------------------------------
+Focus: Build evidence base for AI displacement work
+Context: Research folder, grant applications
+
+Tasks:
+✅ Conduct community needs assessment
+✅ Research AI displacement trends
+✅ Create data collection systems
+✅ Develop impact measurement tools
+✅ Build research partnerships
+
+SESSION 10: FUNDRAISING CAMPAIGN DEVELOPMENT
+---------------------------------------------
+Focus: Create comprehensive fundraising strategy
+Context: Financial files, grant dashboard
+
+Tasks:
+✅ Design annual fundraising calendar
+✅ Create major donor prospect research
+✅ Develop fundraising event strategies
+✅ Create donor stewardship programs
+✅ Build sustainable revenue streams
+
+🎯 EMERGENCY TASK SESSIONS (As Needed):
+=======================================
+
+CRISIS RESPONSE: If urgent grant deadline appears
+TECHNICAL SUPPORT: Website/system emergencies  
+COMPLIANCE URGENT: Filing deadlines approaching
+OPPORTUNITY RESPONSE: Unexpected funding chances
+
+📋 BEFORE EACH SESSION CHECKLIST:
+=================================
+✅ Identify specific task from list above
+✅ Gather relevant context files from C:\TLC\
+✅ Enable filesystem access (C:\TLC\ only)
+✅ Set clear goal for the session
+✅ Plan to save all work before ending
+
+🔄 AFTER EACH SESSION:
+=====================
+✅ Save all new files to appropriate TLC folders
+✅ Update master tracking documents
+✅ Note what was accomplished
+✅ Identify next priority task
+✅ Disable filesystem access if desired
+
+💡 CLAUDE INTRODUCTION TEMPLATE:
+===============================
+"Hi Claude! I'm Erik from TLC Ministry - Tacos, Love & Creation Foundation. I need help with [SPECIFIC TASK] for my nonprofit focused on AI displacement response. I have context files to share and need filesystem access to C:\TLC\ folder only. Let me know when you're ready!"
+
+🚀 SUCCESS METRICS:
+==================
+- Complete 2-3 major grant applications per month
+- Secure real property within 6 months
+- Launch 3+ community programs by end of year
+- Build 5+ strategic partnerships
+- Achieve sustainable monthly donations
+
+💖 REMEMBER: Each Claude session should feel productive and focused. Don't try to do everything at once - that's how we hit context limits! One task, one session, maximum results!
+
+Erik, this system will let you work with individual Claudes on specific tasks while building TLC Ministry into an unstoppable force! 🌟
