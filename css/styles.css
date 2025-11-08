@@ -1,37 +1,32 @@
 /*
-  TLC Ministry Website Stylesheet
+  TLC Ministry Light Theme Stylesheet
 
-  This CSS file defines the look and feel of the TLC Ministry website.
-  The design embraces a cosmic palette of deep blues and purples with
-  vibrant teal accents to convey optimism and creativity. Sections
-  alternate dark and light backgrounds to aid readability, and cards
-  are elevated with soft shadows and rounded corners. The layout
-  gracefully adapts to different screen sizes without sacrificing
-  impact.
+  This stylesheet defines a light, friendly look for the TLC Ministry site.
+  The palette uses pale blues, whites and teals to convey openness and
+  optimism.  Elements are spaced generously and cards cast soft shadows.
+  The top navigation is sticky so it remains visible as visitors scroll.
 */
 
 :root {
-  /* Color palette */
-  --deep-blue: #0d1333;
-  --midnight: #151a46;
-  --space: #1e2465;
-  --navy: #0f152d;
-  --card-bg: #21295b;
-  --alt-bg: #171c48;
-  --highlight: #1ec6b6;
-  --highlight-light: #28d8c6;
-  --light-text: #f5f7fa;
-  --muted-text: #b5b8df;
-  --info-bg: #2b337a;
-  --info-border: #3b438c;
-  --donate-bg: #1ec6b6;
-  --donate-text: #0f152d;
-  --btn-bg: #1ec6b6;
-  --btn-hover: #28d8c6;
+  /* Colour palette */
+  --bg: #f7f9fc;
+  --alt-bg: #ffffff;
+  --primary: #2a8ecf;
+  --primary-light: #3d9dd8;
+  --highlight: #2db18b;
+  --highlight-light: #37c9a0;
+  --text: #333333;
+  --heading: #111111;
+  --muted: #555555;
+  --card-bg: #ffffff;
+  --info-bg: #f1f6fb;
+  --border: #e0e6ee;
+  --btn-bg: var(--primary);
+  --btn-hover: var(--primary-light);
   --btn-secondary-bg: transparent;
-  --btn-secondary-border: #28d8c6;
-  --btn-secondary-hover: rgba(40, 216, 198, 0.2);
-  --shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --btn-secondary-border: var(--primary);
+  --btn-secondary-hover: rgba(42, 142, 207, 0.1);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Reset and base styles */
@@ -44,13 +39,12 @@
 body {
   font-family: "Inter", "Segoe UI", Tahoma, Arial, sans-serif;
   line-height: 1.6;
-  background: linear-gradient(180deg, var(--deep-blue) 0%, var(--midnight) 100%);
-  color: var(--light-text);
-  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
 }
 
 a {
-  color: var(--highlight-light);
+  color: var(--primary);
   text-decoration: none;
 }
 
@@ -67,13 +61,13 @@ img {
 h1, h2, h3, h4 {
   font-weight: 600;
   line-height: 1.3;
-  color: var(--light-text);
+  color: var(--heading);
   margin-bottom: 0.5rem;
 }
 
 p {
   margin-bottom: 1rem;
-  color: var(--muted-text);
+  color: var(--muted);
 }
 
 .container {
@@ -94,11 +88,12 @@ p {
 
 /* Header */
 .site-header {
-  background: var(--navy);
+  background: var(--alt-bg);
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  z-index: 10;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .nav-container {
@@ -123,7 +118,7 @@ p {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.5px;
-  color: var(--highlight-light);
+  color: var(--primary);
 }
 
 .nav-list {
@@ -134,7 +129,7 @@ p {
 }
 
 .nav-list li a {
-  color: var(--light-text);
+  color: var(--text);
   font-weight: 500;
   padding: 0.5rem;
   transition: color 0.2s ease;
@@ -142,7 +137,7 @@ p {
 
 .nav-list li a:hover,
 .nav-list li a:focus {
-  color: var(--highlight-light);
+  color: var(--primary);
 }
 
 /* Buttons */
@@ -157,12 +152,12 @@ p {
 
 .btn-cta {
   background: var(--btn-bg);
-  color: var(--donate-text);
+  color: #ffffff;
 }
 
 .btn-cta:hover {
   background: var(--btn-hover);
-  color: var(--donate-text);
+  color: #ffffff;
 }
 
 .btn-secondary {
@@ -175,9 +170,14 @@ p {
   background: var(--btn-secondary-hover);
 }
 
+.btn.small {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
 /* Hero */
 .hero {
-  background: var(--deep-blue);
+  background: var(--secondary-bg, #e7f1fb);
 }
 
 .hero-grid {
@@ -188,130 +188,77 @@ p {
 }
 
 .hero-title {
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 
 .hero-text .lead {
   font-size: 1.125rem;
-  color: var(--muted-text);
   margin-bottom: 1rem;
 }
 
 .hero-text .mission {
-  font-size: 0.95rem;
-  color: var(--muted-text);
+  font-size: 1rem;
   margin-bottom: 1.5rem;
 }
 
-.cta-row {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
 .hero-image {
-  border-radius: 12px;
+  border-radius: 1rem;
   box-shadow: var(--shadow);
 }
 
-/* About */
-.two-col {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-}
-
-.info-box {
-  background: var(--info-bg);
-  border: 1px solid var(--info-border);
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.info-box h3 {
-  color: var(--highlight-light);
-  margin-bottom: 0.5rem;
-}
-
-/* Programs */
+/* Cards */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
 }
 
 .card {
   background: var(--card-bg);
-  padding: 1.5rem;
-  border-radius: 8px;
+  padding: 2rem;
+  border-radius: 1rem;
   box-shadow: var(--shadow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border);
 }
 
 .card h3 {
-  margin-bottom: 0.5rem;
-  color: var(--highlight-light);
+  color: var(--primary);
+  margin-bottom: 0.75rem;
 }
 
-/* Membership */
+/* Membership grid */
 .membership-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
 }
 
 .member-card {
   background: var(--card-bg);
+  border-radius: 1rem;
   padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.member-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
-}
-
-.member-card h3 {
-  color: var(--highlight-light);
-  margin-bottom: 0.5rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
 }
 
 .member-card .price {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--primary);
   margin-bottom: 0.5rem;
-  color: var(--highlight);
 }
 
 .member-card .price span {
-  font-size: 0.8rem;
-  color: var(--muted-text);
-  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--muted);
 }
 
-.member-card p {
-  font-size: 0.9rem;
-  color: var(--muted-text);
-}
-
-/* Donate */
+/* Donate section */
 .donate-section {
-  background: var(--alt-bg);
+  background: var(--info-bg);
 }
 
 .donate-container {
@@ -321,78 +268,63 @@ p {
   align-items: start;
 }
 
-.donate-left h2 {
-  margin-bottom: 1rem;
-}
-
-.donate-left .lead {
-  margin-bottom: 1rem;
-}
-
-.donate-left .micro {
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
-  color: var(--muted-text);
+.donate-left {
+  padding: 2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
 }
 
 .donate-right {
+  padding: 2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.micro {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* Info boxes */
+.info-box {
   background: var(--info-bg);
-  border: 1px solid var(--info-border);
+  border-left: 4px solid var(--primary);
   padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
+  margin-top: 1rem;
 }
 
-.donate-right h3 {
-  margin-bottom: 0.5rem;
-  color: var(--highlight-light);
+.info-box h3 {
+  margin-top: 0;
+  color: var(--primary);
 }
 
-/* Contact */
-.contact-container {
+/* Two column layout */
+.two-col {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-}
-
-form input,
-form textarea {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid var(--info-border);
-  background: var(--navy);
-  color: var(--light-text);
-  border-radius: 6px;
-  margin-top: 0.25rem;
-}
-
-form input:focus,
-form textarea:focus {
-  outline: none;
-  border-color: var(--highlight);
-}
-
-form label {
-  font-size: 0.9rem;
-  color: var(--muted-text);
-}
-
-form button {
-  margin-top: 0.75rem;
+  align-items: start;
 }
 
 /* Footer */
 .site-footer {
-  background: var(--navy);
+  background: var(--alt-bg);
+  border-top: 1px solid var(--border);
   padding: 2rem 0;
-  color: var(--muted-text);
+  color: var(--muted);
 }
 
 .footer-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
+  gap: 2rem;
 }
 
 .foot-brand {
@@ -406,68 +338,22 @@ form button {
   height: auto;
 }
 
-.foot-brand strong {
-  font-size: 1.2rem;
-  color: var(--highlight-light);
-}
-
-.foot-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-}
-
 .foot-nav a {
-  color: var(--muted-text);
-  font-size: 0.9rem;
+  margin-right: 1rem;
+  color: var(--text);
+  font-weight: 500;
 }
 
 .foot-nav a:hover {
-  color: var(--highlight-light);
-  text-decoration: underline;
+  color: var(--primary);
 }
 
-.foot-meta {
-  text-align: right;
-  font-size: 0.8rem;
-  color: var(--muted-text);
-}
-
-/* Utilities */
-.center {
-  text-align: center;
-}
-
-.small {
-  font-size: 0.9rem;
-  padding: 0.5rem 1rem;
-}
-
-.micro {
-  font-size: 0.75rem;
-  color: var(--muted-text);
-}
-
+/* Responsive tweaks */
 @media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
   .nav-list {
     gap: 1rem;
-  }
-  .brand-logo {
-    width: 64px;
-  }
-  .hero-title {
-    font-size: 1.8rem;
-  }
-  .cta-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .btn {
-    width: 100%;
-    text-align: center;
-  }
-  .foot-meta {
-    text-align: center;
   }
 }

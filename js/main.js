@@ -1,11 +1,12 @@
-/*
- * TLC Ministry JavaScript
- *
- * Currently minimal. Reserved for interactive enhancements like
- * mobile navigation toggles, animations, or form handling. The
- * PayPal hosted button script is included directly in the HTML to
- * simplify integration.
- */
+// TLC Ministry website scripts (light version)
 
-// Example: You could implement a mobile navigation toggle here if you
-// decide to add a hamburger menu in the future.
+// Set current year in the footer
+document.addEventListener('DOMContentLoaded', () => {
+  const yearEl = document.getElementById('year');
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
+});
+
+// Note: Additional interactivity (e.g., mobile menu toggles) can be
+// implemented here in the future.
