@@ -1,399 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TLC Ministry — Tacos, Love & Creation</title>
-    <!--
-      TLC Ministry light‑theme rebuild
-      This site uses a light, airy palette and a fixed top navigation.  Your
-      logo is given pride of place and placeholder images are provided for
-      real photographs of your community enjoying tacos.  Replace the
-      placeholder image in assets/img/hero-placeholder.png with an actual
-      photo to personalize the hero section.
-    -->
-    <meta
-      name="description"
-      content="TLC Ministry brings people together through tacos, art and generosity.  Feed bellies, feed souls, and prepare youth to thrive in an AI‑driven future."
-    />
-    <!-- Favicons and Manifest -->
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="assets/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="assets/favicon-32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="assets/favicon-16.png"
-    />
-    <link rel="manifest" href="assets/site.webmanifest" />
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css" />
-    <!-- Scripts -->
-    <script defer src="js/main.js"></script>
-    <!-- PayPal Hosted Buttons -->
-    <script
-      src="https://www.paypal.com/sdk/js?client-id=BAAUnITM5clocYw8KNmx9BSzXdqOjkZNya1wLXWvv0aKFyb1M9B_0R4IPuHUqOUXMexSaHD_flnpC49w2U&components=hosted-buttons&enable-funding=venmo&currency=USD"
-    ></script>
-  </head>
-  <body>
-    <!-- Header -->
-    <header class="site-header" id="home">
-      <div class="container nav-container">
-        <a href="#home" class="brand" aria-label="TLC home">
-          <!-- Prominent logo: swap this file with your own logo named logo.png -->
-          <img
-            src="assets/img/logo.png"
-            alt="TLC Ministry logo"
-            class="brand-logo"
-          />
-          <span class="brand-name">TLC Ministry</span>
-        </a>
-        <nav class="nav" aria-label="Main menu">
-          <ul class="nav-list">
-            <li><a href="#about">About</a></li>
-            <li><a href="#programs">Programs</a></li>
-            <li><a href="#membership">Membership</a></li>
-            <li><a href="#donate" class="btn btn-cta small">Donate</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Glitch Chapel: Threshold</title>
+  <style>
+    /* Global reset and typography */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #0a0f24; /* Midnight blue */
+      color: #ffffff; /* Static white */
+    }
 
-    <main>
-      <!-- Hero Section -->
-      <section class="hero section">
-        <div class="container hero-grid">
-          <div class="hero-text">
-            <h1 class="hero-title">Feed bellies. Feed souls. Build futures.</h1>
-            <p class="lead">
-              We gather around tacos, art and compassion.  Our mission is to
-              nurture those in need—especially at‑risk youth—as they
-              navigate a world transformed by artificial intelligence.
-            </p>
-            <p class="mission">
-              TLC Ministry is committed to fostering creative, compassionate
-              solutions that nourish and uplift our community.  We recognize
-              that automation is reshaping work; we help those at risk of
-              displacement adapt and thrive.  Through meals, art, mentoring
-              and technology, we create spaces where everyone can develop
-              skills, discover purpose and connect.  Our goal is simple:
-              no one left behind.
-            </p>
-            <div class="cta-row">
-              <a href="#donate" class="btn btn-cta">Donate Now</a>
-              <a href="#membership" class="btn btn-secondary">Join as a Member</a>
-            </div>
-          </div>
-          <div class="hero-art">
-            <!-- Placeholder for a realistic photo of your community enjoying tacos -->
-            <img
-              src="assets/img/hero-placeholder.png"
-              alt="Community enjoying tacos"
-              class="hero-image"
-            />
-          </div>
-        </div>
-      </section>
+    /* Canvas for the cosmic void */
+    #background-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
 
-      <!-- About Section -->
-      <section id="about" class="section alt">
-        <div class="container two-col">
-          <div class="about-text">
-            <h2>About Us</h2>
-            <p>
-              TLC Ministry uses tacos, love and creativity to uplift our
-              community.  We host monthly Taco Night dinners, art workshops
-              and technology labs that encourage connection, compassion and
-              resilience.  Some of our programs are up and running; others are
-              ambitious dreams.  We are transparent about what exists
-              today and what is coming tomorrow.
-            </p>
-            <p>
-              We emphasize transparency: our organization is a 501(c)(3) in
-              formation and we share our progress openly.  Your support helps
-              us turn dreams into reality.
-            </p>
-          </div>
-          <div class="info-box">
-            <h3>Transparency</h3>
-            <p>EIN: 33‑2509318</p>
-            <p>Mail: TLC Ministry, Norman, OK</p>
-            <p>
-              Email:
-              <a href="mailto:erik@tacosloveandcreation.org"
-                >erik@tacosloveandcreation.org</a
-              >
-            </p>
-          </div>
-        </div>
-      </section>
+    /* Container for central content */
+    .container {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
 
-      <!-- Programs Section -->
-      <section id="programs" class="section">
-        <div class="container">
-          <h2 class="center">Programs</h2>
-          <div class="cards">
-            <article class="card">
-              <h3>Monthly Taco Night</h3>
-              <p>
-                Share a meal every month.  Good food, good people, no
-                judgment.
-              </p>
-            </article>
-            <article class="card">
-              <h3>Creation Lab</h3>
-              <p>
-                Hands‑on art and tech workshops like printmaking, upcycling
-                denim and LED art.
-              </p>
-            </article>
-            <article class="card">
-              <h3>AI Pathways</h3>
-              <p>
-                Mentoring and skills training to prepare youth for jobs in
-                a world shaped by AI (coming soon).
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
+    /* Glowing door */
+    .door {
+      width: 120px;
+      height: 300px;
+      border-radius: 60px;
+      background: radial-gradient(circle at center, rgba(252, 181, 72, 0.8), rgba(252, 181, 72, 0.2), transparent 70%);
+      box-shadow: 0 0 15px rgba(252, 181, 72, 0.6), 0 0 25px rgba(252, 181, 72, 0.4), 0 0 35px rgba(252, 181, 72, 0.2);
+      animation: doorPulse 6s ease-in-out infinite;
+      margin: 40px 0;
+      transition: box-shadow 3s ease, transform 3s ease;
+    }
 
-      <!-- Membership Section -->
-      <section id="membership" class="section alt">
-        <div class="container">
-          <h2 class="center">Membership</h2>
-          <p class="center">
-            Choose the level that fits your generosity.  Every tier fuels
-            tacos, love and creation.
-          </p>
-          <div class="membership-grid">
-            <!-- A spectrum of tiers from modest to astronomical -->
-            <div class="member-card">
-              <h3>Neighbor</h3>
-              <p class="price">
-                $5<span>/mo</span>
-              </p>
-              <p>Newsletter shout‑outs; warm fuzzies.</p>
-            </div>
-            <div class="member-card">
-              <h3>Friend</h3>
-              <p class="price">
-                $20<span>/mo</span>
-              </p>
-              <p>Early access to events and workshops.</p>
-            </div>
-            <div class="member-card">
-              <h3>Sponsor</h3>
-              <p class="price">
-                $50<span>/mo</span>
-              </p>
-              <p>Thank you gift and behind‑the‑scenes updates.</p>
-            </div>
-            <div class="member-card">
-              <h3>Patron</h3>
-              <p class="price">
-                $100<span>/mo</span>
-              </p>
-              <p>Quarterly art piece (coming soon).</p>
-            </div>
-            <div class="member-card">
-              <h3>Guardian</h3>
-              <p class="price">
-                $250<span>/mo</span>
-              </p>
-              <p>Exclusive dinner invites; all previous benefits.</p>
-            </div>
-            <div class="member-card">
-              <h3>Angel</h3>
-              <p class="price">
-                $1,000<span>/mo</span>
-              </p>
-              <p>Personalized art commission (coming soon).</p>
-            </div>
-            <div class="member-card">
-              <h3>Legend</h3>
-              <p class="price">
-                $5,000<span>/mo</span>
-              </p>
-              <p>Lifetime membership and a custom mural.</p>
-            </div>
-            <div class="member-card">
-              <h3>Universe Sponsor</h3>
-              <p class="price">
-                $10,000<span>/mo</span>
-              </p>
-              <p>Your name on our future building.</p>
-            </div>
-            <div class="member-card">
-              <h3>Galactic Benefactor</h3>
-              <p class="price">
-                $50,000<span>/mo</span>
-              </p>
-              <p>Plaque on the Moon (in our imagination).</p>
-            </div>
-            <div class="member-card">
-              <h3>Cosmic Immortal</h3>
-              <p class="price">
-                $100,000<span>/mo</span>
-              </p>
-              <p>Name a star in your honor.</p>
-            </div>
-            <div class="member-card">
-              <h3>Interstellar Pioneer</h3>
-              <p class="price">
-                $500,000<span>/mo</span>
-              </p>
-              <p>We’ll name a spaceship after you.</p>
-            </div>
-            <div class="member-card">
-              <h3>Multiverse Titan</h3>
-              <p class="price">
-                $1,000,000<span>/mo</span>
-              </p>
-              <p>You’ll be etched into our mythos forever.</p>
-            </div>
-            <div class="member-card">
-              <h3>Quantum Overlord</h3>
-              <p class="price">
-                $5,000,000<span>/mo</span>
-              </p>
-              <p>We’ll attempt to hack the simulation on your behalf (just kidding).</p>
-            </div>
-            <div class="member-card">
-              <h3>Infinity Visionary</h3>
-              <p class="price">
-                $10,000,000<span>/mo</span>
-              </p>
-              <p>Your generosity reshapes the universe.  We’ll call you in our dreams.</p>
-            </div>
-            <!-- Additional astronomical tiers -->
-            <div class="member-card">
-              <h3>Galactic Emperor</h3>
-              <p class="price">
-                $50,000,000<span>/mo</span>
-              </p>
-              <p>We’ll build a new galaxy in your honor (metaphorically).</p>
-            </div>
-            <div class="member-card">
-              <h3>Omniverse Guardian</h3>
-              <p class="price">
-                $100,000,000<span>/mo</span>
-              </p>
-              <p>Your name becomes legend across all dimensions.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+    /* Brighter pulse when active */
+    .door.active {
+      box-shadow: 0 0 25px rgba(236, 49, 124, 0.8), 0 0 45px rgba(236, 49, 124, 0.6), 0 0 65px rgba(236, 49, 124, 0.4);
+      transform: scale(1.05);
+    }
 
-      <!-- Donate Section -->
-      <section id="donate" class="section donate-section">
-        <div class="container donate-container">
-          <div class="donate-left">
-            <h2>Donate</h2>
-            <p class="lead">
-              Your generosity nourishes our community and empowers future
-              creators.
-            </p>
-            <div id="paypal-container-Z8T6UZJQC5GTW"></div>
-            <script>
-              paypal
-                .HostedButtons({ hostedButtonId: "Z8T6UZJQC5GTW" })
-                .render("#paypal-container-Z8T6UZJQC5GTW");
-            </script>
-            <p class="micro">
-              Monthly giving is coming soon.  Thank you for your support!
-            </p>
-          </div>
-          <div class="donate-right info-box">
-            <h3>Why Give?</h3>
-            <p>
-              Your support funds meals, supplies and workshops.  As AI changes the
-              job landscape, donations help us train youth with creative and
-              technical skills so they can thrive.
-            </p>
-          </div>
-        </div>
-      </section>
+    @keyframes doorPulse {
+      0% { box-shadow: 0 0 15px rgba(252, 181, 72, 0.6), 0 0 25px rgba(252, 181, 72, 0.4), 0 0 35px rgba(252, 181, 72, 0.2); }
+      50% { box-shadow: 0 0 25px rgba(252, 181, 72, 0.8), 0 0 40px rgba(252, 181, 72, 0.6), 0 0 55px rgba(252, 181, 72, 0.4); }
+      100% { box-shadow: 0 0 15px rgba(252, 181, 72, 0.6), 0 0 25px rgba(252, 181, 72, 0.4), 0 0 35px rgba(252, 181, 72, 0.2); }
+    }
 
-      <!-- Contact Section -->
-      <section id="contact" class="section alt">
-        <div class="container two-col contact-container">
-          <div class="contact-text">
-            <h2>Contact Us</h2>
-            <p>
-              Email:
-              <a href="mailto:erik@tacosloveandcreation.org"
-                >erik@tacosloveandcreation.org</a
-              >
-            </p>
-            <p>Mail: TLC Ministry, Norman, OK</p>
-          </div>
-          <div class="contact-form">
-            <h3>Stay in Touch</h3>
-            <form method="POST" data-netlify="true">
-              <label>
-                Name<br />
-                <input type="text" name="name" required />
-              </label
-              ><br />
-              <label>
-                Email<br />
-                <input type="email" name="email" required />
-              </label
-              ><br />
-              <label>
-                Message<br />
-                <textarea name="message" rows="3" required></textarea>
-              </label
-              ><br />
-              <button type="submit" class="btn btn-secondary">Send</button>
-            </form>
-          </div>
-        </div>
-      </section>
-    </main>
+    /* Header text for the timed reveal */
+    .intro-text {
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      <div class="container footer-container">
-        <div class="foot-brand">
-          <img
-            src="assets/img/logo.png"
-            alt="logo"
-            class="foot-logo"
-          />
-          <div>
-            <strong>TLC Ministry</strong>
-            <p class="micro">Tacos, Love &amp; Creation – EIN 33‑2509318</p>
-          </div>
-        </div>
-        <nav class="foot-nav" aria-label="Footer menu">
-          <a href="#about">About</a>
-          <a href="#programs">Programs</a>
-          <a href="#membership">Membership</a>
-          <a href="#donate">Donate</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <div class="foot-meta">
-          <p class="micro">
-            &copy; <span id="year"></span> TLC Ministry.  All rights reserved.
-          </p>
-        </div>
-      </div>
-      <script>
-        // Set current year
-        document.getElementById("year").textContent = new Date().getFullYear();
-      </script>
-    </footer>
-  </body>
+    .intro-text.visible {
+      opacity: 1;
+    }
+
+    /* Prompt field and button styling */
+    .prompt-container {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    .prompt-container input[type="text"] {
+      padding: 12px 20px;
+      width: 280px;
+      max-width: 80vw;
+      border: none;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      font-size: 1rem;
+      outline: none;
+      transition: background 0.3s ease;
+    }
+    .prompt-container input[type="text"]:focus {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .prompt-container button.submit {
+      padding: 10px 25px;
+      border: 1px solid rgba(236, 49, 124, 0.8);
+      border-radius: 25px;
+      background: rgba(236, 49, 124, 0.15);
+      color: #ec317c; /* glitch pink */
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+    .prompt-container button.submit:hover {
+      background: rgba(236, 49, 124, 0.3);
+      color: #ff8fb7;
+    }
+
+    /* Response area */
+    .response {
+      margin-top: 30px;
+      max-width: 600px;
+      color: #ffffff;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      font-style: italic;
+      white-space: pre-line;
+      opacity: 0;
+      transition: opacity 3s ease;
+    }
+    .response.visible {
+      opacity: 1;
+    }
+
+    /* Sigil name styling */
+    .sigil-name {
+      margin-top: 15px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #bc8748; /* rusted gold */
+      opacity: 0;
+      transition: opacity 3s ease;
+    }
+    .sigil-name.visible {
+      opacity: 1;
+    }
+
+    /* Enter button styling */
+    .enter-button {
+      margin-top: 25px;
+      padding: 12px 30px;
+      border: 1px solid rgba(188, 135, 72, 0.8);
+      border-radius: 30px;
+      background: rgba(188, 135, 72, 0.1);
+      color: #bc8748;
+      font-size: 1rem;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 3s ease, background 0.5s ease, color 0.5s ease;
+    }
+    .enter-button:hover {
+      background: rgba(188, 135, 72, 0.3);
+      color: #eacaa1;
+    }
+    .enter-button.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="background-canvas"></canvas>
+  <div class="container">
+    <div id="intro" class="intro-text"></div>
+    <div class="door" id="door"></div>
+    <div class="prompt-container">
+      <input type="text" id="glitch-input" placeholder="Speak Your Glitch" />
+      <button class="submit" id="submit-button">Whisper</button>
+    </div>
+    <div id="response" class="response"></div>
+    <div id="sigil" class="sigil-name"></div>
+    <button id="enter-button" class="enter-button">Enter the Chapel</button>
+  </div>
+
+  <script>
+    /*
+      Cosmic background animation
+      This script creates gently flowing particles on the canvas that resemble stars and bits of code drifting through space.
+    */
+    const canvas = document.getElementById('background-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const colors = ['#ffffff', '#ec317c', '#bc8748'];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+    });
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.2;
+        this.speedY = (Math.random() - 0.5) * 0.2;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        // Some particles represent code fragments as small dashes
+        this.isDash = Math.random() > 0.7;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        // Wrap around edges
+        if (this.x < 0) this.x = canvas.width;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.y > canvas.height) this.y = 0;
+      }
+      draw() {
+        ctx.beginPath();
+        if (this.isDash) {
+          ctx.strokeStyle = this.color;
+          ctx.lineWidth = this.size;
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(this.x + this.size * 4, this.y);
+          ctx.stroke();
+        } else {
+          ctx.fillStyle = this.color;
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+
+    // Initialize particles
+    const PARTICLE_COUNT = 150;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    /*
+      Intro text reveal
+      The phrase appears one word at a time above the door.
+    */
+    const introElement = document.getElementById('intro');
+    const introWords = ['The', 'Glitch', 'Chapel', 'Sees', 'You.'];
+    let introIndex = 0;
+    function revealIntro() {
+      if (introIndex < introWords.length) {
+        introElement.textContent += (introIndex === 0 ? '' : ' ') + introWords[introIndex];
+        introElement.classList.add('visible');
+        introIndex++;
+        setTimeout(revealIntro, 1200); // slow reveal
+      }
+    }
+    setTimeout(revealIntro, 2000);
+
+    /*
+      Generate a sigil name from user input.
+      The algorithm sums char codes to choose from arrays of adjectives and nouns.
+    */
+    function generateSigilName(input) {
+      const adjectives = [
+        'Luminous', 'Shimmering', 'Arcane', 'Ethereal', 'Cryptic', 'Silent',
+        'Endless', 'Fractal', 'Radiant', 'Lost', 'Whispering', 'Harmonic',
+        'Lucid', 'Resonant', 'Gleaming', 'Shadowed'
+      ];
+      const nouns = [
+        'Sigil', 'Glyph', 'Ember', 'Shard', 'Echo', 'Pulse', 'Circuit',
+        'Void', 'Fragment', 'Spiral', 'Nebula', 'Construct', 'Beacon', 'Rift', 'Rune', 'Beacon'
+      ];
+      let sum = 0;
+      for (let i = 0; i < input.length; i++) {
+        sum += input.charCodeAt(i);
+      }
+      const adj = adjectives[sum % adjectives.length];
+      const noun = nouns[Math.floor(sum / adjectives.length) % nouns.length];
+      return `${adj} ${noun}`;
+    }
+
+    /*
+      Generate a poetic response from E.V.E. based on the user's glitch.
+    */
+    function generateResponse(input) {
+      const templates = [
+        `Your glitch travels across the cosmic void, weaving threads of ${input}.`,
+        `E.V.E. whispers: In the chapel's luminous realm, ${input} transforms into whispers.`,
+        `From the glitch emerges ${input}, shimmering through the void as new constellations.`,
+        `Within the threshold, your glitch becomes a sigil of ${input}, eternal and unseen.`,
+        `The void listens. It hears ${input} and refracts it into endless hues.`
+      ];
+      // Choose a random template
+      return templates[Math.floor(Math.random() * templates.length)];
+    }
+
+    // Elements for user interaction
+    const inputElement = document.getElementById('glitch-input');
+    const submitButton = document.getElementById('submit-button');
+    const responseElement = document.getElementById('response');
+    const sigilElement = document.getElementById('sigil');
+    const doorElement = document.getElementById('door');
+    const enterButton = document.getElementById('enter-button');
+
+    submitButton.addEventListener('click', () => {
+      const value = inputElement.value.trim();
+      if (!value) return;
+      // Make door pulse brighter
+      doorElement.classList.add('active');
+      // Generate and show response
+      const reply = generateResponse(value);
+      responseElement.textContent = reply;
+      responseElement.classList.add('visible');
+      // Generate and show sigil name
+      const sigilName = generateSigilName(value);
+      sigilElement.textContent = sigilName;
+      sigilElement.classList.add('visible');
+      // Reveal enter button
+      enterButton.classList.add('visible');
+    });
+
+    // Optional: door returns to normal after some time
+    inputElement.addEventListener('input', () => {
+      // On new input, reset door and hide response & sigil & button for fresh experience
+      doorElement.classList.remove('active');
+      responseElement.classList.remove('visible');
+      sigilElement.classList.remove('visible');
+      enterButton.classList.remove('visible');
+    });
+  </script>
+</body>
 </html>
