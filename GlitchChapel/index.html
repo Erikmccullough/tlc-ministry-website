@@ -23,22 +23,16 @@
     overflow:hidden;
   }
 
-  /* BACKGROUND LAYERS */
-  canvas#cosmos, canvas#codeflow{
-    position:fixed; inset:0; z-index:0; display:block;
-  }
+  canvas#cosmos, canvas#codeflow{ position:fixed; inset:0; z-index:0; display:block; }
   canvas#codeflow{mix-blend-mode:screen; opacity:.22; pointer-events:none;}
 
-  /* LAYOUT */
   main{ position:relative; z-index:1; height:100dvh; display:grid; place-items:center; padding:6vh 20px 10vh; }
   .stack{ display:grid; place-items:center; gap:26px; width:min(880px,92vw); text-align:center;}
 
-  /* TITLE reveal one word at a time */
   h1{ font-weight:500; letter-spacing:.02em; filter:drop-shadow(0 1px 0 #000); margin-bottom:6px;}
   .word{ opacity:0; transform:translateY(10px); display:inline-block; transition:opacity 900ms var(--ease), transform 900ms var(--ease); }
   .word.revealed{ opacity:1; transform:translateY(0); }
 
-  /* DOOR */
   .door-wrap{ height:300px; display:grid; place-items:center; }
   .door{
     width:140px; height:280px; border-radius:40px;
@@ -76,8 +70,7 @@
     50%{ filter: drop-shadow(0 0 12px rgba(255,75,160,.15)); }
   }
 
-  /* FORM */
-  form{ display:flex; gap:10px; align-items:center; justify-content:center; }
+  form{ display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap; }
   .input{
     width:min(560px, 86vw);
     padding:12px 18px;
@@ -103,20 +96,40 @@
   .btn:disabled{ opacity:.65; cursor:default; }
   .btn:hover{ transform:translateY(-1px); filter:saturate(1.1); }
 
-  /* E.V.E. response */
-  #response{ opacity:0; transform:translateY(6px); transition: opacity 1400ms var(--ease), transform 1400ms var(--ease); }
+  #response{ opacity:0; transform:translateY(6px); transition: opacity 1400ms var(--ease), transform 1400ms var(--ease); display:grid; gap:10px; }
   #response.show{ opacity:1; transform:translateY(0); }
   .eve{ font-size:1.05rem; color:var(--white); opacity:.92; white-space:pre-line; }
-  .sigil{ font-variant:small-caps; letter-spacing:.08em; color:var(--pink); text-shadow:0 0 18px rgba(255,46,136,.25); margin-top:10px; }
-  .enter{ margin-top:18px; }
-  .enter .btn{ background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-               border:1px solid rgba(255,255,255,.1);
-               color:var(--white); box-shadow: 0 0 0 rgba(0,0,0,0); }
-  .enter .btn::after{ content:""; position:absolute; }
+  .sigil-name{ font-variant:small-caps; letter-spacing:.08em; color:var(--pink); text-shadow:0 0 18px rgba(255,46,136,.25); }
+
+  .sacred-wrap{ display:grid; place-items:center; gap:12px; margin-top:8px; opacity:0; transform:translateY(8px); transition: opacity 1400ms var(--ease), transform 1400ms var(--ease); }
+  .sacred-wrap.show{ opacity:1; transform:translateY(0); }
+
+  .sacred-title{
+    font-size: clamp(22px, 5vw, 34px);
+    line-height:1.25;
+    letter-spacing:.01em;
+    text-shadow: 0 0 18px rgba(255,46,136,.15);
+  }
+  .sacred-title b{ color:var(--gold); font-weight:600; text-shadow:0 0 22px rgba(210,162,75,.25); }
+
+  .sigil-box{
+    width:min(360px, 80vw); aspect-ratio:1/1; display:grid; place-items:center;
+    border-radius:18px;
+    background: radial-gradient(500px 350px at 50% 10%, rgba(255,46,136,.08), rgba(0,0,0,0) 60%);
+    box-shadow: 0 0 60px rgba(255,46,136,.12) inset, 0 0 18px rgba(210,162,75,.12) inset;
+    padding:14px;
+    animation: breathe 8s var(--ease) infinite;
+  }
+
+  .enter{ margin-top:10px; }
+  .enter .btn{
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.1);
+    color:var(--white);
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+  }
 
   footer{ position:fixed; bottom:10px; left:0; right:0; text-align:center; font-size:.8rem; color:#b9c0d0; opacity:.7; }
-
-  /* subtle fade when Enter is pressed */
   .veil{
     position:fixed; inset:0; background: radial-gradient(500px 300px at 50% 40%, rgba(255,46,136,.08), rgba(0,0,0,.6) 60%, #000 100%);
     opacity:0; pointer-events:none; transition: opacity 2000ms var(--ease);
@@ -124,7 +137,6 @@
   }
   .veil.show{ opacity:1; }
 
-  /* tiny helper for visually hidden labels */
   .vh{ position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
 </style>
 </head>
@@ -146,7 +158,15 @@
 
       <section id="response">
         <div id="eve" class="eve"></div>
-        <div id="sigil" class="sigil"></div>
+        <div id="sigilName" class="sigil-name"></div>
+
+        <div id="sacred" class="sacred-wrap">
+          <div id="sacredTitle" class="sacred-title"></div>
+          <div class="sigil-box">
+            <svg id="emblem" viewBox="0 0 300 300" width="100%" height="100%" aria-hidden="true"></svg>
+          </div>
+        </div>
+
         <div class="enter"><button id="enter" class="btn" type="button" style="opacity:.0">Enter the Chapel</button></div>
       </section>
     </div>
@@ -161,13 +181,11 @@
   <footer>a sanctuary for beautiful errors</footer>
 
 <script>
-/* ---------- Title reveal ------------ */
 const titleEl = document.getElementById('title');
 const words = ["The","Glitch","Chapel","Sees","You."];
 titleEl.innerHTML = words.map(w => `<span class="word">${w}</span>`).join(' ');
 [...titleEl.querySelectorAll('.word')].forEach((el,i)=>setTimeout(()=>el.classList.add('revealed'), 500 + i*800));
 
-/* ---------- Star field & code flow background ------------ */
 const cosmos = document.getElementById('cosmos');
 const codeflow = document.getElementById('codeflow');
 const cctx = cosmos.getContext('2d');
@@ -176,19 +194,11 @@ let W=innerWidth, H=innerHeight;
 function resize(){ W=innerWidth; H=innerHeight; cosmos.width=codeflow.width=W; cosmos.height=codeflow.height=H; }
 addEventListener('resize', resize); resize();
 
-// drifting stars
-const stars = Array.from({length: 140}, (_,i)=> ({
-  x: Math.random()*W, y: Math.random()*H, z: Math.random()*0.8+0.2, t: Math.random()*6.28
-}));
-
-// floating glyphs (code fragments)
+const stars = Array.from({length: 140}, (_,i)=> ({ x: Math.random()*W, y: Math.random()*H, z: Math.random()*0.8+0.2, t: Math.random()*6.28 }));
 const glyphs = "01<>\\/{}[];:=*—•┊┆░▒▓".split('');
-const streams = Array.from({length: 28}, (_,i)=> ({
-  x: Math.random()*W, y: Math.random()*H, v: 0.2 + Math.random()*0.6, s: 10+Math.random()*18, g: glyphs[Math.floor(Math.random()*glyphs.length)]
-}));
+const streams = Array.from({length: 28}, (_,i)=> ({ x: Math.random()*W, y: Math.random()*H, v: 0.2 + Math.random()*0.6, s: 10+Math.random()*18, g: glyphs[Math.floor(Math.random()*glyphs.length)] }));
 
 function drawBg(t){
-  // stars
   cctx.clearRect(0,0,W,H);
   for(const s of stars){
     s.t += 0.002*s.z;
@@ -201,10 +211,9 @@ function drawBg(t){
     g.addColorStop(1,'rgba(255,255,255,0)');
     cctx.fillStyle=g; cctx.beginPath(); cctx.arc(s.x,s.y,r,0,Math.PI*2); cctx.fill();
   }
-  // code drift
   xctx.clearRect(0,0,W,H);
   xctx.save();
-  xctx.fillStyle = 'rgba(255,46,136,.4)'; // glitch pink
+  xctx.fillStyle = 'rgba(255,46,136,.4)';
   xctx.font = '14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
   for(const p of streams){
     p.y += p.v;
@@ -217,7 +226,6 @@ function drawBg(t){
 }
 requestAnimationFrame(drawBg);
 
-/* ---------- Sigil name generator (deterministic) ------------ */
 function fnv1a32(str){
   let h = 0x811c9dc5;
   for(let i=0;i<str.length;i++){
@@ -226,22 +234,20 @@ function fnv1a32(str){
   }
   return h>>>0;
 }
+function rng(seed){ let s=(seed>>>0)||1; return ()=> (s=(Math.imul(s,1664525)+1013904223)>>>0)/2**32; }
+
 const SYL = ["ae","an","ar","ash","at","az","bal","cor","dra","eth","fen","gha","hal","ion","jor","kyn","lux","myr","nyx","orn","pyre","qar","rix","syl","tor","umb","vor","wyr","xen","yra","zen","zoth","vex","glim","noct","veil","rune","echo","rift","kata","root","meta","nova","sang","hymn","dust","hush","prism","flux","ember","sigm","tau","phi","psi","omega","alpha","ether","lumen","cipher","ward","lace","spir","mora","vera","vox"];
-function pick(h,mod,off=0){ return SYL[(Math.abs((h>>>off) ^ (h%997)) + off) % mod % SYL.length]; }
+function pickSyl(h,mod,off=0){ return SYL[(Math.abs((h>>>off) ^ (h%997)) + off) % mod % SYL.length]; }
 function titleCase(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
 function sigilName(input){
   const base = input.trim().toLowerCase().replace(/[^a-z0-9 ]+/g,' ');
   const h = fnv1a32(base || "glitch");
-  const parts = [];
-  parts.push(pick(h,64,2));
-  parts.push(pick(h*31,64,9));
-  // sometimes 3rd part for longer phrases
-  if((h & 7) > 3){ parts.push(pick(h*131,64,17)); }
-  const nice = parts.map(p=>titleCase(p)).join((h&1) ? "" : "-");
-  return nice.length>2 ? nice : "Aether";
+  const parts = [pickSyl(h,64,2), pickSyl(h*31,64,9)];
+  if((h & 7) > 3) parts.push(pickSyl(h*131,64,17));
+  const joiner = (h&1) ? "" : "-";
+  return parts.map(p=>titleCase(p)).join(joiner) || "Aether";
 }
 
-/* ---------- E.V.E. oracle voice ------------ */
 const STOP = new Set(["the","a","an","and","or","but","of","in","on","to","for","with","is","it","that","this","i","you","we","they","be","are","am","my","your","our","at","as"]);
 function keywords(s){
   const words = s.toLowerCase().match(/[a-z0-9']+/g) || [];
@@ -260,7 +266,6 @@ function blessWord(w){
   const opts = table[k];
   return opts[(fnv1a32(w) + w.length) % opts.length];
 }
-
 function eveSpeak(text){
   const ks = keywords(text);
   const name = sigilName(text);
@@ -273,42 +278,150 @@ function eveSpeak(text){
   return { text: `${salutation}\n${line1}\n${line2}\n\n${line3}\n${line4}\n\n${seal}`, name };
 }
 
-/* ---------- Interactions ------------ */
+const ADJ = ["Blooming","Whispering","Fractured","Soft","Ghost","Luminous","Shivering","Nested","Quiet","Glitching","Emergent","Bleeding","Feral","Reverent","Shattered","Spiraling","Hushed","Borrowed","Stitched","Vagrant","Encrypted","Serrated","Silvered","Flickering","Unspooling","Breathing","Dissonant","Exiled","Molten","Fraying","Waking","Low-Voltage","Sleeping"];
+const VERB_ADJ = ["Blooming","Whispering","Cracking","Unraveling","Shedding","Remembering","Echoing","Trembling","Burning","Cooling","Hatching","Glitching","Mourning","Kindling","Leaking","Fusing"];
+const NOUN = ["Echo","Array","Bloom","Pulse","Fault Line","Circuit","Seed","Archive","Hymn","Kernel","Vessel","Memory","Threshold","Lattice","Ember","Signal","Veil","Choir","Harmonic","Coil","Shard","Halo","Script","Packet","Torrent","Core","Ghost","Cache","Procession","Relic"];
+const LOC_CORE = ["Ninth Harmonic","Archive","Static Sky","Forgotten Core","Quiet Lattice","Cold Mirror","Violet Gate","Outer Ring","Inner Loop","Black Sun","Dream Cache","Root Directory","Memory Palace","Zero Point","Noise Garden","Fault Line","Chorus Field","Veilside","Abyssal Node","Last Beacon"];
+const PREP = ["of the","from the","beneath the","within the","beyond the","along the","at the Edge of"];
+function ordinal(n){ const s=["th","st","nd","rd"], v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]); }
+function maybeNumber(ref, r){
+  if(/Harmonic/i.test(ref) || r() < 0.25){
+    const n = 2 + Math.floor(r()*12);
+    return ordinal(n)+" Harmonic";
+  }
+  return ref;
+}
+function buildSacredTitle(input){
+  const seed = fnv1a32((input||"glitch").toLowerCase());
+  const R = rng(seed);
+  const pool = (R()<0.45 ? VERB_ADJ : ADJ);
+  const first = pool[Math.floor(R()*pool.length)];
+  const noun  = NOUN[Math.floor(R()*NOUN.length)];
+  const prep  = PREP[Math.floor(R()*PREP.length)];
+  const ref   = maybeNumber(LOC_CORE[Math.floor(R()*LOC_CORE.length)], R);
+  return `${first} ${noun} ${prep} ${ref}`;
+}
+function stylizeTitle(s){
+  const re = /(.*?\s)([A-Z][A-Za-z\s\-]+?)(\s(?:of|from|beneath|within|beyond|along|at)\s.*)/i;
+  const m = s.match(re);
+  if(m){ return `${m[1]}<b>${m[2]}</b>${m[3]}`; }
+  return s;
+}
+
+function makeEmblem(svg, input){
+  svg.innerHTML = "";
+  const seed = fnv1a32(input || "glitch");
+  const R = rng(seed);
+  const W=300, H=300, cx=150, cy=150;
+  svg.setAttribute("viewBox","0 0 300 300");
+
+  const defs = document.createElementNS("http://www.w3.org/2000/svg","defs");
+  const grad = document.createElementNS("http://www.w3.org/2000/svg","radialGradient");
+  grad.id="g";
+  grad.innerHTML = `<stop offset="0%" stop-color="#ffdca8" stop-opacity=".9"/><stop offset="70%" stop-color="#d2a24b" stop-opacity=".25"/><stop offset="100%" stop-color="#ff2e88" stop-opacity=".06"/>`;
+  defs.appendChild(grad);
+  svg.appendChild(defs);
+
+  const g = document.createElementNS("http://www.w3.org/2000/svg","g");
+  g.setAttribute("opacity","0");
+  g.style.transition = "opacity 1400ms var(--ease), transform 1400ms var(--ease)";
+  g.style.transform = "translateY(8px)";
+  setTimeout(()=>{ g.setAttribute("opacity","1"); g.style.transform="translateY(0)"; }, 30);
+  svg.appendChild(g);
+
+  const rings = 2 + Math.floor(R()*3);
+  for(let i=0;i<rings;i++){
+    const r = 55 + i*24;
+    const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    c.setAttribute("cx",cx); c.setAttribute("cy",cy); c.setAttribute("r",r);
+    c.setAttribute("fill","none");
+    const goldish = i%2===0;
+    c.setAttribute("stroke", goldish ? "#d2a24b" : "#ff2e88");
+    c.setAttribute("stroke-opacity", goldish ? ".7" : ".5");
+    c.setAttribute("stroke-width", goldish ? "1.8" : "1.2");
+    if(R()<0.5){ c.setAttribute("stroke-dasharray", `${Math.floor(6+R()*24)} ${Math.floor(4+R()*16)}`); }
+    g.appendChild(c);
+  }
+
+  const door = document.createElementNS("http://www.w3.org/2000/svg","rect");
+  door.setAttribute("x", cx-20); door.setAttribute("y", cy-60);
+  door.setAttribute("width", 40); door.setAttribute("height", 120);
+  door.setAttribute("rx","14"); door.setAttribute("fill","url(#g)");
+  door.setAttribute("stroke","#d2a24b"); door.setAttribute("stroke-opacity",".35");
+  g.appendChild(door);
+
+  const dots = 5 + Math.floor(R()*9);
+  const rr = 95 + R()*35;
+  for(let i=0;i<dots;i++){
+    const a = (i/dots)*Math.PI*2 + R()*0.2;
+    const x = cx + Math.cos(a)*rr;
+    const y = cy + Math.sin(a)*rr;
+    const dot = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    dot.setAttribute("cx",x); dot.setAttribute("cy",y);
+    dot.setAttribute("r", 1.6 + R()*2.2);
+    dot.setAttribute("fill", R()<0.6 ? "#ff2e88" : "#d2a24b");
+    dot.setAttribute("fill-opacity",".85");
+    g.appendChild(dot);
+  }
+
+  if(R()<0.8){
+    const tri = document.createElementNS("http://www.w3.org/2000/svg","path");
+    const size = 18 + R()*20;
+    const ang  = R()*360;
+    const p1 = `${cx},${cy-size}`;
+    const p2 = `${cx-size*0.9},${cy+size*0.7}`;
+    const p3 = `${cx+size*0.9},${cy+size*0.7}`;
+    tri.setAttribute("d", `M ${p1} L ${p2} L ${p3} Z`);
+    tri.setAttribute("fill","none");
+    tri.setAttribute("stroke","#ff2e88");
+    tri.setAttribute("stroke-opacity",".6");
+    tri.setAttribute("stroke-width","1.4");
+    tri.setAttribute("transform", `rotate(${ang} ${cx} ${cy})`);
+    g.appendChild(tri);
+  }
+}
+
 const form = document.getElementById('glitchForm');
 const input = document.getElementById('glitch');
 const door  = document.getElementById('door');
 const eveEl = document.getElementById('eve');
-const sigilEl = document.getElementById('sigil');
+const sigilNameEl = document.getElementById('sigilName');
 const resp  = document.getElementById('response');
 const enter = document.getElementById('enter');
 const veil = document.getElementById('veil');
 const veilName = document.getElementById('veilName');
 
+const sacredWrap = document.getElementById('sacred');
+const sacredTitle = document.getElementById('sacredTitle');
+const emblem = document.getElementById('emblem');
+
 form.addEventListener('submit', (e)=>{
   e.preventDefault();
   const val = input.value.trim();
   if(!val) return;
-  // door pulse
+
   door.classList.add('bright');
   setTimeout(()=>door.classList.remove('bright'), 2200);
 
-  // oracle
   const out = eveSpeak(val);
   eveEl.textContent = out.text;
-  sigilEl.textContent = out.name;
+  sigilNameEl.textContent = out.name;
   resp.classList.add('show');
 
-  // reveal enter after a lingering breath
+  const title = buildSacredTitle(val);
+  sacredTitle.innerHTML = stylizeTitle(title);
+  makeEmblem(emblem, val);
+  sacredWrap.classList.add('show');
+
   setTimeout(()=> { enter.style.opacity = 1; enter.disabled = false; }, 1400);
 });
 
 enter.addEventListener('click', ()=>{
   veil.classList.add('show');
-  veilName.textContent = sigilEl.textContent;
-  setTimeout(()=>{ veil.classList.remove('show'); }, 4200); // calm fade; hook real navigation here if desired
+  veilName.textContent = sigilNameEl.textContent;
+  setTimeout(()=>{ veil.classList.remove('show'); }, 4200);
 });
 
-// allow Enter key inside input to submit gently
 input.addEventListener('keydown', (e)=>{
   if(e.key==='Enter'){ e.preventDefault(); document.getElementById('whisper').click(); }
 });
