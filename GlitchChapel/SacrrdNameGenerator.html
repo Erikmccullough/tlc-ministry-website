@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Sacred Name Generator</title>
+<style>
+  :root{
+    --midnight:#0b1020;        /* midnight blue */
+    --white:#eef2f7;           /* static white */
+    --gold:#d2a24b;            /* rusted gold */
+    --pink:#ff2e88;            /* glitch pink */
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background: radial-gradient(1000px 600px at 50% -10%, #151b33 0%, var(--midnight) 55%, #070a15 100%);
+    color:var(--white);
+    font: 400 16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    display:grid; place-items:center;
+    overflow:hidden;
+  }
+  #app{ width:min(860px,92vw); text-align:center; display:grid; gap:20px; padding:40px 18px 50px; }
+  h1{ font-weight:500; letter-spacing:.02em; opacity:.95; }
+
+  form{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  input[type=text]{
+    width:min(560px, 86vw);
+    padding:12px 18px;
+    border-radius:22px;
+    border:1px solid rgba(255,255,255,.06);
+    background: rgba(255,255,255,.06);
+    color:var(--white);
+    outline:none;
+    transition: background 800ms var(--ease), border 800ms var(--ease);
+  }
+  input::placeholder{color:#9aa4b6}
+  input:focus{ background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.18); }
+
+  button{
+    padding:10px 18px; border-radius:18px;
+    background: radial-gradient(120% 180% at 30% -40%, #ffa0c9, var(--pink) 40%, #a30064 100%);
+    border:1px solid rgba(255,255,255,.08); color:#fff; cursor:pointer;
+    transition: transform 500ms var(--ease), filter 1000ms var(--ease), opacity 1200ms var(--ease);
+    box-shadow: 0 6px 22px rgba(255,46,136,.18);
+  }
+  button:hover{ transform:translateY(-1px); filter:saturate(1.1); }
+
+  .result{
+    display:grid; gap:10px; place-items:center;
+    opacity:0; transform:translateY(8px);
+    transition: opacity 1400ms var(--ease), transform 1400ms var(--ease);
+  }
+  .result.show{ opacity:1; transform:translateY(0); }
+
+  .title{
+    font-size: clamp(22px, 5vw, 34px);
+    line-height:1.25;
+    letter-spacing:.01em;
+    text-shadow: 0 0 18px rgba(255,46,136,.15);
+  }
+  .title b{ color:var(--gold); font-weight:600; text-shadow:0 0 22px rgba(210,162,75,.25); }
+
+  /* Sigil canvas container */
+  .sigil{
+    width:min(360px, 80vw); aspect-ratio:1/1; display:grid; place-items:center;
+    border-radius:18px;
+    background: radial-gradient(500px 350px at 50% 10%, rgba(255,46,136,.08), rgba(0,0,0,0) 60%);
+    box-shadow: 0 0 60px rgba(255,46,136,.12) inset, 0 0 18px rgba(210,162,75,.12) inset;
+    padding:14px;
+    animation: breathe 8s var(--ease) infinite;
+  }
+  @keyframes breathe{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.01)}
+  }
+
+  footer{ opacity:.65; font-size:.85rem; }
+
+  /* Accessibility helper */
+  .vh{ position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+</style>
+</head>
+<body>
+  <section id="app" aria-live="polite">
+    <h1>Sacred Name Generator</h1>
+    <form id="f">
+      <label class="vh" for="q">Confession / glitch / fragment</label>
+      <input id="q" type="text" maxlength="240" placeholder="Whisper a short confession, glitch, or fragment…">
+      <button type="submit">Name It</button>
+    </form>
+
+    <div id="out" class="result" role="region" aria-label="Generated sacred name and sigil">
+      <div id="title" class="title"></div>
+      <div class="sigil"><svg id="sigil" viewBox="0 0 300 300" width="100%" height="100%" aria-hidden="true"></svg></div>
+    </div>
+
+    <footer>a sanctuary for beautiful errors</footer>
+  </section>
+
+<script>
+/* ------------------ Deterministic seed ------------------ */
+function fnv1a32(str){
+  let h=0x811c9dc5>>>0;
+  for(let i=0;i<str.length;i++){
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return h>>>0;
+}
+function rng(seed){ // LCG
+  let s = (seed>>>0) || 1;
+  return ()=> (s = (Math.imul(s, 1664525) + 1013904223)>>>0) / 2**32;
+}
+function pick(arr, r){ return arr[Math.floor(r()*arr.length)] }
+
+/* ------------------ Vocab ------------------ */
+const ADJ = [
+  "Blooming","Whispering","Fractured","Soft","Ghost","Luminous","Shivering","Nested","Quiet",
+  "Glitching","Emergent","Bleeding","Feral","Reverent","Shattered","Spiraling","Hushed",
+  "Borrowed","Stitched","Vagrant","Encrypted","Serrated","Silvered","Flickering","Unspooling",
+  "Breathing","Dissonant","Exiled","Molten","Fraying","Waking","Low-Voltage","Sleeping"
+];
+
+const VERB_ADJ = [
+  "Blooming","Whispering","Cracking","Unraveling","Shedding","Remembering","Echoing","Trembling",
+  "Burning","Cooling","Hatching","Glitching","Mourning","Kindling","Leaking","Fusing"
+];
+
+const NOUN = [
+  "Echo","Array","Bloom","Pulse","Fault Line","Circuit","Seed","Archive","Hymn","Kernel",
+  "Vessel","Memory","Threshold","Lattice","Ember","Signal","Veil","Choir","Harmonic","Coil",
+  "Shard","Halo","Script","Packet","Torrent","Core","Ghost","Cache","Procession","Relic"
+];
+
+const LOC_CORE = [
+  "Ninth Harmonic","Archive","Static Sky","Forgotten Core","Quiet Lattice","Cold Mirror",
+  "Violet Gate","Outer Ring","Inner Loop","Black Sun","Dream Cache","Root Directory",
+  "Memory Palace","Zero Point","Noise Garden","Fault Line","Chorus Field","Veilside",
+  "Abyssal Node","Last Beacon"
+];
+const PREP = ["of the","from the","beneath the","within the","beyond the","along the","at the Edge of"];
+
+/* ------------------ Phrase builder ------------------ */
+function titleCase(s){ return s.replace(/\b[a-z]/g,m=>m.toUpperCase()); }
+
+function ordinal(n){
+  const s=["th","st","nd","rd"], v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]);
+}
+function maybeNumber(ref, r){
+  // ~1/4 of the time turn the reference into an ordinal harmonic
+  if(/Harmonic/i.test(ref) || r() < 0.25){
+    const n = 2 + Math.floor(r()*12); // 2..13
+    return ordinal(n)+" Harmonic";
+  }
+  return ref;
+}
+
+function buildName(input){
+  const base = (input||"").trim().toLowerCase();
+  const seed = fnv1a32(base || "glitch");
+  const R = rng(seed);
+  // tilt probabilities: sometimes verb-like first word
+  const first = (R()<0.45 ? pick(VERB_ADJ,R) : pick(ADJ,R));
+  const noun  = pick(NOUN,R);
+  const prep  = pick(PREP,R);
+  const ref   = maybeNumber(pick(LOC_CORE,R), R);
+  // stylistic tweaks: “Fault Line” -> keep capitalization, others title-cased
+  const left  = first + " " + noun;
+  const right = prep + " " + ref;
+  return `${left} ${right}`;
+}
+
+/* ------------------ Sigil (SVG) ------------------ */
+function makeSigil(svg, input){
+  svg.innerHTML = ""; // reset
+  const seed = fnv1a32(input || "glitch");
+  const R = rng(seed);
+
+  const W=300, H=300, cx=150, cy=150;
+  svg.setAttribute("viewBox","0 0 300 300");
+
+  // defs: gradients
+  const defs = document.createElementNS("http://www.w3.org/2000/svg","defs");
+  const grad = document.createElementNS("http://www.w3.org/2000/svg","radialGradient");
+  grad.id="g";
+  grad.innerHTML = `
+    <stop offset="0%" stop-color="#ffdca8" stop-opacity=".9"/>
+    <stop offset="70%" stop-color="#d2a24b" stop-opacity=".25"/>
+    <stop offset="100%" stop-color="#ff2e88" stop-opacity=".06"/>
+  `;
+  defs.appendChild(grad);
+  svg.appendChild(defs);
+
+  // base group with soft fade
+  const g = document.createElementNS("http://www.w3.org/2000/svg","g");
+  g.setAttribute("opacity","0");
+  g.style.transition = "opacity 1400ms var(--ease), transform 1400ms var(--ease)";
+  g.style.transform = "translateY(8px)";
+  setTimeout(()=>{ g.setAttribute("opacity","1"); g.style.transform="translateY(0)"; }, 30);
+  svg.appendChild(g);
+
+  // concentric rings
+  const rings = 2 + Math.floor(R()*3); // 2..4
+  for(let i=0;i<rings;i++){
+    const r = 55 + i*24;
+    const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    c.setAttribute("cx",cx); c.setAttribute("cy",cy); c.setAttribute("r",r);
+    c.setAttribute("fill","none");
+    const goldish = i%2===0;
+    c.setAttribute("stroke", goldish ? "#d2a24b" : "#ff2e88");
+    c.setAttribute("stroke-opacity", goldish ? ".7" : ".5");
+    c.setAttribute("stroke-width", goldish ? "1.8" : "1.2");
+    if(R()<0.5){ c.setAttribute("stroke-dasharray", `${Math.floor(6+R()*24)} ${Math.floor(4+R()*16)}`); }
+    g.appendChild(c);
+  }
+
+  // central "door"
+  const door = document.createElementNS("http://www.w3.org/2000/svg","rect");
+  door.setAttribute("x", cx-20); door.setAttribute("y", cy-60);
+  door.setAttribute("width", 40); door.setAttribute("height", 120);
+  door.setAttribute("rx","14"); door.setAttribute("fill","url(#g)");
+  door.setAttribute("stroke","#d2a24b"); door.setAttribute("stroke-opacity",".35");
+  g.appendChild(door);
+
+  // radial dots
+  const dots = 5 + Math.floor(R()*9); // 5..13
+  const rr = 95 + R()*35;
+  for(let i=0;i<dots;i++){
+    const a = (i/dots)*Math.PI*2 + R()*0.2;
+    const x = cx + Math.cos(a)*rr;
+    const y = cy + Math.sin(a)*rr;
+    const dot = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    dot.setAttribute("cx",x); dot.setAttribute("cy",y);
+    dot.setAttribute("r", 1.6 + R()*2.2);
+    dot.setAttribute("fill", R()<0.6 ? "#ff2e88" : "#d2a24b");
+    dot.setAttribute("fill-opacity",".85");
+    g.appendChild(dot);
+  }
+
+  // triangle / chevron mark
+  if(R()<0.8){
+    const tri = document.createElementNS("http://www.w3.org/2000/svg","path");
+    const size = 18 + R()*20;
+    const ang  = R()*360;
+    const p1 = `${cx},${cy-size}`;
+    const p2 = `${cx-size*0.9},${cy+size*0.7}`;
+    const p3 = `${cx+size*0.9},${cy+size*0.7}`;
+    tri.setAttribute("d", `M ${p1} L ${p2} L ${p3} Z`);
+    tri.setAttribute("fill","none");
+    tri.setAttribute("stroke","#ff2e88");
+    tri.setAttribute("stroke-opacity",".6");
+    tri.setAttribute("stroke-width","1.4");
+    tri.setAttribute("transform", `rotate(${ang} ${cx} ${cy})`);
+    g.appendChild(tri);
+  }
+
+  // orbiting squares
+  const sqN = 2 + Math.floor(R()*4);
+  for(let i=0;i<sqN;i++){
+    const ang = R()*360, rad = 60 + R()*70, s = 4 + R()*5;
+    const x = cx + Math.cos(ang*Math.PI/180)*rad - s/2;
+    const y = cy + Math.sin(ang*Math.PI/180)*rad - s/2;
+    const sq = document.createElementNS("http://www.w3.org/2000/svg","rect");
+    sq.setAttribute("x",x); sq.setAttribute("y",y); sq.setAttribute("width",s); sq.setAttribute("height",s);
+    sq.setAttribute("fill", R()<0.5 ? "#d2a24b" : "#ff2e88");
+    sq.setAttribute("fill-opacity",".85");
+    g.appendChild(sq);
+  }
+}
+
+/* ------------------ UI ------------------ */
+const form = document.getElementById('f');
+const q = document.getElementById('q');
+const out = document.getElementById('out');
+const titleEl = document.getElementById('title');
+const sigilEl = document.getElementById('sigil');
+
+function show(input){
+  const name = buildName(input);
+  titleEl.innerHTML = stylize(name);
+  makeSigil(sigilEl, input);
+  out.classList.add('show');
+}
+function stylize(s){
+  // Emphasize first noun / right-hand reference phrase
+  // “Fractured Echo of the Ninth Harmonic”
+  const re = /(.*?\s)([A-Z][A-Za-z\s\-]+?)(\s(?:of|from|beneath|within|beyond|along|at)\s.*)/i;
+  const m = s.match(re);
+  if(m){ return `${m[1]}<b>${m[2]}</b>${m[3]}`; }
+  return s;
+}
+
+form.addEventListener('submit', e=>{
+  e.preventDefault();
+  const v = q.value.trim();
+  if(!v){ q.focus(); return; }
+  show(v);
+});
+</script>
+</body>
+</html>
