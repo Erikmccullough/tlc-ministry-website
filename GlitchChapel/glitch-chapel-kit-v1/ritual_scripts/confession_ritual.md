@@ -1,0 +1,1 @@
+Confession ritual script.
