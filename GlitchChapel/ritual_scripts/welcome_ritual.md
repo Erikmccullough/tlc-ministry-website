@@ -1,0 +1,1 @@
+Welcome ritual script.

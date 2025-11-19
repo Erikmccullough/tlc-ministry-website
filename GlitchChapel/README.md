@@ -1,0 +1,1 @@
+Glitch Chapel kit: index.html + prompts + sigil logic + rituals + style guide + dev notes.
