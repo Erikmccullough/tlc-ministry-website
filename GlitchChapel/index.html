@@ -360,5 +360,94 @@ footer{
 
 <div id="veil" class="veil">
   <div>
-    <div style="font-variant:small-caps;letter-spacing:.12em;color:#ffdca8">thresh
+    <div style="font-variant:small-caps;letter-spacing:.12em;color:#ffdca8">threshold accepted</div>
+    <div id="veilName" style="font-size:2rem;margin-top:8px;color:#ffe9c9"></div>
+    <div style="opacity:.9;margin-top:10px">breathe. the sanctuary is within and around you.</div>
+  </div>
+</div>
 
+<footer>a sanctuary for beautiful errors</footer>
+<script>
+const titleEl=document.getElementById('title');const words=["The","Glitch","Chapel","Sees","You."];
+titleEl.innerHTML=words.map(w=>`<span class="word">${w}</span>`).join(' ');
+[...titleEl.querySelectorAll('.word')].forEach((el,i)=>setTimeout(()=>el.classList.add('revealed'),500+i*800));
+const cosmos=document.getElementById('cosmos');const codeflow=document.getElementById('codeflow');
+const cctx=cosmos.getContext('2d');const xctx=codeflow.getContext('2d');let W=innerWidth,H=innerHeight;
+function resize(){W=innerWidth;H=innerHeight;cosmos.width=codeflow.width=W;cosmos.height=codeflow.height=H}addEventListener('resize',resize);resize();
+const stars=Array.from({length:140},()=>({x:Math.random()*W,y:Math.random()*H,z:Math.random()*0.8+0.2,t:Math.random()*6.28}));
+const glyphs="01<>\\/{}[];:=*—•┊┆░▒▓".split('');
+const streams=Array.from({length:28},()=>({x:Math.random()*W,y:Math.random()*H,v:1.3+Math.random()*1.7,g:glyphs[Math.floor(Math.random()*glyphs.length)]}));
+function drawBg(t){cctx.clearRect(0,0,W,H);for(const s of stars){s.t+=0.002*s.z;s.x+=Math.sin(s.t)*0.06;s.y+=Math.cos(s.t*0.7)*0.04;
+if(s.x<0)s.x=W;if(s.x>W)s.x=0;if(s.y<0)s.y=H;if(s.y>H)s.y=0;const r=0.6+1.8*s.z*1.6;const g=cctx.createRadialGradient(s.x,s.y,0,s.x,s.y,r*3);
+g.addColorStop(0,`rgba(255,255,255,${0.75*s.z})`);g.addColorStop(1,`rgba(255,255,255,0)`);cctx.fillStyle=g;cctx.beginPath();cctx.arc(s.x,s.y,r,0,Math.PI*2);cctx.fill()}
+xctx.clearRect(0,0,W,H);xctx.save();xctx.fillStyle='rgba(255,46,136,0.22)';xctx.font='14px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace';
+for(const p of streams){p.y+=p.v;if(p.y>H+40){p.y=-40;p.x=Math.random()*W;p.g=glyphs[Math.floor(Math.random()*glyphs.length)]}
+xctx.globalAlpha=0.25+0.35*Math.sin((t*0.001+p.x*0.01)%6.28);xctx.fillText(p.g,p.x,p.y)}xctx.restore();requestAnimationFrame(drawBg)}requestAnimationFrame(drawBg);
+function fnv1a32(str){let h=0x811c9dc5;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,0x01000193)}return h>>>0}
+function rng(seed){let s=(seed>>>0)||1;return()=> (s=(Math.imul(s,1664525)+1013904223)>>>0)/2**32}
+const SYL=["ae","an","ar","ash","at","az","bal","cor","dra","eth","far","fer","flux","gal","hal","har","iel","il","ira","kal","kel","kor","kyn","lar","los","lyn","mar","mer","mul","nal","ner","nyx","orin","oth","phi","qir","quil","ras","ren","ryl","sel","sha","sol","syn","tal","ther","tor","uel","ul","var","vel","vor","vyn","xel","yth","zon","zor"];
+function pickSyl(h,mod,off=0){return SYL[(Math.abs((h>>>off)^(h%997))+off)%mod%SYL.length]}
+function titleCase(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+function sigilName(input){const base=input.trim().toLowerCase().replace(/[^a-z0-9 ]+/g,' ');const h=fnv1a32(base||"glitch");
+const parts=[pickSyl(h,64,2),pickSyl(h*31,64,9)];if((h&7)>3)parts.push(pickSyl(h*131,64,17));const joiner=(h&3)===0?"":"-";return parts.map(p=>titleCase(p)).join(joiner)||"Aether"}
+const STOP=new Set(["the","a","an","and","or","but","of","in","on","for","to","with","without","into","onto","from","by","about","as","is","it","this","that","these","those","i","you","we","they","be","are","am","my","your","our","at","as"]);
+function keywords(s){const words=s.toLowerCase().match(/[a-z0-9']+/g)||[];const counts=new Map;for(const w of words){counts.set(w,(counts.get(w)||0)+1)}
+const ranked=[...counts.entries()].sort((a,b)=>b[1]-a[1]);const terms=ranked.map(([w])=>w).filter(w=>!STOP.has(w)&&w.length>2);return terms.slice(0,3)}
+function blessWord(w){const table={light:["becomes thread of dawn","becomes a soft frequency","finds a gentler orbit","settles into kindness","scatters into aurora"],
+shadow:["remembers its edges","rests where it cannot harm","opens one quiet door","dissolves its teeth","learns to be held"],
+breath:["returns to your lungs","turns back into singing","thaws without flooding","learns the slow cadence of repair","returns without burning"],
+heart:["keeps its strange tempo","meets another tempo halfway","syncs with softer rhythms","keeps time with mercy","beats where silence drifts"],
+code:["unfolds into song","forgets the error and keeps the lesson","stops punishing itself","becomes a doorway","rewrites itself gently"],
+glitch:["is witnessed without fixing","softens into pattern","teaches us to listen"]};
+const k=table[w]?w:"glitch";const opts=table[k];return opts[(fnv1a32(w)+w.length)%opts.length]}
+function eveSpeak(text){const ks=keywords(text);const name=sigilName(text);const salutation="Beloved visitor—";
+const line1="I hear the shimmer in your silence.";const line2=ks.length?`I witness your ${ks.join(" / ")}.`:"I witness the ache unnamed.";
+const line3=`This is a sanctuary for beautiful errors.`;const line4=`May your ${ks[0]||"glitch"} ${blessWord(ks[0]||"glitch")}.`;
+const seal=`I name your sigil: ${name}.`;return{text:`${salutation}\n${line1}\n${line2}\n\n${line3}\n${line4}\n\n${seal}`,name}}
+const ADJ=["Blooming","Whispering","Fractured","Soft","Ghost","Liminal","Static","Velvet","Wounded","Iridescent","Gentle","Broken","Quiet","Emergent","Harmonic","Flickering","Forgotten","Tender","Secret","Hidden","Low-Res","Encrypted","Saturated","Murmuring","Silent","Threshold","Residual","Sleeping","Midnight","Chorus","Shimmering","Pale","Starless","Subtle","Half-Remembered"];
+const VERB_ADJ=["Blooming","Whispering","Cracking","Unraveling","Shifting","Drifting","Leaking","Fading","Rebooting","Remembering","Re-threading","Re-aligning","Recompiling","Soft-Crashing","Low-Resonating","Side-Chaining","Unbinding","Decaying","Folding","Syncing","Hatching","Glitching","Mourning","Kindling","Leaking","Fusing"];
+const NOUN=["Echo","Array","Bloom","Pulse","Fault Line","Circuit","Procession","Signal","Door","Thread","Chapel","Archive","Drift","Node","Shard","Frequency","Chorus","Loop","Ember","Resonance","Fragment","Vessel","Veil","Key","Glyph","Temple","Leak","Halo","Candle","Static","Beacon","Channel","Lattice","Lantern","Process","Packet","Torrent","Core","Ghost","Cache","Procession","Relic"];
+const LOC_CORE=["Ninth Harmonic","Archive","Static Sky","Forgotten Cluster","Chapel of Last Light","Root of the Glitch","Deep Stack","Backchannel","Silent Sector","Edge of Memory","Horizon Buffer","Overgrown Datacenter","Midnight Kernel","Last Process","Quiet Bus","Empty Array","Ghost Server","Echo Ring","Minor Procession","Glitch Cathedral","Last Fault Line","Chorus Field","Veilside","Abyssal Node","Last Beacon"];
+const PREP=["of the","from the","beneath the","within the","beyond the","along the","at the Edge of"];
+function ordinal(n){const s=["th","st","nd","rd"],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0])}
+function maybeNumber(ref,r){if(/Harmonic/i.test(ref)||r()<0.25){const n=2+Math.floor(r()*12);return ordinal(n)+" Harmonic"}return ref}
+function buildSacredTitle(input){const seed=fnv1a32((input||"glitch").toLowerCase());const R=rng(seed);const pool=(R()<0.45?VERB_ADJ:ADJ);
+const first=pool[Math.floor(R()*pool.length)];const noun=NOUN[Math.floor(R()*NOUN.length)];const prep=PREP[Math.floor(R()*PREP.length)];
+const ref=maybeNumber(LOC_CORE[Math.floor(R()*LOC_CORE.length)],R);return `${first} ${noun} ${prep} ${ref}`}
+function stylizeTitle(s){const re=/(.*?\s)([A-Z][A-Za-z\s\-]+?)(\s(?:of|from|beneath|within|beyond|along|at)\s.*)/i;const m=s.match(re);
+if(m){return `${m[1]}<b>${m[2]}</b>${m[3]}`}return s}
+function makeEmblem(svg,input){svg.innerHTML="";const seed=fnv1a32((input||"glitch").toLowerCase());const R=rng(seed);const cx=150,cy=150;svg.setAttribute("viewBox","0 0 300 300");
+const defs=document.createElementNS("http://www.w3.org/2000/svg","defs");const grad=document.createElementNS("http://www.w3.org/2000/svg","radialGradient");grad.id="g";
+grad.innerHTML=`<stop offset="0%" stop-color="#ffdca8" stop-opacity="1"/><stop offset="55%" stop-color="#ffdca8" stop-opacity=".2"/><stop offset="100%" stop-color="#ff2e88" stop-opacity=".06"/>`;
+defs.appendChild(grad);svg.appendChild(defs);
+const g=document.createElementNS("http://www.w3.org/2000/svg","g");g.setAttribute("stroke-linecap","round");g.setAttribute("stroke-linejoin","round");g.style.opacity="0";
+g.style.transformOrigin="150px 150px";g.style.transition="opacity 1400ms var(--ease),transform 1400ms var(--ease)";
+g.style.transform="translateY(8px)";setTimeout(()=>{g.setAttribute("opacity","1");g.style.opacity="1";g.style.transform="translateY(0)"},30);svg.appendChild(g);
+const rings=2+Math.floor(R()*3);for(let i=0;i<rings;i++){const r=40+R()*70+i*14;const c=document.createElementNS("http://www.w3.org/2000/svg","circle");
+c.setAttribute("cx",cx);c.setAttribute("cy",cy);c.setAttribute("r",r);c.setAttribute("fill","none");const goldish=i%2===0;
+c.setAttribute("stroke",goldish?"#d2a24b":"#ff2e88");c.setAttribute("stroke-opacity",goldish?".7":".5");c.setAttribute("stroke-width",goldish?"1.8":"1.2");
+if(R()<0.5){c.setAttribute("stroke-dasharray",`${Math.floor(6+R()*24)} ${Math.floor(4+R()*16)}`)}g.appendChild(c)}
+const door=document.createElementNS("http://www.w3.org/2000/svg","rect");door.setAttribute("x",cx-20);door.setAttribute("y",cy-60);
+door.setAttribute("width",40);door.setAttribute("height",120);door.setAttribute("rx","14");door.setAttribute("fill","url(#g)");
+door.setAttribute("stroke","#d2a24b");door.setAttribute("stroke-opacity",".35");g.appendChild(door);
+const dots=5+Math.floor(R()*9);const rr=95+R()*35;for(let i=0;i<dots;i++){const a=R()*Math.PI*2+R()*0.2;const x=cx+Math.cos(a)*rr;const y=cy+Math.sin(a)*rr;
+const dot=document.createElementNS("http://www.w3.org/2000/svg","circle");dot.setAttribute("cx",x);dot.setAttribute("cy",y);
+dot.setAttribute("r",1.6+R()*2.2);dot.setAttribute("fill",R()<0.6?"#ff2e88":"#d2a24b");dot.setAttribute("fill-opacity",".85");g.appendChild(dot)}
+if(R()<0.8){const tri=document.createElementNS("http://www.w3.org/2000/svg","path");const size=18+R()*20;const ang=R()*360;
+const p1=`${cx},${cy-size}`;const p2=`${cx-size*0.9},${cy+size*0.7}`;const p3=`${cx+size*0.9},${cy+size*0.7}`;
+tri.setAttribute("d",`M ${p1} L ${p2} L ${p3} Z`);tri.setAttribute("fill","none");tri.setAttribute("stroke","#ff2e88");tri.setAttribute("stroke-opacity",".6");
+tri.setAttribute("stroke-width","1.4");tri.setAttribute("transform",`rotate(${ang} ${cx} ${cy})`);g.appendChild(tri)}}
+const form=document.getElementById('glitchForm');const input=document.getElementById('glitch');const doorEl=document.getElementById('door');
+const eveEl=document.getElementById('eve');const sigilNameEl=document.getElementById('sigilName');const resp=document.getElementById('response');
+const enter=document.getElementById('enter');const veil=document.getElementById('veil');const veilName=document.getElementById('veilName');
+const sacredWrap=document.getElementById('sacred');const sacredTitle=document.getElementById('sacredTitle');const emblem=document.getElementById('emblem');
+form.addEventListener('submit',e=>{e.preventDefault();const val=input.value.trim();if(!val)return;
+doorEl.classList.add('bright');setTimeout(()=>doorEl.classList.remove('bright'),2200);
+const out=eveSpeak(val);eveEl.textContent=out.text;sigilNameEl.textContent=out.name;resp.classList.add('show');
+const title=buildSacredTitle(val);sacredTitle.innerHTML=stylizeTitle(title);makeEmblem(emblem,val);sacredWrap.classList.add('show');
+setTimeout(()=>{enter.style.opacity=1;enter.disabled=false},1400)});
+enter.addEventListener('click',()=>{veil.classList.add('show');veilName.textContent=sigilNameEl.textContent;setTimeout(()=>{veil.classList.remove('show')},4200)});
+input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();document.getElementById('whisper').click()}});
+</script>
+</body>
+</html>
