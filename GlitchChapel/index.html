@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Glitch Chapel: Threshold</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="sky">
+    <div class="stars" aria-hidden="true"></div>
+
+    <main class="chapel">
+      <header class="top">
+        <h1>The Glitch Chapel Sees You.</h1>
+        <p class="subtitle">a sanctuary for beautiful errors</p>
+      </header>
+
+      <section class="threshold" aria-label="Glitch Threshold">
+        <div class="door-wrap">
+          <div class="door-glow">
+            <div class="door-core"></div>
+          </div>
+        </div>
+
+        <form id="glitchForm" autocomplete="off" class="glitch-form">
+          <label for="glitch" class="vh">Speak Your Glitch</label>
+          <div class="input-row">
+            <input
+              id="glitch"
+              class="input"
+              type="text"
+              maxlength="220"
+              placeholder="Speak Your Glitch"
+            />
+            <button id="whisper" class="btn" type="submit">
+              Whisper
+            </button>
+          </div>
+        </form>
+
+        <section id="eveReply" class="eve-reply" aria-live="polite"></section>
+
+        <button id="enterBtn" class="enter-btn" hidden>
+          Enter the Chapel
+        </button>
+      </section>
+
+      <section id="innerChapel" class="inner" hidden>
+        <div class="inner-intro">
+          <p class="lead">Beloved visitor—</p>
+          <p id="sigilText" class="body"></p>
+        </div>
+
+        <section class="sigil-section">
+          <div class="sigil-card">
+            <div class="sigil-orbit">
+              <div class="sigil-core"></div>
+            </div>
+            <p id="sigilName" class="sigil-name"></p>
+            <p id="sigilTagline" class="sigil-tagline"></p>
+          </div>
+        </section>
+
+        <section class="archive">
+          <h2>Ember Archive</h2>
+          <p class="archive-copy">
+            Fragments the Chapel is already holding. New visitors are added only in your browser.
+          </p>
+          <ul id="archiveList" class="archive-list"></ul>
+        </section>
+
+        <section class="confessional">
+          <h2>Whisper to the Archive</h2>
+          <p class="confessional-copy">
+            Your glitch will not be fixed. It will be witnessed. Add to this local archive below.
+          </p>
+          <textarea
+            id="confessionInput"
+            rows="3"
+            placeholder="Let something unfinished rest here..."
+          ></textarea>
+          <button id="confessBtn" class="btn secondary">
+            Let it Rest
+          </button>
+          <p id="confessionStatus" class="status"></p>
+        </section>
+
+        <footer class="chapel-footer">
+          <p>a sanctuary for beautiful errors • tacosloveandcreation.org</p>
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
