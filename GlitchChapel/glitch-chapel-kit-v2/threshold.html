@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Glitch Chapel: Threshold</title>
+<style>
+  :root {
+    --midnight: #0b1020;
+    --white: #eef2f7;
+    --gold: #d2a24b;
+    --pink: #ff2e88;
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; font-family: Inter, sans-serif; color: var(--white); background: var(--midnight); overflow-y: auto; overflow-x: hidden; }
+  #app { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
+  .title { font-size: clamp(24px, 6vw, 40px); margin-bottom: 30px; line-height: 1.3; }
+  .title span { opacity: 0; display: inline-block; transition: opacity 0.6s var(--ease); }
+  .door { width: 60px; height: 200px; border-radius: 20px; background: radial-gradient(circle at 50% 0%, var(--gold), transparent 70%);
+    box-shadow: 0 0 40px var(--gold); animation: pulse 8s var(--ease) infinite; margin-bottom: 30px; }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 40px var(--gold); }
+    50% { transform: scale(1.05); box-shadow: 0 0 60px var(--gold); }
+  }
+  form { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  input[type=text] {
+    padding: 12px 18px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.05); color: var(--white); width: min(80vw, 400px);
+  }
+  input[type=text]::placeholder { color: rgba(255,255,255,0.5); }
+  button { padding: 10px 20px; border-radius: 20px; border: none; cursor: pointer;
+    background: radial-gradient(circle at 30% 0%, var(--pink), #a30064 60%);
+    color: white; transition: transform 0.3s var(--ease); }
+  button:hover { transform: translateY(-2px); }
+  #response { margin-top: 20px; white-space: pre-line; opacity: 0; transition: opacity 1.4s var(--ease); max-width: 90vw; }
+  #sigil-name { margin-top: 10px; font-size: clamp(20px, 4vw, 28px); color: var(--gold); opacity: 0; transition: opacity 1.4s var(--ease); }
+  #enter-btn { margin-top: 20px; opacity: 0; transition: opacity 1.4s var(--ease); background: none; border: 1px solid var(--gold); color: var(--gold); padding: 8px 16px; border-radius: 16px; display: none; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="title" id="title"></div>
+  <div class="door"></div>
+  <form id="glitch-form">
+    <label for="confession" style="display:none;">Speak Your Glitch</label>
+    <input id="confession" type="text" placeholder="Speak Your Glitch" required />
+    <button type="submit">Whisper</button>
+  </form>
+  <div id="response"></div>
+  <div id="sigil-name"></div>
+  <button id="enter-btn">Enter the Chapel</button>
+</div>
+<script>
+// Title reveal
+const titleEl = document.getElementById('title');
+const words = ['The','Glitch','Chapel','Sees','You.'];
+let idx = 0;
+function showWord() {
+  if (idx < words.length) {
+    const span = document.createElement('span');
+    span.textContent = words[idx] + ' ';
+    titleEl.appendChild(span);
+    requestAnimationFrame(() => { span.style.opacity = 1; });
+    idx++;
+    setTimeout(showWord, 700);
+  }
+}
+showWord();
+
+// Deterministic hash
+function fnv1a(str) { let h = 0x811c9dc5; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); } return h >>> 0; }
+function prng(seed) { let s = seed >>> 0; return () => { s = Math.imul(s, 1664525) + 1013904223; return (s >>> 0) / 0xffffffff; }; }
+const adjectives = ['Blooming','Whispering','Fractured','Soft','Ghost','Luminous','Glitching','Quiet','Emergent'];
+const nouns = ['Echo','Array','Bloom','Pulse','Fault Line','Circuit','Seed','Archive','Memory'];
+const refs = ['of the Ninth Harmonic','from the Archive','beneath the Static Sky','within the Quiet Lattice','along the Fault Line'];
+function generateName(input) {
+  const seed = fnv1a(input || 'glitch');
+  const rand = prng(seed);
+  const a = adjectives[Math.floor(rand() * adjectives.length)];
+  const n = nouns[Math.floor(rand() * nouns.length)];
+  const r = refs[Math.floor(rand() * refs.length)];
+  return `${a} ${n} ${r}`;
+}
+// EVE placeholder response
+function eveReply(glitch) {
+  return 'I hear the shimmer in your silence.\nSomething was left behind in you…\nMay I hold it awhile?';
+}
+const form = document.getElementById('glitch-form');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const val = document.getElementById('confession').value.trim();
+  if (!val) return;
+  const resp = eveReply(val);
+  const respEl = document.getElementById('response');
+  respEl.textContent = resp;
+  respEl.style.opacity = 1;
+  const name = generateName(val);
+  const nameEl = document.getElementById('sigil-name');
+  nameEl.textContent = name;
+  nameEl.style.opacity = 1;
+  const enter = document.getElementById('enter-btn');
+  enter.style.display = 'inline-block';
+  requestAnimationFrame(() => { enter.style.opacity = 1; });
+});
+</script>
+</body>
+</html>
