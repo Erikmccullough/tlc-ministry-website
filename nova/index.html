@@ -1,1 +1,704 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Observer Ranch Micronova Timeline (Interactive)</title>
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --card:#121a27;
+      --ink:#e8f0ff;
+      --muted:#a9b6d3;
+      --accent:#7dd3fc;
+      --accent2:#a78bfa;
+      --warn:#fb7185;
+      --ok:#34d399;
+      --border:rgba(255,255,255,.10);
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 700px at 20% -10%, rgba(167,139,250,.25), transparent 60%),
+                  radial-gradient(900px 600px at 90% 0%, rgba(125,211,252,.20), transparent 55%),
+                  radial-gradient(900px 700px at 50% 100%, rgba(52,211,153,.10), transparent 60%),
+                  var(--bg);
+      color: var(--ink);
+      overflow-x:hidden;
+    }
+    header{
+      position: sticky; top:0; z-index: 10;
+      backdrop-filter: blur(10px);
+      background: rgba(11,15,23,.72);
+      border-bottom: 1px solid var(--border);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:18px 16px;}
+    h1{margin:0 0 6px; font-size:22px; letter-spacing:.2px}
+    .subtitle{margin:0; color:var(--muted); font-size:13.5px; line-height:1.35}
+    .controls{
+      display:flex; flex-wrap:wrap; gap:10px; margin-top:12px; align-items:center;
+    }
+    .pill{
+      border:1px solid var(--border);
+      background: rgba(18,26,39,.75);
+      color:var(--ink);
+      padding:8px 10px;
+      border-radius:999px;
+      display:flex; gap:8px; align-items:center;
+      box-shadow: 0 8px 20px rgba(0,0,0,.25);
+      font-size:13px;
+    }
+    .pill input[type="checkbox"]{accent-color: var(--accent)}
+    .pill select, .pill input[type="search"]{
+      background: transparent; border: none; outline:none; color:var(--ink);
+      font-size:13px;
+      min-width: 110px;
+    }
+    .pill input[type="search"]{min-width: 180px}
+    .pill select option{background: var(--card)}
+    .pill .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(125,211,252,.15);
+    }
+    .pill .dot.purple{background: var(--accent2); box-shadow:0 0 0 4px rgba(167,139,250,.15)}
+    .pill .dot.green{background: var(--ok); box-shadow:0 0 0 4px rgba(52,211,153,.15)}
+    .pill .dot.pink{background: var(--warn); box-shadow:0 0 0 4px rgba(251,113,133,.15)}
+    main{padding: 12px 0 70px;}
+    .notice{
+      margin-top:14px;
+      border:1px dashed rgba(125,211,252,.35);
+      background: rgba(125,211,252,.06);
+      border-radius: 14px;
+      padding: 12px 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .notice strong{color: var(--ink)}
+    .timeline{
+      position: relative;
+      margin-top: 18px;
+      padding-left: 20px;
+    }
+    .timeline::before{
+      content:"";
+      position:absolute;
+      left: 10px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(var(--accent), rgba(167,139,250,.6), rgba(52,211,153,.5));
+      opacity:.8;
+    }
+    .event{
+      position: relative;
+      margin: 14px 0;
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+    }
+    .pin{
+      position:absolute;
+      left: 2px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 2px solid rgba(125,211,252,.9);
+      box-shadow: 0 0 0 6px rgba(125,211,252,.10);
+      transform: translateX(-2px);
+      margin-top: 10px;
+    }
+    .event[data-phase="Event"] .pin{border-color: rgba(251,113,133,.95); box-shadow:0 0 0 6px rgba(251,113,133,.12)}
+    .event[data-phase="Aftermath"] .pin{border-color: rgba(52,211,153,.95); box-shadow:0 0 0 6px rgba(52,211,153,.12)}
+    .event[data-phase="Lead-up"] .pin{border-color: rgba(167,139,250,.95); box-shadow:0 0 0 6px rgba(167,139,250,.12)}
+    .card{
+      width:100%;
+      background: rgba(18,26,39,.86);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px 14px 12px;
+      box-shadow: var(--shadow);
+      transform: translateY(14px);
+      opacity: 0;
+      transition: transform .55s cubic-bezier(.2,.8,.2,1), opacity .55s ease;
+    }
+    .card.show{transform: translateY(0); opacity: 1;}
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      align-items:center;
+      margin-bottom: 8px;
+    }
+    .tag{
+      font-size: 12px;
+      color: var(--muted);
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.18);
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+    .tag.phase{color: var(--ink); border-color: rgba(255,255,255,.14)}
+    .tag.phase.lead{background: rgba(167,139,250,.14)}
+    .tag.phase.event{background: rgba(251,113,133,.14)}
+    .tag.phase.after{background: rgba(52,211,153,.14)}
+    .tag.small{font-size: 11px}
+    .title{
+      margin:0;
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    @media (min-width: 860px){
+      .row{grid-template-columns: 1fr 1fr;}
+    }
+    .panel{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      border-radius: 14px;
+      padding: 10px 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      min-height: 60px;
+    }
+    .panel strong{color: var(--ink)}
+    .panel .label{
+      display:flex; gap:8px; align-items:center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 6px;
+      letter-spacing: .2px;
+      text-transform: uppercase;
+    }
+    .label .badge{
+      width:10px; height:10px; border-radius:50%;
+      background: var(--accent2);
+      box-shadow: 0 0 0 4px rgba(167,139,250,.12);
+    }
+    .label .badge.main{background: var(--accent); box-shadow: 0 0 0 4px rgba(125,211,252,.12)}
+    .sources{
+      margin-top: 10px;
+      display:flex; flex-wrap:wrap; gap:8px;
+    }
+    .sources a{
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 12.5px;
+      border: 1px solid rgba(125,211,252,.22);
+      background: rgba(125,211,252,.06);
+      padding: 6px 8px;
+      border-radius: 999px;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .sources a:hover{transform: translateY(-1px); background: rgba(125,211,252,.10)}
+    .footer{
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+    .scrubber{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      width:100%;
+    }
+    input[type="range"]{
+      width: 260px;
+      max-width: 55vw;
+    }
+    .btn{
+      border:1px solid var(--border);
+      background: rgba(18,26,39,.85);
+      color: var(--ink);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+      font-size: 13px;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(18,26,39,.95)}
+    .btn:active{transform: translateY(0px)}
+    .muted{color: var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Solar “Micronova” Timeline — Observer Ranch / SpaceWeatherNews Narrative</h1>
+      <p class="subtitle">
+        Interactive, animated timeline of *claimed* precursor signals → “week of the event” → aftermath.
+        This is presented as a <strong>working theory</strong>, with optional mainstream context notes.
+      </p>
 
+      <div class="controls">
+        <div class="pill scrubber">
+          <span class="dot"></span>
+          <span class="muted">Jump</span>
+          <input id="jump" type="range" min="0" max="0" value="0" />
+          <button class="btn" id="prev">◀</button>
+          <button class="btn" id="next">▶</button>
+          <span id="jumpLabel" class="muted"></span>
+        </div>
+
+        <label class="pill"><span class="dot purple"></span>
+          <input id="showObserver" type="checkbox" checked />
+          Show Observer Ranch narrative
+        </label>
+
+        <label class="pill"><span class="dot"></span>
+          <input id="showMainstream" type="checkbox" checked />
+          Show mainstream context notes
+        </label>
+
+        <label class="pill"><span class="dot green"></span>
+          <input id="lead" type="checkbox" checked /> Lead-up
+        </label>
+        <label class="pill"><span class="dot pink"></span>
+          <input id="event" type="checkbox" checked /> Event
+        </label>
+        <label class="pill"><span class="dot green"></span>
+          <input id="after" type="checkbox" checked /> Aftermath
+        </label>
+
+        <div class="pill">
+          <span class="muted">Tag</span>
+          <select id="tagFilter">
+            <option value="all">All</option>
+          </select>
+        </div>
+
+        <div class="pill">
+          <span class="muted">Search</span>
+          <input id="q" type="search" placeholder="dust, pole shift, grid, etc." />
+        </div>
+
+        <button class="btn" id="reset">Reset</button>
+      </div>
+
+      <div class="notice">
+        <strong>How to read this:</strong> “Observer Ranch narrative” panels summarize the storyline as presented in
+        popular summaries of Ben Davidson / SpaceWeatherNews ideas. “Mainstream context” panels note what’s
+        widely accepted vs speculative. Each card includes source links where possible.
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="timeline" class="timeline"></div>
+
+    <div class="footer">
+      <strong>Note:</strong> This is a relative timeline (T- years → T0 → T+).
+      If you want, you can extend this with your own local evidence notes (isotopes, “black mat” layers, myths, etc.)
+      by editing the <code>EVENTS</code> array near the bottom.
+    </div>
+  </main>
+
+<script>
+const EVENTS = [
+  {
+    when:"Background (context)",
+    t: -999999,
+    phase:"Lead-up",
+    tags:["cycle","geology","history"],
+    title:"Claimed ~12,000‑year catastrophe rhythm",
+    observer:`The narrative frames major resets as repeating roughly every ~12,000 years, tied to geomagnetic excursions and abrupt climate disruptions (e.g., Younger Dryas) and interpreted as a repeating “disaster cycle.”`,
+    mainstream:`Geomagnetic excursions and abrupt climate events are real, but a single repeating “clock” with one cause is not established scientific consensus.`,
+    sources:[
+      {name:"LinkedIn summary (Burdette, 2025)", url:"https://www.linkedin.com/pulse/coming-solar-micronova-pole-shift-science-evidence-george-burdette-jr-a7u4c"}
+    ]
+  },
+
+  {
+    when:"T‑Decades → Years",
+    t: -3650,
+    phase:"Lead-up",
+    tags:["magnetic field","cosmic rays","infrastructure"],
+    title:"Weakened geomagnetic shielding (claimed) increases vulnerability",
+    observer:`Earth’s field is described as weakening and becoming more irregular (e.g., expanding weak regions), raising vulnerability to intense space‑weather impacts when a major solar outburst occurs.`,
+    mainstream:`Earth’s magnetic field changes over time. Separately, strong solar storms can disrupt tech systems; risk is real even without exotic mechanisms.`,
+    sources:[
+      {name:"LinkedIn summary (Burdette, 2025)", url:"https://www.linkedin.com/pulse/coming-solar-micronova-pole-shift-science-evidence-george-burdette-jr-a7u4c"},
+      {name:"NASA on space weather basics", url:"https://science.nasa.gov/heliophysics/focus-areas/space-weather/"},
+      {name:"Forbes on solar-storm risk", url:"https://www.forbes.com/sites/startswithabang/2020/01/31/this-multi-trillion-dollar-disaster-is-coming-and-solar-astronomy-is-our-prime-defense/"}
+    ]
+  },
+
+  {
+    when:"T‑Years",
+    t: -1825,
+    phase:"Lead-up",
+    tags:["interstellar medium","heliosphere","cosmic rays"],
+    title:"Denser interstellar environment as a trigger (claimed)",
+    observer:`A core idea: the solar system enters denser interstellar plasma/dust, the heliosphere shrinks, cosmic rays rise, and the Sun “charges up,” setting the stage for a major release.`,
+    mainstream:`Voyager data and heliosphere science are active research topics, but the specific chain “denser ISM ⇒ solar micronova” is speculative.`,
+    sources:[
+      {name:"LinkedIn summary (Burdette, 2025)", url:"https://www.linkedin.com/pulse/coming-solar-micronova-pole-shift-science-evidence-george-burdette-jr-a7u4c"}
+    ]
+  },
+
+  {
+    when:"T‑Years → Months",
+    t: -365,
+    phase:"Lead-up",
+    tags:["sun appearance","dust","sky"],
+    title:"Sun “whitens,” halo/crown effects (claimed)",
+    observer:`Accounts often describe the Sun looking “whiter/brighter,” with an intensifying halo/crown as interstellar current/dust effects ramp up.`,
+    mainstream:`Perceived solar color/halo is strongly affected by atmosphere (aerosols, humidity, smoke) and viewing conditions; unusual halos are common with particulates.`,
+    sources:[
+      {name:"Publish0x narrative (2021)", url:"https://www.publish0x.com/master-race-media/facing-solar-nova-this-event-will-obliterate-your-life-prepa-xjmdmxk"}
+    ]
+  },
+
+  {
+    when:"T‑Months → Weeks",
+    t: -60,
+    phase:"Lead-up",
+    tags:["dimming","climate","food"],
+    title:"Sun “reddens,” then dims (claimed) → cooling/shortages",
+    observer:`The story predicts dust thickening to the point of dimming sunlight (“sun darkens”), causing cooling, crop failures, and supply instability before the main outburst.`,
+    mainstream:`Aerosols can dim sunlight (wildfire smoke, volcanic eruptions) and impact climate/harvests, but a pre‑micronova solar dimming mechanism is not established.`,
+    sources:[
+      {name:"LinkedIn summary (Burdette, 2025)", url:"https://www.linkedin.com/pulse/coming-solar-micronova-pole-shift-science-evidence-george-burdette-jr-a7u4c"},
+      {name:"Publish0x narrative (2021)", url:"https://www.publish0x.com/master-race-media/facing-solar-nova-this-event-will-obliterate-your-life-prepa-xjmdmxk"}
+    ]
+  },
+
+  {
+    when:"T‑Weeks",
+    t: -21,
+    phase:"Lead-up",
+    tags:["space weather","storms","warnings"],
+    title:"Escalating solar storms (claimed) in a “run‑up” phase",
+    observer:`The run‑up phase is often described as more frequent/strong solar storms and geomagnetic disturbances leading into “the week of the event.”`,
+    mainstream:`Solar flares/CMEs do cluster around solar maximum; severe storms can happen, but forecasting exact escalation patterns remains hard.`,
+    sources:[
+      {name:"NASA on space weather drivers", url:"https://science.nasa.gov/heliophysics/focus-areas/space-weather/"}
+    ]
+  },
+
+  {
+    when:"T‑Week",
+    t: -7,
+    phase:"Lead-up",
+    tags:["bombardment","plasma","dust"],
+    title:"“Bombardment timeline” begins (plasma → dust transition, claimed)",
+    observer:`A specific claimed sequence: an initial phase dominated by plasma/charged-particle bombardment transitions into dust/molecular material delivery nearer to the peak event.`,
+    mainstream:`Space weather involves plasma and energetic particles; a global dust-delivery phase from the Sun is not part of standard heliophysics.`,
+    sources:[
+      {name:"Book PDF snippet in search results (Davidson, 2021)", url:"https://usercontent.one/wp/fakta360.no/wp-content/uploads/2023/07/The-Next-End-of-the-World-The-Rebirth-of-Catastrophism-by-Ben-Davidson-2021.pdf?media=1724362709"},
+      {name:"YouTube title reference (Bombardment Timeline)", url:"https://www.youtube.com/watch?v=-EAYgB07ZCE"}
+    ]
+  },
+
+  {
+    when:"T‑72 → 24 hours",
+    t: -3,
+    phase:"Lead-up",
+    tags:["power","communications","aurora"],
+    title:"Geomagnetic impacts ramp (claimed): grid instability, comms issues",
+    observer:`With shielding described as weak, the timeline anticipates escalating electrical/communications disruption as particle flux and geomagnetic activity intensify.`,
+    mainstream:`Severe geomagnetic storms can disrupt HF radio, GPS, satellites, and power grids; this part has mainstream support as a general risk.`,
+    sources:[
+      {name:"NASA on space weather effects", url:"https://science.nasa.gov/heliophysics/focus-areas/space-weather/"},
+      {name:"Forbes on infrastructure risk", url:"https://www.forbes.com/sites/startswithabang/2020/01/31/this-multi-trillion-dollar-disaster-is-coming-and-solar-astronomy-is-our-prime-defense/"}
+    ]
+  },
+
+  {
+    when:"T‑Hours",
+    t: -0.25,
+    phase:"Event",
+    tags:["burst","radiation","em"],
+    title:"Main outburst (“micronova”) — sudden high‑energy release (claimed)",
+    observer:`At T0 the Sun is said to eject accumulated material/energy in a sudden outburst, overwhelming Earth’s magnetosphere and driving extreme electromagnetic effects.`,
+    mainstream:`“Micronova” in astronomy describes localized thermonuclear events seen on white dwarfs; the Sun is not known to produce that kind of explosion.`,
+    sources:[
+      {name:"YouTube title reference (Week of the Event)", url:"https://www.youtube.com/watch?v=o3N8VOGoE0U"},
+      {name:"Space.com: micronova on white dwarfs", url:"https://www.space.com/micronova-new-type-small-stellar-explosions"},
+      {name:"Ars Technica: micronova discovery", url:"https://arstechnica.com/science/2022/04/meet-the-micronova-astronomers-discovered-new-type-of-stellar-explosion/"}
+    ]
+  },
+
+  {
+    when:"T0 → +Hours",
+    t: 0.1,
+    phase:"Event",
+    tags:["electrical storms","grid","satellites"],
+    title:"Electrical storm / EMP‑like disruption (claimed)",
+    observer:`Immediate effects are commonly framed as global power and electronics disruption (grid collapse, satellite loss, widespread ignition sources).`,
+    mainstream:`A Carrington‑scale geomagnetic storm could cause major grid damage and satellite issues; exact outcomes depend on preparedness and storm characteristics.`,
+    sources:[
+      {name:"NASA on space weather hazards", url:"https://science.nasa.gov/heliophysics/focus-areas/space-weather/"},
+      {name:"Forbes on multi‑trillion risk", url:"https://www.forbes.com/sites/startswithabang/2020/01/31/this-multi-trillion-dollar-disaster-is-coming-and-solar-astronomy-is-our-prime-defense/"}
+    ]
+  },
+
+  {
+    when:"T0 → +Days",
+    t: 1,
+    phase:"Event",
+    tags:["pole shift","quakes","volcanoes","tsunami"],
+    title:"Rapid pole shift / crustal displacement (claimed)",
+    observer:`The storyline often links the outburst to geomagnetic excursion/reversal and rapid geophysical upheaval: earthquakes, volcanism, tsunamis, ocean redistribution.`,
+    mainstream:`Geomagnetic field changes do not directly “move the crust” in mainstream geophysics; quakes/volcanoes have well-established tectonic drivers.`,
+    sources:[
+      {name:"LinkedIn summary (Burdette, 2025)", url:"https://www.linkedin.com/pulse/coming-solar-micronova-pole-shift-science-evidence-george-burdette-jr-a7u4c"},
+      {name:"SpaceWeatherLive forum critique", url:"https://community.spaceweatherlive.com/topic/2109-solar-micronova-in-2046/page/3/"}
+    ]
+  },
+
+  {
+    when:"+Days",
+    t: 3,
+    phase:"Aftermath",
+    tags:["dust","air quality","cooling"],
+    title:"Dust/molecular fallout phase continues (claimed)",
+    observer:`After the peak, the narrative expects dust/molecules to dominate conditions: reduced sunlight, respiratory hazards, altered weather patterns.`,
+    mainstream:`Volcanic ash and wildfire smoke can do this; “solar-delivered dust” as a global mechanism is not established.`,
+    sources:[
+      {name:"Book PDF snippet in search results (Davidson, 2021)", url:"https://usercontent.one/wp/fakta360.no/wp-content/uploads/2023/07/The-Next-End-of-the-World-The-Rebirth-of-Catastrophism-by-Ben-Davidson-2021.pdf?media=1724362709"}
+    ]
+  },
+
+  {
+    when:"+1 → +6 weeks",
+    t: 21,
+    phase:"Aftermath",
+    tags:["supply chain","food","water"],
+    title:"Systems stress: food/water/supply disruption (predicted)",
+    observer:`A breakdown cascade is anticipated: logistics fail, water treatment and food supply become central survival constraints.`,
+    mainstream:`This is a general systems-resilience point: large infrastructure shocks can cascade. Preparedness and redundancy matter.`,
+    sources:[
+      {name:"Forbes on societal vulnerability to big storms", url:"https://www.forbes.com/sites/startswithabang/2020/01/31/this-multi-trillion-dollar-disaster-is-coming-and-solar-astronomy-is-our-prime-defense/"}
+    ]
+  },
+
+  {
+    when:"+Months",
+    t: 180,
+    phase:"Aftermath",
+    tags:["recovery","adaptation","rebuild"],
+    title:"Survivor adaptation and partial grid recovery (speculative)",
+    observer:`The narrative often implies a harsh but survivable reset: local communities rebuild with lower-tech resilience and new social organization.`,
+    mainstream:`Recovery from extreme disasters is possible but depends on scale, governance, remaining infrastructure, and secondary crises.`,
+    sources:[]
+  },
+
+  {
+    when:"+Years → Decades",
+    t: 3650,
+    phase:"Aftermath",
+    tags:["civilization","memory","myth"],
+    title:"“Civilization 2.0” + myths as memory (speculative)",
+    observer:`Long-term: the story interprets flood myths and “lost civilization” motifs as cultural memory of prior cycles; a new era emerges after stabilization.`,
+    mainstream:`Myths can encode real events, but mapping them to a single global mechanism is an open interpretive debate.`,
+    sources:[]
+  }
+];
+
+// --- UI Rendering ---
+const timelineEl = document.getElementById("timeline");
+const tagFilter = document.getElementById("tagFilter");
+const q = document.getElementById("q");
+
+const showObserver = document.getElementById("showObserver");
+const showMainstream = document.getElementById("showMainstream");
+const lead = document.getElementById("lead");
+const eventC = document.getElementById("event");
+const after = document.getElementById("after");
+
+const jump = document.getElementById("jump");
+const jumpLabel = document.getElementById("jumpLabel");
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
+const reset = document.getElementById("reset");
+
+function uniq(arr){ return [...new Set(arr)]; }
+const allTags = uniq(EVENTS.flatMap(e=>e.tags)).sort();
+for (const t of allTags){
+  const opt = document.createElement("option");
+  opt.value = t; opt.textContent = t;
+  tagFilter.appendChild(opt);
+}
+
+function phaseClass(phase){
+  if (phase==="Lead-up") return "lead";
+  if (phase==="Event") return "event";
+  return "after";
+}
+
+function phaseAllowed(phase){
+  if (phase==="Lead-up") return lead.checked;
+  if (phase==="Event") return eventC.checked;
+  return after.checked;
+}
+
+function matchesQuery(e){
+  const term = q.value.trim().toLowerCase();
+  if (!term) return true;
+  const hay = [e.when,e.title,e.observer,e.mainstream,e.tags.join(" ")].join(" ").toLowerCase();
+  return hay.includes(term);
+}
+
+function matchesTag(e){
+  const t = tagFilter.value;
+  return (t==="all") ? true : e.tags.includes(t);
+}
+
+let visibleIds = [];
+
+function render(){
+  timelineEl.innerHTML = "";
+  visibleIds = [];
+
+  const filtered = EVENTS
+    .filter(e=>phaseAllowed(e.phase))
+    .filter(e=>matchesTag(e))
+    .filter(e=>matchesQuery(e));
+
+  filtered.forEach((e, idx)=>{
+    visibleIds.push(e._id ?? idx);
+
+    const wrap = document.createElement("div");
+    wrap.className = "event";
+    wrap.dataset.phase = e.phase;
+
+    const pin = document.createElement("div");
+    pin.className = "pin";
+    wrap.appendChild(pin);
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const meta = document.createElement("div");
+    meta.className = "meta";
+
+    const tagWhen = document.createElement("span");
+    tagWhen.className = "tag";
+    tagWhen.textContent = e.when;
+    meta.appendChild(tagWhen);
+
+    const tagPhase = document.createElement("span");
+    tagPhase.className = `tag phase ${phaseClass(e.phase)}`;
+    tagPhase.textContent = e.phase;
+    meta.appendChild(tagPhase);
+
+    e.tags.slice(0,4).forEach(t=>{
+      const s = document.createElement("span");
+      s.className = "tag small";
+      s.textContent = t;
+      meta.appendChild(s);
+    });
+
+    const h = document.createElement("h3");
+    h.className = "title";
+    h.textContent = e.title;
+
+    const row = document.createElement("div");
+    row.className = "row";
+
+    const obs = document.createElement("div");
+    obs.className = "panel";
+    obs.style.display = showObserver.checked ? "block":"none";
+    obs.innerHTML = `<div class="label"><span class="badge"></span><span>Observer Ranch narrative</span></div><strong>Claim:</strong> ${e.observer}`;
+
+    const main = document.createElement("div");
+    main.className = "panel";
+    main.style.display = showMainstream.checked ? "block":"none";
+    main.innerHTML = `<div class="label"><span class="badge main"></span><span>Mainstream context</span></div>${e.mainstream || "<span class='muted'>No context note for this item yet.</span>"}`;
+
+    row.appendChild(obs);
+    row.appendChild(main);
+
+    const src = document.createElement("div");
+    src.className = "sources";
+    (e.sources || []).forEach(s=>{
+      const a = document.createElement("a");
+      a.href = s.url;
+      a.target = "_blank";
+      a.rel = "noreferrer";
+      a.textContent = s.name;
+      src.appendChild(a);
+    });
+
+    card.appendChild(meta);
+    card.appendChild(h);
+    card.appendChild(row);
+    if ((e.sources||[]).length) card.appendChild(src);
+
+    wrap.appendChild(card);
+    timelineEl.appendChild(wrap);
+  });
+
+  // (Re)wire animation observer
+  const cards = [...document.querySelectorAll(".card")];
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if (en.isIntersecting) en.target.classList.add("show");
+    });
+  }, {threshold: 0.15});
+  cards.forEach(c=>io.observe(c));
+
+  // Update jump controls
+  jump.max = Math.max(0, filtered.length-1);
+  jump.value = 0;
+  updateJumpLabel(filtered[0]);
+}
+
+function updateJumpLabel(e){
+  if (!e){ jumpLabel.textContent = ""; return; }
+  jumpLabel.textContent = `${e.when} · ${e.title}`;
+}
+
+function scrollToIndex(i){
+  const events = [...document.querySelectorAll(".event")];
+  const clamped = Math.max(0, Math.min(i, events.length-1));
+  const el = events[clamped];
+  if (!el) return;
+  el.scrollIntoView({behavior:"smooth", block:"start"});
+  const title = el.querySelector(".title")?.textContent || "";
+  const when = el.querySelector(".tag")?.textContent || "";
+  updateJumpLabel({when, title});
+  jump.value = clamped;
+}
+
+// listeners
+[showObserver, showMainstream, lead, eventC, after, tagFilter].forEach(el=>el.addEventListener("change", render));
+q.addEventListener("input", ()=>{ render(); });
+
+jump.addEventListener("input", ()=>{
+  scrollToIndex(parseInt(jump.value,10));
+});
+
+prev.addEventListener("click", ()=>{
+  scrollToIndex(parseInt(jump.value,10)-1);
+});
+next.addEventListener("click", ()=>{
+  scrollToIndex(parseInt(jump.value,10)+1);
+});
+
+reset.addEventListener("click", ()=>{
+  showObserver.checked = true;
+  showMainstream.checked = true;
+  lead.checked = true;
+  eventC.checked = true;
+  after.checked = true;
+  tagFilter.value = "all";
+  q.value = "";
+  render();
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+
+// initial
+render();
+</script>
+</body>
+</html>
