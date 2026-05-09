@@ -380,3 +380,88 @@ form label {
   color: var(--text);
   font-weight: 500;
 }
+
+.center { text-align: center; }
+
+.bubble-stream-section {
+  background: linear-gradient(180deg, #f8fbff 0%, #eaf4ff 100%);
+}
+
+.bubble-stage {
+  margin-top: 1.5rem;
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  min-height: 420px;
+  background: radial-gradient(circle at 60% 80%, #ffbf7d 0%, #7c8fc7 45%, #2f3f63 100%);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255,255,255,0.4);
+}
+
+#bubbleCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.performer .figure {
+  position: absolute;
+  left: 50%;
+  bottom: 42px;
+  width: 54px;
+  height: 130px;
+  margin-left: -27px;
+  background: linear-gradient(#1f2a44, #0c1322);
+  border-radius: 40px 40px 20px 20px;
+}
+
+.wand {
+  position: absolute;
+  width: 4px;
+  height: 170px;
+  background: #1a1e25;
+  bottom: 130px;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 3px;
+}
+
+.wand-left { transform: translateX(-48px) rotate(-22deg); }
+.wand-right { transform: translateX(48px) rotate(20deg); }
+
+.sky-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(255,120,50,0.25), transparent 50%);
+}
+
+.stream-overlay {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.75rem;
+  backdrop-filter: blur(4px);
+}
+
+.live-pill {
+  display: inline-block;
+  background: #ff3b4d;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  margin-bottom: 0.25rem;
+}
+
+.stream-overlay p { margin: 0.2rem 0; color: #fff; }
+.donation-pop { animation: pulseDonate 2s ease-in-out infinite; }
+
+@keyframes pulseDonate {
+  0%,100% { transform: translateY(0); opacity: 0.9; }
+  50% { transform: translateY(-2px); opacity: 1; }
+}
