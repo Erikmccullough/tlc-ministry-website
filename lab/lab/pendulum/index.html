@@ -2,26 +2,88 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TLC Lab - Pendulum</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TLC Pendulum Lab</title>
 <style>
-body{
-  background:#000814;
-  color:#00e5ff;
-  font-family:Arial,sans-serif;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  margin:0;
-}
-h1{
-  text-align:center;
-  text-shadow:0 0 20px #00e5ff;
-}
+html,body{margin:0;height:100%;overflow:hidden;background:#020814;color:#9ff;font-family:Arial}
+canvas{display:block;width:100vw;height:100vh}
+.panel{position:fixed;left:14px;right:14px;bottom:14px;padding:14px;border:1px solid #0ff;border-radius:18px;background:rgba(0,20,35,.75);box-shadow:0 0 25px #00e5ff88}
+button{width:48%;padding:14px;margin:4px 1%;border-radius:14px;border:1px solid #0ff;background:#063647;color:white;font-size:18px;font-weight:bold}
+h1{font-size:20px;letter-spacing:4px;margin:0 0 8px;text-shadow:0 0 15px #0ff}
 </style>
 </head>
 <body>
-<h1>🌌 TLC Pendulum Lab Online 🌌</h1>
+<canvas id="c"></canvas>
+<div class="panel">
+<h1>TLC PENDULUM LAB</h1>
+<p>Drag the glowing orb. JavaScript is alive.</p>
+<button onclick="kick()">Kick</button><button onclick="reset()">Reset</button>
+</div>
+<script>
+const c=document.getElementById("c"),x=c.getContext("2d");
+let w,h,cx,cy,R,t=0,drag=false;
+let a=1.1,v=.015;
+
+function size(){w=c.width=innerWidth*devicePixelRatio;h=c.height=innerHeight*devicePixelRatio;x.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);cx=innerWidth/2;cy=innerHeight*.42;R=Math.min(innerWidth,innerHeight)*.38}
+addEventListener("resize",size);size();
+
+function pos(){
+ let px=cx+Math.sin(a)*R*.72;
+ let py=cy+Math.cos(a)*R*.42;
+ return [px,py];
+}
+
+function draw(){
+ requestAnimationFrame(draw);
+ t+=.016;
+ if(!drag){v+=Math.sin(a)*.0009;v*=.996;a+=v}
+ x.clearRect(0,0,innerWidth,innerHeight);
+
+ let g=x.createRadialGradient(cx,cy,10,cx,cy,R*1.2);
+ g.addColorStop(0,"#06244a");g.addColorStop(1,"#010711");
+ x.fillStyle=g;x.fillRect(0,0,innerWidth,innerHeight);
+
+ x.strokeStyle="#00e5ff55";x.lineWidth=2;
+ for(let i=0;i<9;i++){
+   x.beginPath();
+   x.ellipse(cx,cy,R*(1-i*.06),R*.45*(1-i*.06),0,Math.PI,Math.PI*2);
+   x.stroke();
+ }
+ for(let i=-4;i<=4;i++){
+   x.beginPath();
+   x.ellipse(cx,cy,R*.16, R*.45, i*.23, Math.PI, Math.PI*2);
+   x.stroke();
+ }
+
+ let [px,py]=pos();
+ x.strokeStyle="#00ffff";x.lineWidth=4;x.shadowBlur=20;x.shadowColor="#00ffff";
+ x.beginPath();x.moveTo(cx,cy);x.quadraticCurveTo((cx+px)/2,cy-R*.2,px,py);x.stroke();
+
+ x.fillStyle="#ffffff";x.shadowBlur=30;x.shadowColor="#00ffff";
+ x.beginPath();x.arc(px,py,18,0,Math.PI*2);x.fill();
+ x.fillStyle="#00e5ff";x.beginPath();x.arc(px,py,9,0,Math.PI*2);x.fill();
+
+ x.shadowBlur=0;x.fillStyle="#9ff";x.font="16px Arial";
+ x.fillText("Hemisphere constraint prototype",20,36);
+}
+draw();
+
+function reset(){a=1.1;v=.015}
+function kick(){v+=(Math.random()-.5)*.2}
+
+function touch(e){
+ let p=e.touches?e.touches[0]:e;
+ let [px,py]=pos();
+ return Math.hypot(p.clientX-px,p.clientY-py)<60;
+}
+addEventListener("pointerdown",e=>{if(touch(e))drag=true});
+addEventListener("pointermove",e=>{
+ if(drag){
+   a=Math.atan2(e.clientX-cx,(e.clientY-cy)/.6);
+   v=0;
+ }
+});
+addEventListener("pointerup",()=>drag=false);
+</script>
 </body>
 </html>
