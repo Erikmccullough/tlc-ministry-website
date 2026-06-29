@@ -9,151 +9,122 @@ html,body{margin:0;height:100%;overflow:hidden;background:#020814;color:#9ff;fon
 canvas{display:block;width:100vw;height:100vh}
 .panel{position:fixed;left:14px;right:14px;bottom:14px;padding:14px;border:1px solid #0ff;border-radius:18px;background:rgba(0,20,35,.78);box-shadow:0 0 25px #00e5ff88}
 button{width:48%;padding:14px;margin:4px 1%;border-radius:14px;border:1px solid #0ff;background:#063647;color:white;font-size:18px;font-weight:bold}
-h1{font-size:20px;letter-spacing:4px;margin:0 0 8px;text-shadow:0 0 15px #0ff}
+h1{font-size:22px;letter-spacing:5px;margin:0 0 8px;text-shadow:0 0 15px #0ff}
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
 <div class="panel">
 <h1>TLC DOUBLE PENDULUM LAB</h1>
-<p>Two linked glowing masses. Drag the first orb. Chaos goblin engaged.</p>
+<p>Two linked glowing masses. Kick it and let chaos flirt with geometry.</p>
 <button onclick="kick()">Kick</button><button onclick="reset()">Reset</button>
 </div>
 <script>
 const c=document.getElementById("c"),x=c.getContext("2d");
-let w,h,cx,cy,R,drag=false;
-let a1=1.05,a2=1.55,v1=.012,v2=-.018;
+let W,H,cx,cy,R;
+let a1=1.35,a2=1.9,v1=0,v2=0;
+let m1=1,m2=1,L1=145,L2=125,g=.7,d=.997;
 let trail=[];
 
 function size(){
-  w=c.width=innerWidth*devicePixelRatio;
-  h=c.height=innerHeight*devicePixelRatio;
+  W=c.width=innerWidth*devicePixelRatio;
+  H=c.height=innerHeight*devicePixelRatio;
   x.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
   cx=innerWidth/2;
-  cy=innerHeight*.38;
-  R=Math.min(innerWidth,innerHeight)*.34;
+  cy=innerHeight*.32;
+  R=Math.min(innerWidth,innerHeight)*.32;
 }
 addEventListener("resize",size);size();
 
-function point(a,scale,offsetY=0){
-  return [
-    cx+Math.sin(a)*R*scale,
-    cy+Math.cos(a)*R*.42*scale+offsetY
-  ];
+function reset(){a1=1.35;a2=1.9;v1=0;v2=0;trail=[]}
+function kick(){v1+=(Math.random()-.5)*.3;v2+=(Math.random()-.5)*.4}
+
+function physics(){
+  let n1=-g*(2*m1+m2)*Math.sin(a1);
+  let n2=-m2*g*Math.sin(a1-2*a2);
+  let n3=-2*Math.sin(a1-a2)*m2*(v2*v2*L2+v1*v1*L1*Math.cos(a1-a2));
+  let den=L1*(2*m1+m2-m2*Math.cos(2*a1-2*a2));
+  let acc1=(n1+n2+n3)/den;
+
+  let n4=2*Math.sin(a1-a2);
+  let n5=v1*v1*L1*(m1+m2);
+  let n6=g*(m1+m2)*Math.cos(a1);
+  let n7=v2*v2*L2*m2*Math.cos(a1-a2);
+  let den2=L2*(2*m1+m2-m2*Math.cos(2*a1-2*a2));
+  let acc2=n4*(n5+n6+n7)/den2;
+
+  v1=(v1+acc1)*d;
+  v2=(v2+acc2)*d;
+  a1+=v1;
+  a2+=v2;
 }
 
-function positions(){
-  const p0=[cx,cy];
-  const p1=point(a1,.72,0);
-  const p2=[
-    p1[0]+Math.sin(a2)*R*.42,
-    p1[1]+Math.cos(a2)*R*.28
-  ];
-  return [p0,p1,p2];
+function project(px,py){
+  let scale=.72+.28*Math.cos((px-cx)/300);
+  return [px, cy+(py-cy)*.58*scale];
 }
 
-function drawRod(pA,pB,bend){
-  x.strokeStyle="#00ffff";
-  x.lineWidth=4;
-  x.shadowBlur=22;
-  x.shadowColor="#00ffff";
-  x.beginPath();
-  x.moveTo(pA[0],pA[1]);
-  x.quadraticCurveTo((pA[0]+pB[0])/2, (pA[1]+pB[1])/2-bend, pB[0],pB[1]);
-  x.stroke();
-}
-
-function orb(p,r,color){
-  x.shadowBlur=30;
-  x.shadowColor=color;
-  x.fillStyle="#fff";
-  x.beginPath();x.arc(p[0],p[1],r,0,Math.PI*2);x.fill();
-  x.fillStyle=color;
-  x.beginPath();x.arc(p[0],p[1],r*.48,0,Math.PI*2);x.fill();
-}
-
-function draw(){
-  requestAnimationFrame(draw);
-
-  if(!drag){
-    let g1=Math.sin(a1)*.0011;
-    let g2=Math.sin(a2-a1)*.0024 + Math.sin(a2)*.0007;
-    v1+=g1+(Math.sin(a2-a1)*.0009);
-    v2+=g2-(Math.sin(a2-a1)*.0007);
-    v1*=.996; v2*=.995;
-    a1+=v1; a2+=v2;
-  }
-
-  x.clearRect(0,0,innerWidth,innerHeight);
-
-  let bg=x.createRadialGradient(cx,cy,10,cx,cy,R*1.7);
-  bg.addColorStop(0,"#06244a");
-  bg.addColorStop(1,"#010711");
-  x.fillStyle=bg;
-  x.fillRect(0,0,innerWidth,innerHeight);
-
-  x.strokeStyle="#00e5ff55";
-  x.lineWidth=2;
-  x.shadowBlur=8;
-  x.shadowColor="#00e5ff";
+function drawDome(){
+  x.strokeStyle="#00e5ff55";x.lineWidth=2;
   for(let i=0;i<10;i++){
     x.beginPath();
-    x.ellipse(cx,cy,R*(1-i*.055),R*.46*(1-i*.055),0,Math.PI,Math.PI*2);
+    x.ellipse(cx,cy,R*(1-i*.055),R*.45*(1-i*.055),0,Math.PI,Math.PI*2);
     x.stroke();
   }
   for(let i=-5;i<=5;i++){
     x.beginPath();
-    x.ellipse(cx,cy,R*.12,R*.46,i*.22,Math.PI,Math.PI*2);
+    x.ellipse(cx,cy,R*.18,R*.45,i*.19,Math.PI,Math.PI*2);
     x.stroke();
   }
+}
 
-  const [p0,p1,p2]=positions();
-  trail.push([p1[0],p1[1],p2[0],p2[1]]);
-  if(trail.length>180)trail.shift();
-
+function orb(px,py,r,color){
+  x.shadowBlur=30;x.shadowColor=color;
+  x.fillStyle="#fff";
+  x.beginPath();x.arc(px,py,r,0,Math.PI*2);x.fill();
+  x.fillStyle=color;
+  x.beginPath();x.arc(px,py,r*.48,0,Math.PI*2);x.fill();
   x.shadowBlur=0;
+}
+
+function frame(){
+  requestAnimationFrame(frame);
+  physics();
+
+  let x1=cx+L1*Math.sin(a1);
+  let y1=cy+L1*Math.cos(a1);
+  let x2=x1+L2*Math.sin(a2);
+  let y2=y1+L2*Math.cos(a2);
+
+  let p0=[cx,cy],p1=project(x1,y1),p2=project(x2,y2);
+  trail.push(p2);
+  if(trail.length>260)trail.shift();
+
+  x.clearRect(0,0,innerWidth,innerHeight);
+  let bg=x.createRadialGradient(cx,cy,10,cx,cy,R*2.7);
+  bg.addColorStop(0,"#06244a");bg.addColorStop(1,"#010711");
+  x.fillStyle=bg;x.fillRect(0,0,innerWidth,innerHeight);
+
+  x.fillStyle="#9ff";x.font="18px Arial";
+  x.fillText("Hemisphere double pendulum prototype",24,38);
+
+  drawDome();
+
+  x.lineWidth=2;
   for(let i=1;i<trail.length;i++){
-    let alpha=i/trail.length;
-    x.strokeStyle=`rgba(0,229,255,${alpha*.35})`;
-    x.lineWidth=2;
-    x.beginPath();
-    x.moveTo(trail[i-1][2],trail[i-1][3]);
-    x.lineTo(trail[i][2],trail[i][3]);
-    x.stroke();
+    let q0=trail[i-1],q1=trail[i];
+    x.strokeStyle=`rgba(0,229,255,${i/trail.length*.55})`;
+    x.beginPath();x.moveTo(q0[0],q0[1]);x.lineTo(q1[0],q1[1]);x.stroke();
   }
 
-  drawRod(p0,p1,R*.12);
-  drawRod(p1,p2,R*.07);
-  orb(p1,18,"#00e5ff");
-  orb(p2,15,"#b000ff");
-
+  x.strokeStyle="#00ffff";x.lineWidth=5;x.shadowBlur=20;x.shadowColor="#00ffff";
+  x.beginPath();x.moveTo(p0[0],p0[1]);x.lineTo(p1[0],p1[1]);x.lineTo(p2[0],p2[1]);x.stroke();
   x.shadowBlur=0;
-  x.fillStyle="#9ff";
-  x.font="16px Arial";
-  x.fillText("Hemisphere double pendulum prototype",20,36);
-}
-draw();
 
-function reset(){
-  a1=1.05;a2=1.55;v1=.012;v2=-.018;trail=[];
+  orb(p1[0],p1[1],17,"#00e5ff");
+  orb(p2[0],p2[1],21,"#ff35ff");
 }
-function kick(){
-  v1+=(Math.random()-.5)*.25;
-  v2+=(Math.random()-.5)*.35;
-}
-
-function near(p,q){return Math.hypot(p.clientX-q[0],p.clientY-q[1])<55}
-addEventListener("pointerdown",e=>{
-  const [,p1]=positions();
-  if(near(e,p1))drag=true;
-});
-addEventListener("pointermove",e=>{
-  if(drag){
-    a1=Math.atan2(e.clientX-cx,(e.clientY-cy)/.55);
-    v1=0;
-  }
-});
-addEventListener("pointerup",()=>drag=false);
+frame();
 </script>
 </body>
 </html>
