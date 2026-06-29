@@ -10,15 +10,25 @@ canvas{display:block;width:100vw;height:100vh}
 .panel{position:fixed;left:14px;right:14px;bottom:14px;padding:14px;border:1px solid #0ff;border-radius:18px;background:rgba(0,20,35,.78);box-shadow:0 0 25px #00e5ff88}
 button{width:48%;padding:14px;margin:4px 1%;border-radius:14px;border:1px solid #0ff;background:#063647;color:white;font-size:18px;font-weight:bold}
 h1{font-size:22px;letter-spacing:5px;margin:0 0 8px;text-shadow:0 0 15px #0ff}
+label{display:block;margin:8px 0;color:#cff}
+input{width:100%}
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
+
 <div class="panel">
 <h1>TLC DOUBLE PENDULUM LAB</h1>
-<p>Two linked glowing masses. Kick it and let chaos flirt with geometry.</p>
+<p>Two linked glowing masses. Adjust arm length and mass.</p>
+
+<label>Arm 1 Length <input id="L1" type="range" min="60" max="260" value="145"></label>
+<label>Arm 2 Length <input id="L2" type="range" min="40" max="260" value="125"></label>
+<label>Mass 1 <input id="M1" type="range" min=".2" max="5" step=".1" value="1"></label>
+<label>Mass 2 <input id="M2" type="range" min=".2" max="5" step=".1" value="1"></label>
+
 <button onclick="kick()">Kick</button><button onclick="reset()">Reset</button>
 </div>
+
 <script>
 const c=document.getElementById("c"),x=c.getContext("2d");
 let W,H,cx,cy,R;
@@ -38,6 +48,11 @@ addEventListener("resize",size);size();
 
 function reset(){a1=1.35;a2=1.9;v1=0;v2=0;trail=[]}
 function kick(){v1+=(Math.random()-.5)*.3;v2+=(Math.random()-.5)*.4}
+
+document.getElementById("L1").oninput=e=>{L1=Number(e.target.value);trail=[]};
+document.getElementById("L2").oninput=e=>{L2=Number(e.target.value);trail=[]};
+document.getElementById("M1").oninput=e=>{m1=Number(e.target.value);trail=[]};
+document.getElementById("M2").oninput=e=>{m2=Number(e.target.value);trail=[]};
 
 function physics(){
   let n1=-g*(2*m1+m2)*Math.sin(a1);
@@ -65,12 +80,15 @@ function project(px,py){
 }
 
 function drawDome(){
-  x.strokeStyle="#00e5ff55";x.lineWidth=2;
+  x.strokeStyle="#00e5ff55";
+  x.lineWidth=2;
+
   for(let i=0;i<10;i++){
     x.beginPath();
     x.ellipse(cx,cy,R*(1-i*.055),R*.45*(1-i*.055),0,Math.PI,Math.PI*2);
     x.stroke();
   }
+
   for(let i=-5;i<=5;i++){
     x.beginPath();
     x.ellipse(cx,cy,R*.18,R*.45,i*.19,Math.PI,Math.PI*2);
@@ -79,11 +97,18 @@ function drawDome(){
 }
 
 function orb(px,py,r,color){
-  x.shadowBlur=30;x.shadowColor=color;
+  x.shadowBlur=30;
+  x.shadowColor=color;
   x.fillStyle="#fff";
-  x.beginPath();x.arc(px,py,r,0,Math.PI*2);x.fill();
+  x.beginPath();
+  x.arc(px,py,r,0,Math.PI*2);
+  x.fill();
+
   x.fillStyle=color;
-  x.beginPath();x.arc(px,py,r*.48,0,Math.PI*2);x.fill();
+  x.beginPath();
+  x.arc(px,py,r*.48,0,Math.PI*2);
+  x.fill();
+
   x.shadowBlur=0;
 }
 
@@ -96,34 +121,52 @@ function frame(){
   let x2=x1+L2*Math.sin(a2);
   let y2=y1+L2*Math.cos(a2);
 
-  let p0=[cx,cy],p1=project(x1,y1),p2=project(x2,y2);
+  let p0=[cx,cy];
+  let p1=project(x1,y1);
+  let p2=project(x2,y2);
+
   trail.push(p2);
-  if(trail.length>260)trail.shift();
+  if(trail.length>300)trail.shift();
 
   x.clearRect(0,0,innerWidth,innerHeight);
-  let bg=x.createRadialGradient(cx,cy,10,cx,cy,R*2.7);
-  bg.addColorStop(0,"#06244a");bg.addColorStop(1,"#010711");
-  x.fillStyle=bg;x.fillRect(0,0,innerWidth,innerHeight);
 
-  x.fillStyle="#9ff";x.font="18px Arial";
+  let bg=x.createRadialGradient(cx,cy,10,cx,cy,R*2.7);
+  bg.addColorStop(0,"#06244a");
+  bg.addColorStop(1,"#010711");
+  x.fillStyle=bg;
+  x.fillRect(0,0,innerWidth,innerHeight);
+
+  x.fillStyle="#9ff";
+  x.font="18px Arial";
   x.fillText("Hemisphere double pendulum prototype",24,38);
 
   drawDome();
 
-  x.lineWidth=2;
   for(let i=1;i<trail.length;i++){
     let q0=trail[i-1],q1=trail[i];
     x.strokeStyle=`rgba(0,229,255,${i/trail.length*.55})`;
-    x.beginPath();x.moveTo(q0[0],q0[1]);x.lineTo(q1[0],q1[1]);x.stroke();
+    x.lineWidth=2;
+    x.beginPath();
+    x.moveTo(q0[0],q0[1]);
+    x.lineTo(q1[0],q1[1]);
+    x.stroke();
   }
 
-  x.strokeStyle="#00ffff";x.lineWidth=5;x.shadowBlur=20;x.shadowColor="#00ffff";
-  x.beginPath();x.moveTo(p0[0],p0[1]);x.lineTo(p1[0],p1[1]);x.lineTo(p2[0],p2[1]);x.stroke();
+  x.strokeStyle="#00ffff";
+  x.lineWidth=5;
+  x.shadowBlur=20;
+  x.shadowColor="#00ffff";
+  x.beginPath();
+  x.moveTo(p0[0],p0[1]);
+  x.lineTo(p1[0],p1[1]);
+  x.lineTo(p2[0],p2[1]);
+  x.stroke();
   x.shadowBlur=0;
 
-  orb(p1[0],p1[1],17,"#00e5ff");
-  orb(p2[0],p2[1],21,"#ff35ff");
+  orb(p1[0],p1[1],12+m1*5,"#00e5ff");
+  orb(p2[0],p2[1],12+m2*5,"#ff35ff");
 }
+
 frame();
 </script>
 </body>
