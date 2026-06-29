@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TLC Pendulum Lab</title>
+<title>TLC Double Pendulum Lab</title>
 <style>
 html,body{margin:0;height:100%;overflow:hidden;background:#020814;color:#9ff;font-family:Arial}
 canvas{display:block;width:100vw;height:100vh}
-.panel{position:fixed;left:14px;right:14px;bottom:14px;padding:14px;border:1px solid #0ff;border-radius:18px;background:rgba(0,20,35,.75);box-shadow:0 0 25px #00e5ff88}
+.panel{position:fixed;left:14px;right:14px;bottom:14px;padding:14px;border:1px solid #0ff;border-radius:18px;background:rgba(0,20,35,.78);box-shadow:0 0 25px #00e5ff88}
 button{width:48%;padding:14px;margin:4px 1%;border-radius:14px;border:1px solid #0ff;background:#063647;color:white;font-size:18px;font-weight:bold}
 h1{font-size:20px;letter-spacing:4px;margin:0 0 8px;text-shadow:0 0 15px #0ff}
 </style>
@@ -15,73 +15,143 @@ h1{font-size:20px;letter-spacing:4px;margin:0 0 8px;text-shadow:0 0 15px #0ff}
 <body>
 <canvas id="c"></canvas>
 <div class="panel">
-<h1>TLC PENDULUM LAB</h1>
-<p>Drag the glowing orb. JavaScript is alive.</p>
+<h1>TLC DOUBLE PENDULUM LAB</h1>
+<p>Two linked glowing masses. Drag the first orb. Chaos goblin engaged.</p>
 <button onclick="kick()">Kick</button><button onclick="reset()">Reset</button>
 </div>
 <script>
 const c=document.getElementById("c"),x=c.getContext("2d");
-let w,h,cx,cy,R,t=0,drag=false;
-let a=1.1,v=.015;
+let w,h,cx,cy,R,drag=false;
+let a1=1.05,a2=1.55,v1=.012,v2=-.018;
+let trail=[];
 
-function size(){w=c.width=innerWidth*devicePixelRatio;h=c.height=innerHeight*devicePixelRatio;x.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);cx=innerWidth/2;cy=innerHeight*.42;R=Math.min(innerWidth,innerHeight)*.38}
+function size(){
+  w=c.width=innerWidth*devicePixelRatio;
+  h=c.height=innerHeight*devicePixelRatio;
+  x.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+  cx=innerWidth/2;
+  cy=innerHeight*.38;
+  R=Math.min(innerWidth,innerHeight)*.34;
+}
 addEventListener("resize",size);size();
 
-function pos(){
- let px=cx+Math.sin(a)*R*.72;
- let py=cy+Math.cos(a)*R*.42;
- return [px,py];
+function point(a,scale,offsetY=0){
+  return [
+    cx+Math.sin(a)*R*scale,
+    cy+Math.cos(a)*R*.42*scale+offsetY
+  ];
+}
+
+function positions(){
+  const p0=[cx,cy];
+  const p1=point(a1,.72,0);
+  const p2=[
+    p1[0]+Math.sin(a2)*R*.42,
+    p1[1]+Math.cos(a2)*R*.28
+  ];
+  return [p0,p1,p2];
+}
+
+function drawRod(pA,pB,bend){
+  x.strokeStyle="#00ffff";
+  x.lineWidth=4;
+  x.shadowBlur=22;
+  x.shadowColor="#00ffff";
+  x.beginPath();
+  x.moveTo(pA[0],pA[1]);
+  x.quadraticCurveTo((pA[0]+pB[0])/2, (pA[1]+pB[1])/2-bend, pB[0],pB[1]);
+  x.stroke();
+}
+
+function orb(p,r,color){
+  x.shadowBlur=30;
+  x.shadowColor=color;
+  x.fillStyle="#fff";
+  x.beginPath();x.arc(p[0],p[1],r,0,Math.PI*2);x.fill();
+  x.fillStyle=color;
+  x.beginPath();x.arc(p[0],p[1],r*.48,0,Math.PI*2);x.fill();
 }
 
 function draw(){
- requestAnimationFrame(draw);
- t+=.016;
- if(!drag){v+=Math.sin(a)*.0009;v*=.996;a+=v}
- x.clearRect(0,0,innerWidth,innerHeight);
+  requestAnimationFrame(draw);
 
- let g=x.createRadialGradient(cx,cy,10,cx,cy,R*1.2);
- g.addColorStop(0,"#06244a");g.addColorStop(1,"#010711");
- x.fillStyle=g;x.fillRect(0,0,innerWidth,innerHeight);
+  if(!drag){
+    let g1=Math.sin(a1)*.0011;
+    let g2=Math.sin(a2-a1)*.0024 + Math.sin(a2)*.0007;
+    v1+=g1+(Math.sin(a2-a1)*.0009);
+    v2+=g2-(Math.sin(a2-a1)*.0007);
+    v1*=.996; v2*=.995;
+    a1+=v1; a2+=v2;
+  }
 
- x.strokeStyle="#00e5ff55";x.lineWidth=2;
- for(let i=0;i<9;i++){
-   x.beginPath();
-   x.ellipse(cx,cy,R*(1-i*.06),R*.45*(1-i*.06),0,Math.PI,Math.PI*2);
-   x.stroke();
- }
- for(let i=-4;i<=4;i++){
-   x.beginPath();
-   x.ellipse(cx,cy,R*.16, R*.45, i*.23, Math.PI, Math.PI*2);
-   x.stroke();
- }
+  x.clearRect(0,0,innerWidth,innerHeight);
 
- let [px,py]=pos();
- x.strokeStyle="#00ffff";x.lineWidth=4;x.shadowBlur=20;x.shadowColor="#00ffff";
- x.beginPath();x.moveTo(cx,cy);x.quadraticCurveTo((cx+px)/2,cy-R*.2,px,py);x.stroke();
+  let bg=x.createRadialGradient(cx,cy,10,cx,cy,R*1.7);
+  bg.addColorStop(0,"#06244a");
+  bg.addColorStop(1,"#010711");
+  x.fillStyle=bg;
+  x.fillRect(0,0,innerWidth,innerHeight);
 
- x.fillStyle="#ffffff";x.shadowBlur=30;x.shadowColor="#00ffff";
- x.beginPath();x.arc(px,py,18,0,Math.PI*2);x.fill();
- x.fillStyle="#00e5ff";x.beginPath();x.arc(px,py,9,0,Math.PI*2);x.fill();
+  x.strokeStyle="#00e5ff55";
+  x.lineWidth=2;
+  x.shadowBlur=8;
+  x.shadowColor="#00e5ff";
+  for(let i=0;i<10;i++){
+    x.beginPath();
+    x.ellipse(cx,cy,R*(1-i*.055),R*.46*(1-i*.055),0,Math.PI,Math.PI*2);
+    x.stroke();
+  }
+  for(let i=-5;i<=5;i++){
+    x.beginPath();
+    x.ellipse(cx,cy,R*.12,R*.46,i*.22,Math.PI,Math.PI*2);
+    x.stroke();
+  }
 
- x.shadowBlur=0;x.fillStyle="#9ff";x.font="16px Arial";
- x.fillText("Hemisphere constraint prototype",20,36);
+  const [p0,p1,p2]=positions();
+  trail.push([p1[0],p1[1],p2[0],p2[1]]);
+  if(trail.length>180)trail.shift();
+
+  x.shadowBlur=0;
+  for(let i=1;i<trail.length;i++){
+    let alpha=i/trail.length;
+    x.strokeStyle=`rgba(0,229,255,${alpha*.35})`;
+    x.lineWidth=2;
+    x.beginPath();
+    x.moveTo(trail[i-1][2],trail[i-1][3]);
+    x.lineTo(trail[i][2],trail[i][3]);
+    x.stroke();
+  }
+
+  drawRod(p0,p1,R*.12);
+  drawRod(p1,p2,R*.07);
+  orb(p1,18,"#00e5ff");
+  orb(p2,15,"#b000ff");
+
+  x.shadowBlur=0;
+  x.fillStyle="#9ff";
+  x.font="16px Arial";
+  x.fillText("Hemisphere double pendulum prototype",20,36);
 }
 draw();
 
-function reset(){a=1.1;v=.015}
-function kick(){v+=(Math.random()-.5)*.2}
-
-function touch(e){
- let p=e.touches?e.touches[0]:e;
- let [px,py]=pos();
- return Math.hypot(p.clientX-px,p.clientY-py)<60;
+function reset(){
+  a1=1.05;a2=1.55;v1=.012;v2=-.018;trail=[];
 }
-addEventListener("pointerdown",e=>{if(touch(e))drag=true});
+function kick(){
+  v1+=(Math.random()-.5)*.25;
+  v2+=(Math.random()-.5)*.35;
+}
+
+function near(p,q){return Math.hypot(p.clientX-q[0],p.clientY-q[1])<55}
+addEventListener("pointerdown",e=>{
+  const [,p1]=positions();
+  if(near(e,p1))drag=true;
+});
 addEventListener("pointermove",e=>{
- if(drag){
-   a=Math.atan2(e.clientX-cx,(e.clientY-cy)/.6);
-   v=0;
- }
+  if(drag){
+    a1=Math.atan2(e.clientX-cx,(e.clientY-cy)/.55);
+    v1=0;
+  }
 });
 addEventListener("pointerup",()=>drag=false);
 </script>
