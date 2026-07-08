@@ -1,90 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>TLC Community Listening Project</title>
-  <meta name="description" content="Help shape future TLC Ministry programs for community connection, creativity, service, education, AI literacy, and human support." />
-
-  <meta property="og:title" content="TLC Community Listening Project" />
-  <meta property="og:description" content="Take the 3-5 minute survey and help shape future TLC programs." />
-  <meta property="og:type" content="website" />
-
-  <meta http-equiv="refresh" content="2; url=https://docs.google.com/forms/d/e/1FAIpQLSe0VAcogH4-XTogcxxnMzFNKPuG_8vqfBrvwpuZyML9xcVV7g/viewform?usp=dialog" />
-
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TLC Community Survey</title>
+  <meta name="description" content="Help shape future TLC Ministry programs for community connection, creativity, service, education, and AI literacy." />
+  <link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 24px;
-    }
-
-    .card {
-      max-width: 680px;
-      background: #1b1b1b;
-      border: 1px solid #333;
-      border-radius: 18px;
-      padding: 36px 28px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
-    }
-
-    h1 {
-      margin-top: 0;
-      font-size: 2rem;
-    }
-
-    p {
-      line-height: 1.6;
-      color: #ddd;
-    }
-
-    a.button {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 14px 22px;
-      border-radius: 999px;
-      background: #f2b705;
-      color: #111;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .small {
-      margin-top: 20px;
-      font-size: 0.9rem;
-      color: #aaa;
-    }
+    body{margin:0;background:#f7f2ea;color:#1e1b18;font:16px/1.6 'Satoshi',Arial,sans-serif}
+    .wrap{width:min(980px,calc(100% - 24px));margin:40px auto}
+    .card{background:#fffdfa;border:1px solid rgba(30,27,24,.12);border-radius:28px;padding:28px;box-shadow:0 18px 48px rgba(30,27,24,.10)}
+    h1,h2{font-family:'Zodiak',Georgia,serif;line-height:1.05}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .full{grid-column:1/-1}
+    label{display:block;margin:14px 0 6px;font-weight:700}
+    input,select,textarea{width:100%;padding:14px 16px;border-radius:16px;border:1px solid rgba(30,27,24,.12);background:#fff}
+    textarea{min-height:120px}
+    button,.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:13px 18px;border-radius:999px;border:0;background:#0f6b6f;color:#fff;font-weight:700;text-decoration:none}
+    .muted{color:#655d53}
+    .status{margin-top:12px;min-height:24px}
+    .hint{padding:14px 16px;border-radius:16px;background:#f1e7dc;margin-bottom:18px}
+    @media(max-width:760px){.grid{grid-template-columns:1fr}}
   </style>
 </head>
-
 <body>
-  <main class="card">
-    <h1>TLC Community Listening Project</h1>
+  <div class="wrap">
+    <a class="btn" href="/" style="background:#d96c5f">Back to site</a>
+    <div class="card">
+      <h1>TLC Community Survey</h1>
+      <p class="muted">This survey mirrors the exact structure of the original Google Form export so historical responses and new website submissions can live in one sheet.</p>
+      <div class="hint">Replace <strong>YOUR_GOOGLE_APPS_SCRIPT_URL</strong> in this file after deploying the Google Apps Script web app. This endpoint is for TLC survey data only. Glitch Chapel remains separate.</div>
 
-    <p>
-      Thank you for helping shape the future of TLC Ministry –
-      Tacos, Love & Creation Foundation.
-    </p>
+      <form id="surveyForm" class="grid">
+        <div>
+          <label>Name (Optional)</label>
+          <input name="Name (Optional)">
+        </div>
 
-    <p>
-      You’ll be redirected to our short community survey in just a moment.
-    </p>
+        <div>
+          <label>Email Address (Optional)</label>
+          <input type="email" name="Email Address (Optional)">
+        </div>
 
-    <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSe0VAcogH4-XTogcxxnMzFNKPuG_8vqfBrvwpuZyML9xcVV7g/viewform?usp=dialog">
-      Open the Survey
-    </a>
+        <div>
+          <label>Would you like to receive updates from TLC?</label>
+          <select name="Would you like to receive updates from TLC?">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
 
-    <p class="small">
-      If nothing happens, tap the button above.
-    </p>
-  </main>
+        <div>
+          <label>Which best describes you?</label>
+          <input name="Which best describes you?" placeholder="Community Member; Artist / Creative; Parent">
+        </div>
+
+        <div class="full">
+          <label>Which TLC programs interest you?</label>
+          <textarea name="Which TLC programs interest you?" placeholder="Separate multiple selections with semicolons"></textarea>
+        </div>
+
+        <div class="full">
+          <label>How would you most likely participate?</label>
+          <textarea name="How would you most likely participate?" placeholder="Volunteer; Attend Events; Become a Member"></textarea>
+        </div>
+
+        <div class="full">
+          <label>What skills could you contribute?</label>
+          <textarea name="What skills could you contribute?" placeholder="Cooking; Social Media; Fundraising"></textarea>
+        </div>
+
+        <div class="full">
+          <label>Which community challenges concern you most?</label>
+          <textarea name="Which community challenges concern you most?"></textarea>
+        </div>
+
+        <div>
+          <label>How concerned are you about the impact of AI on jobs, education, and daily life?</label>
+          <select name="How concerned are you about the impact of AI on jobs, education, and daily life?">
+            <option value=""></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Would you attend a free workshop about AI tools and the future of work?</label>
+          <select name="Would you attend a free workshop about AI tools and the future of work?">
+            <option>Yes</option>
+            <option>Maybe</option>
+            <option>No</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label>What AI-related topics interest you most?</label>
+          <textarea name="What AI-related topics interest you most?"></textarea>
+        </div>
+
+        <div class="full">
+          <label>What is the biggest challenge facing our community today?</label>
+          <textarea name="What is the biggest challenge facing our community today?"></textarea>
+        </div>
+
+        <div class="full">
+          <label>If TLC could launch one new program tomorrow, what should it be?</label>
+          <textarea name="If TLC could launch one new program tomorrow, what should it be?"></textarea>
+        </div>
+
+        <div>
+          <label>Would you be willing to participate in a future focus group or interview?</label>
+          <select name="Would you be willing to participate in a future focus group or interview?">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+
+        <div>
+          <label>How interested would you be in attending free workshops related to AI, technology, creativity, entrepreneurship, or future job skills?</label>
+          <select name="How interested would you be in attending free workshops related to AI, technology, creativity, entrepreneurship, or future job skills?">
+            <option value=""></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label>Anything else you’d like us to know?</label>
+          <textarea name="Anything else you’d like us to know?"></textarea>
+        </div>
+
+        <div class="full">
+          <button type="submit">Submit survey</button>
+          <div class="status" id="status" aria-live="polite"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const ENDPOINT = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+    const form = document.getElementById('surveyForm');
+    const statusEl = document.getElementById('status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      data['Timestamp'] = new Date().toISOString();
+
+      if (ENDPOINT === 'YOUR_GOOGLE_APPS_SCRIPT_URL') {
+        statusEl.textContent = 'Add your deployed Google Apps Script URL to activate live saving.';
+        return;
+      }
+
+      statusEl.textContent = 'Submitting...';
+
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        const out = await res.json().catch(() => ({}));
+        statusEl.textContent = (res.ok && out.ok)
+          ? 'Thank you — your response was saved.'
+          : 'Submission failed. Please try again.';
+
+        if (res.ok && out.ok) form.reset();
+      } catch (err) {
+        statusEl.textContent = 'Submission failed. Please try again.';
+      }
+    });
+  </script>
 </body>
 </html>
