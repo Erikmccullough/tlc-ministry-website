@@ -28,7 +28,7 @@
     <div class="card">
       <h1>TLC Community Survey</h1>
       <p class="muted">This survey mirrors the exact structure of the original Google Form export so historical responses and new website submissions can live in one sheet.</p>
-      <div class="hint">Replace <strong>https://script.google.com/macros/s/AKfycbyKWDD0DgOvhmANDM9e2-ir-bdvG5zRQQE0MjEsRJetHwaeQH5WiSp_SwwRH_TxEFJBw/exec</strong> in this file after deploying the Google Apps Script web app. This endpoint is for TLC survey data only. Glitch Chapel remains separate.</div>
+      <div class="hint">Replace <strong>https://script.google.com/macros/s/AKfycbyKWDD0DgOvhmANDM9e2-ir-bdvG5zRQQE0MjEsRJetHwaeQH5WiSp_SwwRHs3Fkv00Qw/exec</strong> in this file after deploying the Google Apps Script web app. This endpoint is for TLC survey data only. Glitch Chapel remains separate.</div>
 
       <form id="surveyForm" class="grid">
         <div>
@@ -144,7 +144,7 @@
   </div>
 
   <script>
-    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyKWDD0DgOvhmANDM9e2-ir-bdvG5zRQQE0MjEsRJetHwaeQH5WiSp_SwwRH_TxEFJBw/exec';
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyKWDD0DgOvhmANDM9e2-ir-bdvG5zRQQE0MjEsRJetHwaeQH5WiSp_SwwRHs3Fkv00Qw/exec';
     const form = document.getElementById('surveyForm');
     const statusEl = document.getElementById('status');
 
@@ -153,7 +153,7 @@
       const data = Object.fromEntries(new FormData(form).entries());
       data['Timestamp'] = new Date().toISOString();
 
-      if (ENDPOINT === 'https://script.google.com/macros/s/AKfycbyKWDD0DgOvhmANDM9e2-ir-bdvG5zRQQE0MjEsRJetHwaeQH5WiSp_SwwRH_TxEFJBw/exec') {
+      if (ENDPOINT === 'https://script.google.com/macros/s/AKfycbyKWDD0DgOvhmANDM9e2-ir-bdvG5zRQQE0MjEsRJetHwaeQH5WiSp_SwwRHs3Fkv00Qw/exec') {
         statusEl.textContent = 'Add your deployed Google Apps Script URL to activate live saving.';
         return;
       }
