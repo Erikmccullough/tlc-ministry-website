@@ -168,11 +168,11 @@
         });
 
         const out = await res.json().catch(() => ({}));
-        statusEl.textContent = (res.ok && out.ok)
+        statusEl.textContent = (res.ok && (out.result === 'success' || out.ok))
           ? 'Thank you — your response was saved.'
           : 'Submission failed. Please try again.';
 
-        if (res.ok && out.ok) form.reset();
+        if (res.ok && (out.result === 'success' || out.ok)) form.reset();
       } catch (err) {
         statusEl.textContent = 'Submission failed. Please try again.';
       }
