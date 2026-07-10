@@ -18,7 +18,6 @@
     button,.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:13px 18px;border-radius:999px;border:0;background:#0f6b6f;color:#fff;font-weight:700;text-decoration:none}
     .muted{color:#655d53}
     .status{margin-top:12px;min-height:24px}
-    .hint{padding:14px 16px;border-radius:16px;background:#f1e7dc;margin-bottom:18px}
     @media(max-width:760px){.grid{grid-template-columns:1fr}}
   </style>
 </head>
@@ -28,153 +27,102 @@
     <div class="card">
       <h1>TLC Community Survey</h1>
       <p class="muted">This survey mirrors the exact structure of the original Google Form export so historical responses and new website submissions can live in one sheet.</p>
-      <div class="hint">Replace <strong>https://script.google.com/macros/s/AKfycbyKWDD0DgOvhmANDM9e2-ir-bdvG5zRQQE0MjEsRJetHwaeQH5WiSp_SwwRHs3Fkv00Qw/exec</strong> in this file after deploying the Google Apps Script web app. This endpoint is for TLC survey data only. Glitch Chapel remains separate.</div>
 
       <form id="surveyForm" class="grid">
         <div>
           <label>Name (Optional)</label>
-          <input name="Name (Optional)">
+          <input name="name">
         </div>
-
         <div>
           <label>Email Address (Optional)</label>
-          <input type="email" name="Email Address (Optional)">
+          <input type="email" name="email">
         </div>
-
         <div>
           <label>Would you like to receive updates from TLC?</label>
-          <select name="Would you like to receive updates from TLC?">
-            <option>Yes</option>
-            <option>No</option>
-          </select>
+          <select name="updates"><option>Yes</option><option>No</option></select>
         </div>
-
         <div>
           <label>Which best describes you?</label>
-          <input name="Which best describes you?" placeholder="Community Member; Artist / Creative; Parent">
+          <input name="describes" placeholder="Community Member; Artist / Creative; Parent">
         </div>
-
         <div class="full">
           <label>Which TLC programs interest you?</label>
-          <textarea name="Which TLC programs interest you?" placeholder="Separate multiple selections with semicolons"></textarea>
+          <textarea name="programs" placeholder="Separate multiple selections with semicolons"></textarea>
         </div>
-
         <div class="full">
           <label>How would you most likely participate?</label>
-          <textarea name="How would you most likely participate?" placeholder="Volunteer; Attend Events; Become a Member"></textarea>
+          <textarea name="participate"></textarea>
         </div>
-
         <div class="full">
           <label>What skills could you contribute?</label>
-          <textarea name="What skills could you contribute?" placeholder="Cooking; Social Media; Fundraising"></textarea>
+          <textarea name="skills"></textarea>
         </div>
-
         <div class="full">
           <label>Which community challenges concern you most?</label>
-          <textarea name="Which community challenges concern you most?"></textarea>
+          <textarea name="challenges"></textarea>
         </div>
-
         <div>
-          <label>How concerned are you about the impact of AI on jobs, education, and daily life?</label>
-          <select name="How concerned are you about the impact of AI on jobs, education, and daily life?">
-            <option value=""></option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
+          <label>How concerned are you about the impact of AI on jobs, education, and daily life? (1-5)</label>
+          <select name="ai_concern"><option value=""></option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
         </div>
-
         <div>
           <label>Would you attend a free workshop about AI tools and the future of work?</label>
-          <select name="Would you attend a free workshop about AI tools and the future of work?">
-            <option>Yes</option>
-            <option>Maybe</option>
-            <option>No</option>
-          </select>
+          <select name="ai_workshop"><option>Yes</option><option>Maybe</option><option>No</option></select>
         </div>
-
         <div class="full">
           <label>What AI-related topics interest you most?</label>
-          <textarea name="What AI-related topics interest you most?"></textarea>
+          <textarea name="ai_topics"></textarea>
         </div>
-
         <div class="full">
           <label>What is the biggest challenge facing our community today?</label>
-          <textarea name="What is the biggest challenge facing our community today?"></textarea>
+          <textarea name="biggest_challenge"></textarea>
         </div>
-
         <div class="full">
           <label>If TLC could launch one new program tomorrow, what should it be?</label>
-          <textarea name="If TLC could launch one new program tomorrow, what should it be?"></textarea>
+          <textarea name="new_program"></textarea>
         </div>
-
         <div>
           <label>Would you be willing to participate in a future focus group or interview?</label>
-          <select name="Would you be willing to participate in a future focus group or interview?">
-            <option>Yes</option>
-            <option>No</option>
-          </select>
+          <select name="focus_group"><option>Yes</option><option>No</option></select>
         </div>
-
         <div>
-          <label>How interested would you be in attending free workshops related to AI, technology, creativity, entrepreneurship, or future job skills?</label>
-          <select name="How interested would you be in attending free workshops related to AI, technology, creativity, entrepreneurship, or future job skills?">
-            <option value=""></option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
+          <label>How interested would you be in attending free workshops related to AI, technology, creativity, entrepreneurship, or future job skills? (1-5)</label>
+          <select name="workshop_interest"><option value=""></option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
         </div>
-
         <div class="full">
-          <label>Anything else you’d like us to know?</label>
-          <textarea name="Anything else you’d like us to know?"></textarea>
+          <label>Anything else you'd like us to know?</label>
+          <textarea name="anything_else"></textarea>
         </div>
-
         <div class="full">
           <button type="submit">Submit survey</button>
-          <div class="status" id="status" aria-live="polite"></div>
+          <p class="status" id="status"></p>
         </div>
       </form>
     </div>
   </div>
-
   <script>
     const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyKWDD0DgOvhmANDM9e2-ir-bdvG5zRQQE0MjEsRJetHwaeQH5WiSp_SwwRHs3Fkv00Qw/exec';
     const form = document.getElementById('surveyForm');
     const statusEl = document.getElementById('status');
-
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      statusEl.textContent = 'Submitting...';
       const data = Object.fromEntries(new FormData(form).entries());
       data['Timestamp'] = new Date().toISOString();
-
-      if (ENDPOINT === 'https://script.google.com/macros/s/AKfycbyKWDD0DgOvhmANDM9e2-ir-bdvG5zRQQE0MjEsRJetHwaeQH5WiSp_SwwRHs3Fkv00Qw/exec') {
-        statusEl.textContent = 'Add your deployed Google Apps Script URL to activate live saving.';
-        return;
-      }
-
-      statusEl.textContent = 'Submitting...';
-
       try {
         const res = await fetch(ENDPOINT, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
+          body: new URLSearchParams(data)
         });
-
         const out = await res.json().catch(() => ({}));
-        statusEl.textContent = (res.ok && (out.result === 'success' || out.ok))
-          ? 'Thank you — your response was saved.'
-          : 'Submission failed. Please try again.';
-
-        if (res.ok && (out.result === 'success' || out.ok)) form.reset();
+        if (res.ok && (out.result === 'success' || out.ok)) {
+          statusEl.textContent = 'Thank you - your response was saved!';
+          form.reset();
+        } else {
+          statusEl.textContent = 'Submission failed. Please try again.';
+        }
       } catch (err) {
-        statusEl.textContent = 'Submission failed. Please try again.';
+        statusEl.textContent = 'Submission failed. Please try again. (' + err.message + ')';
       }
     });
   </script>
