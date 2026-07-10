@@ -1,131 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Donate – TLC Ministry</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-uXPTCdzqmTTzp7aG+2HPzBd9+5Y7GXU4RFMmeEoU4t1jVviySm/dxN/wucwIF+KMCdRGKNqkWf2wd+8WJX6kdA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate — TLC Ministry</title>
+<meta name="description" content="Support TLC Ministry with a one-time or recurring gift. Every donation funds community meals, art workshops, and AI Pathways mentorship.">
+<link rel="icon" href="assets/img/logo.jpg">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://www.paypal.com/sdk/js?client-id=BAAUnITM5clocYw8KNmx9BSzXdqOjkZNya1wLXWvv0aKFyb1M9B_0R4IPuHUqOUXMexSaHD_flnpC49w2U&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
 </head>
 <body>
-  <header>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="index.html" class="brand"><img src="assets/img/logo.jpg" alt="TLC Ministry logo"><span>TLC <em>Ministry</em></span></a>
     <nav>
-      <div class="nav-logo">TLC Ministry</div>
-      <div class="nav-toggle"><i class="fas fa-bars"></i></div>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="programs.html">Programs</a>
-        <a href="impact.html">Impact</a>
-        <a href="partner.html">Partner</a>
-        <a href="donate.html">Donate</a>
-        <a href="contact.html">Contact</a>
-        <a href="blog.html">Blog</a>
-      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
-  </header>
-  <!-- Page Hero -->
-  <section class="page-hero" style="background-image: url('assets/images/hero_bg.png');">
-    <div class="page-hero-overlay"></div>
-    <div class="page-hero-content">
-      <h1>Your Gift Creates Nourishment, Love, and Hope</h1>
+    <div class="nav-cta">
+      <a href="donate.html" class="btn btn-secondary">Donate</a>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
-  </section>
-  <!-- Donation Impact Levels -->
-  <section class="donation-levels">
-    <div class="container">
-      <h2>Choose Your Impact</h2>
-      <div class="donation-grid">
-        <div class="donation-card">
-          <h3>$10</h3>
-          <p>Feeds three people with a warm taco meal.</p>
-          <a href="contact.html" class="btn-secondary">Give $10</a>
-        </div>
-        <div class="donation-card">
-          <h3>$25</h3>
-          <p>Funds art supplies for one workshop session.</p>
-          <a href="contact.html" class="btn-secondary">Give $25</a>
-        </div>
-        <div class="donation-card">
-          <h3>$100</h3>
-          <p>Sponsors an entire community event.</p>
-          <a href="contact.html" class="btn-secondary">Give $100</a>
-        </div>
+  </div>
+</header>
+
+<div class="page-header reveal">
+  <div class="container">
+    <p class="eyebrow">Give a Gift</p>
+    <h1>Your Generosity Feeds More Than Bellies</h1>
+    <p class="lede" style="margin: 0 auto;">Every gift funds meals, art supplies, and mentorship for neighbors building a better future.</p>
+  </div>
+</div>
+
+<section style="padding-top:0;">
+  <div class="container grid-2">
+    <div class="reveal">
+      <div class="form-card">
+        <h3 style="margin-bottom: 0.5rem;">Make a Secure Gift</h3>
+        <p class="form-note" style="margin-bottom: 1.5rem;">Give safely through PayPal — one-time or as a recurring gift. Venmo also accepted.</p>
+        <div id="paypal-container-Z8T6UZJQC5GTW"></div>
+        <script>
+          if (window.paypal) {
+            paypal.HostedButtons({ hostedButtonId: "Z8T6UZJQC5GTW" }).render("#paypal-container-Z8T6UZJQC5GTW");
+          }
+        </script>
+        <p class="form-note mt-8">All online donations are processed securely through our hosted PayPal giving button. Prefer a direct ACH/wire gift? Email <a href="mailto:erik@tacosloveandcreation.org" style="color:var(--terracotta); font-weight:700;">erik@tacosloveandcreation.org</a> for current instructions.</p>
       </div>
     </div>
-  </section>
-  <!-- Monthly Giving -->
-  <section class="monthly-giving" style="background-color: var(--secondary); color: #ffffff;">
-    <div class="container" style="text-align: center;">
-      <h2>Join the Creator Circle</h2>
-      <p>Make a lasting impact by becoming a monthly donor. Your recurring gift ensures a steady supply of tacos, love, and art all year long.</p>
-      <a href="contact.html" class="btn">Become a Monthly Donor</a>
-    </div>
-  </section>
-  <!-- Corporate Giving -->
-  <section class="corporate-giving">
-    <div class="container">
-      <h2>Corporate Giving</h2>
-      <p>Looking to maximize your philanthropic impact? We offer tailored giving opportunities for businesses of all sizes. Reach out to learn how your organization can sponsor a program or match employee donations.</p>
-      <a href="partner.html" class="btn-secondary">Learn About Partnership</a>
-    </div>
-  </section>
-  <!-- Trust Statement -->
-  <section class="trust-section" style="background-color: var(--light);">
-    <div class="container" style="text-align: center;">
-      <h2>Trust &amp; Transparency</h2>
-      <p>TLC Ministry is a registered 501(c)(3) organization. All donations are tax‑deductible to the fullest extent allowed by law. We steward every dollar with integrity and accountability.</p>
-    </div>
-  </section>
-  <!-- CTA -->
-  <section class="cta-section" style="background-color: var(--primary); color: #ffffff;">
-    <div class="container" style="text-align: center;">
-      <h2>Ready to Make a Difference?</h2>
-      <p>Your generosity fuels nourishment, love, and creativity in our community.</p>
-      <a href="contact.html" class="btn">Donate Securely Now</a>
-    </div>
-  </section>
-  <!-- Footer -->
-  <footer>
-    <div class="container footer-grid">
-      <div class="footer-about">
-        <h4>About TLC Ministry</h4>
-        <p>TLC Ministry is a registered 501(c)(3) nonprofit dedicated to providing food, love, and art to those in need. Join us in transforming lives.</p>
-      </div>
-      <div class="footer-links">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="about.html">About</a></li>
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="impact.html">Impact</a></li>
-          <li><a href="partner.html">Partner</a></li>
-          <li><a href="donate.html">Donate</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="blog.html">Blog</a></li>
-        </ul>
-      </div>
-      <div class="footer-contact">
-        <h4>Contact</h4>
-        <p>Noble, Oklahoma, USA</p>
-        <p>Email: <a href="mailto:info@tlcministry.org">info@tlcministry.org</a></p>
-        <p>Phone: (555) 123‑4567</p>
-      </div>
-      <div class="footer-social">
-        <h4>Follow Us</h4>
-        <div class="social-icons">
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        </div>
+    <div class="reveal">
+      <p class="eyebrow">Why Give?</p>
+      <h2>Your Support Funds Real People</h2>
+      <p class="lede">Every gift funds meals, supplies, and workshops. As AI reshapes the job landscape, your donations help us train youth with creative and technical skills so they can thrive — not get left behind.</p>
+      <div class="hero-stats" style="margin-top: 2rem;">
+        <div class="hero-stat"><strong>$25</strong><span>Feeds 10 neighbors</span></div>
+        <div class="hero-stat"><strong>$100</strong><span>Funds a mural day</span></div>
+        <div class="hero-stat"><strong>$500</strong><span>Sponsors 1 month of mentorship</span></div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 TLC Ministry. All rights reserved.</p>
+  </div>
+</section>
+
+<!-- BUBBLE FUNDRAISER -->
+<section>
+  <div class="bubble-section reveal">
+    <canvas id="bubbleCanvas"></canvas>
+    <div class="bubble-inner">
+      <span class="bubble-live"><span class="dot"></span> Live Fundraiser</span>
+      <h2>Watch Your Gift Pop a Bubble</h2>
+      <p>Give any amount and watch our Giant Bubble Fundraiser livestream fill up in real time. It's silly, joyful, and 100% for the mission.</p>
     </div>
-  </footer>
-  <script src="assets/js/script.js"></script>
+  </div>
+</section>
+
+<section class="section-cream reveal">
+  <div class="container grid-2">
+    <div>
+      <img src="assets/img/donate-festival.png" alt="A lively outdoor community festival with a food truck, colorful mural, and families dancing together">
+    </div>
+    <div>
+      <p class="eyebrow">Beyond Money</p>
+      <h2>Give Your Time, Skills, or Voice</h2>
+      <p class="lede">Not able to give financially right now? You can still change lives — volunteer at a taco night, mentor a young person, or help us spread the word.</p>
+      <a href="contact.html" class="btn btn-primary">Volunteer With Us</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand"><img src="assets/img/logo.jpg" alt="TLC Ministry logo">TLC Ministry</div>
+      <p style="max-width: 280px; font-size: 0.9rem;">Tacos, Love and Creation Foundation — a 501(c)(3) nonprofit based in Norman, Oklahoma. EIN 33-2509318.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Explore</h5>
+      <a href="about.html">About Us</a>
+      <a href="programs.html">Programs</a>
+      <a href="membership.html">Membership</a>
+      <a href="donate.html">Donate</a>
+    </div>
+    <div class="footer-col">
+      <h5>Connect</h5>
+      <a href="contact.html">Contact</a>
+      <a href="survey/index.html">Community Survey</a>
+    </div>
+    <div class="footer-col">
+      <h5>Reach Us</h5>
+      <a href="mailto:erik@tacosloveandcreation.org">erik@tacosloveandcreation.org</a>
+      <a href="#">Norman, Oklahoma</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 TLC Ministry. All rights reserved.</span>
+    <span>Built with love (and a lot of tacos) in Norman, OK.</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>

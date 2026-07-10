@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membership — TLC Ministry</title>
+<meta name="description" content="Become a TLC Ministry member and help fuel community meals, art workshops, and AI Pathways mentorship every month.">
+<link rel="icon" href="assets/img/logo.jpg">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="index.html" class="brand"><img src="assets/img/logo.jpg" alt="TLC Ministry logo"><span>TLC <em>Ministry</em></span></a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="membership.html" class="active">Membership</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="donate.html" class="btn btn-secondary">Donate</a>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="page-header reveal">
+  <div class="container">
+    <p class="eyebrow">Join the Movement</p>
+    <h1>Become a Member</h1>
+    <p class="lede" style="margin: 0 auto;">Monthly members are the heartbeat of TLC Ministry — your steady support lets us plan ahead, feed more neighbors, and mentor more youth.</p>
+  </div>
+</div>
+
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="pricing-grid">
+      <div class="card price-card reveal">
+        <h4>Community Member</h4>
+        <div class="amount">$15<sup>/mo</sup></div>
+        <p style="font-size: var(--text-sm);">Perfect for anyone who wants to pitch in every month.</p>
+        <ul>
+          <li>Monthly impact newsletter</li>
+          <li>Invitations to taco nights</li>
+          <li>Name listed on our supporter wall</li>
+        </ul>
+        <a href="#apply" class="btn btn-secondary">Choose This Tier</a>
+      </div>
+      <div class="card price-card featured reveal">
+        <h4>Serving Member</h4>
+        <div class="amount">$35<sup>/mo</sup></div>
+        <p style="font-size: var(--text-sm);">Fund a family's worth of meals every single month.</p>
+        <ul>
+          <li>Everything in Community</li>
+          <li>Early access to workshop signups</li>
+          <li>Quarterly video update from Erik</li>
+          <li>Exclusive members-only Discord</li>
+        </ul>
+        <a href="#apply" class="btn btn-primary">Choose This Tier</a>
+      </div>
+      <div class="card price-card reveal">
+        <h4>Family Builder</h4>
+        <div class="amount">$75<sup>/mo</sup></div>
+        <p style="font-size: var(--text-sm);">Help sponsor a youth's full AI Pathways mentorship track.</p>
+        <ul>
+          <li>Everything in Serving</li>
+          <li>VIP seating at annual gala</li>
+          <li>Behind-the-scenes program tours</li>
+          <li>Personal thank-you note from a mentee</li>
+        </ul>
+        <a href="#apply" class="btn btn-secondary">Choose This Tier</a>
+      </div>
+      <div class="card price-card reveal">
+        <h4>Legacy Partner</h4>
+        <div class="amount">$150<sup>/mo</sup></div>
+        <p style="font-size: var(--text-sm);">Become a founding partner in TLC's long-term vision.</p>
+        <ul>
+          <li>Everything in Family Builder</li>
+          <li>Recognition as a Legacy Partner</li>
+          <li>Annual strategy briefing with leadership</li>
+          <li>Co-host invite for a community event</li>
+        </ul>
+        <a href="#apply" class="btn btn-secondary">Choose This Tier</a>
+      </div>
+    </div>
+    <p class="text-center form-note mt-8">All memberships are processed securely through PayPal and can be cancelled anytime. Prefer a one-time gift? <a href="donate.html" style="color:var(--terracotta); font-weight:700;">Visit our Donate page →</a></p>
+  </div>
+</section>
+
+<!-- APPLICATION FORM -->
+<section id="apply" class="section-cream">
+  <div class="container grid-2">
+    <div class="reveal">
+      <p class="eyebrow">Step 1</p>
+      <h2>Tell Us About Yourself</h2>
+      <p class="lede">Fill out this quick form to let us know which membership tier you'd like and how you'd like to stay involved. We'll follow up by email to set up your monthly gift through PayPal.</p>
+      <img src="assets/img/membership-friends.png" alt="A diverse group of friends of all ages hugging and laughing together outdoors in a community garden" style="margin-top: 2rem;">
+    </div>
+    <div class="reveal">
+      <div class="form-card">
+        <div class="form-success">Thank you! Your membership request has been sent — we'll be in touch within 2 business days to finish setting up your monthly gift. 🌮</div>
+        <form action="https://formsubmit.co/erik@tacosloveandcreation.org" method="POST" data-ajax="true">
+          <input type="hidden" name="_subject" value="New TLC Membership Application">
+          <input type="hidden" name="_captcha" value="false">
+          <div class="form-row">
+            <div class="field">
+              <label for="m-name">Full Name</label>
+              <input type="text" id="m-name" name="Name" required>
+            </div>
+            <div class="field">
+              <label for="m-email">Email</label>
+              <input type="email" id="m-email" name="Email" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="m-tier">Membership Tier</label>
+            <select id="m-tier" name="Membership Tier" required>
+              <option value="">Select a tier...</option>
+              <option>Community Member — $15/mo</option>
+              <option>Serving Member — $35/mo</option>
+              <option>Family Builder — $75/mo</option>
+              <option>Legacy Partner — $150/mo</option>
+              <option>Not sure yet — let's talk</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="m-message">Anything else you'd like us to know?</label>
+            <textarea id="m-message" name="Message" placeholder="Questions, interests, or how you'd like to get involved..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Submit Application</button>
+          <p class="form-note">We'll never share your information. Questions? Email <a href="mailto:erik@tacosloveandcreation.org" style="color:var(--terracotta);">erik@tacosloveandcreation.org</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand"><img src="assets/img/logo.jpg" alt="TLC Ministry logo">TLC Ministry</div>
+      <p style="max-width: 280px; font-size: 0.9rem;">Tacos, Love and Creation Foundation — a 501(c)(3) nonprofit based in Norman, Oklahoma. EIN 33-2509318.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Explore</h5>
+      <a href="about.html">About Us</a>
+      <a href="programs.html">Programs</a>
+      <a href="membership.html">Membership</a>
+      <a href="donate.html">Donate</a>
+    </div>
+    <div class="footer-col">
+      <h5>Connect</h5>
+      <a href="contact.html">Contact</a>
+      <a href="survey/index.html">Community Survey</a>
+    </div>
+    <div class="footer-col">
+      <h5>Reach Us</h5>
+      <a href="mailto:erik@tacosloveandcreation.org">erik@tacosloveandcreation.org</a>
+      <a href="#">Norman, Oklahoma</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 TLC Ministry. All rights reserved.</span>
+    <span>Built with love (and a lot of tacos) in Norman, OK.</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

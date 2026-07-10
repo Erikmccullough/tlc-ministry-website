@@ -1,114 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us – TLC Ministry</title>
-  <!-- Fonts and Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-uXPTCdzqmTTzp7aG+2HPzBd9+5Y7GXU4RFMmeEoU4t1jVviySm/dxN/wucwIF+KMCdRGKNqkWf2wd+8WJX6kdA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- Main stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — TLC Ministry</title>
+<meta name="description" content="Learn the story behind TLC Ministry — Tacos, Love and Creation Foundation — and how our people-first mission serves Norman and Oklahoma City.">
+<link rel="icon" href="assets/img/logo.jpg">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Header -->
-  <header>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="index.html" class="brand"><img src="assets/img/logo.jpg" alt="TLC Ministry logo"><span>TLC <em>Ministry</em></span></a>
     <nav>
-      <div class="nav-logo">TLC Ministry</div>
-      <div class="nav-toggle"><i class="fas fa-bars"></i></div>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="programs.html">Programs</a>
-        <a href="impact.html">Impact</a>
-        <a href="partner.html">Partner</a>
-        <a href="donate.html">Donate</a>
-        <a href="contact.html">Contact</a>
-        <a href="blog.html">Blog</a>
-      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="programs.html">Programs</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
-  </header>
-  <!-- Page Hero -->
-  <section class="page-hero" style="background-image: url('assets/images/about_bg.png');">
-    <div class="page-hero-overlay"></div>
-    <div class="page-hero-content">
-      <h1>Love in Action. Art in Service. Tacos for All.</h1>
+    <div class="nav-cta">
+      <a href="donate.html" class="btn btn-secondary">Donate</a>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
-  </section>
-  <!-- Story Section -->
-  <section class="story-section">
-    <div class="container">
-      <h2>Our Story</h2>
-      <p>TLC Ministry was founded by artist and community leader Erik McCullough. What began as a humble effort to share home‑cooked tacos with friends has grown into a movement of compassion and creativity. We saw that technology was reshaping work and livelihoods, leaving many feeling isolated and uncertain. Our response: combine the simple joy of a warm meal, the healing power of love, and the transformative magic of art.</p>
-      <p>Today, TLC Ministry nourishes hundreds of neighbors every week. We gather over food, listen to each other’s stories, and create works of art that brighten our streets. We believe that everyone deserves dignity, connection, and the chance to express themselves—no matter what changes the world brings.</p>
+  </div>
+</header>
+
+<div class="page-header reveal">
+  <div class="container">
+    <p class="eyebrow">About TLC Ministry</p>
+    <h1>Love in Action.<br>Art in Service.<br>Tacos for All.</h1>
+  </div>
+</div>
+
+<section style="padding-top:0;">
+  <div class="container grid-2">
+    <div class="reveal">
+      <p class="eyebrow">From Our Founder</p>
+      <h2>It Started With a Folding Table</h2>
+      <p class="lede">I'm Erik McCullough, founder of TLC Ministry. I didn't set out to start a nonprofit — I just wanted to feed my neighbors. What began as a folding table and a griddle in a parking lot in Norman, Oklahoma has grown into a community of volunteers, artists, mentors, and families who believe that a full plate and a listening ear can change a life.</p>
+      <p>As I watched more and more neighbors lose stable work to automation and AI-driven change, I realized feeding people wasn't enough — we needed to help them build futures, too. That's how our AI Pathways mentorship program was born: art, food, and technology, all in service of the same goal — helping people thrive.</p>
     </div>
-  </section>
-  <!-- Mission & Vision -->
-  <section class="mission-vision" style="background-color: var(--teal); color: #ffffff;">
-    <div class="container">
-      <h2>Our Mission &amp; Vision</h2>
-      <p><strong>Mission:</strong> To nourish our community with food, love, and art—building resilience in a world transformed by technology.</p>
-      <p><strong>Vision:</strong> A future where every person feels seen, supported, and inspired to create; where technological change serves humanity, not the other way around.</p>
+    <div class="reveal">
+      <img src="assets/img/about-founder.png" alt="TLC founder laughing with teenage volunteers while cooking tacos on a griddle in the community kitchen">
     </div>
-  </section>
-  <!-- Founder Note -->
-  <section class="founder-note">
-    <div class="container">
-      <h2>From Our Founder</h2>
-      <blockquote>
-        “I’ve been an artist all my life, but the most important creation I’ve made is this community. At TLC Ministry we measure success in smiles, stories, and shared meals. Thank you for being part of our journey.”
-      </blockquote>
-      <p class="founder-signature">– Erik McCullough, Founder</p>
+  </div>
+</section>
+
+<section class="section-cream">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Mission &amp; Vision</p>
+      <h2>What We Believe</h2>
     </div>
-  </section>
-  <!-- CTA Section -->
-  <section class="cta-section" style="background-color: var(--primary); color: #ffffff;">
-    <div class="container" style="text-align: center;">
-      <h2>Join the Movement</h2>
-      <p>Whether you cook, paint, organize, or simply care, there’s a place for you at TLC. Learn more about our team and how you can get involved.</p>
-      <a href="contact.html" class="btn">Meet Our Team &amp; Board</a>
-    </div>
-  </section>
-  <!-- Footer -->
-  <footer>
-    <div class="container footer-grid">
-      <div class="footer-about">
-        <h4>About TLC Ministry</h4>
-        <p>TLC Ministry is a registered 501(c)(3) nonprofit dedicated to providing food, love, and art to those in need. Join us in transforming lives.</p>
+    <div class="grid-3">
+      <div class="card reveal">
+        <div class="icon-circle">🌮</div>
+        <h4>Mission</h4>
+        <p>To nourish bodies and spirits through shared meals, creative expression, and future-ready mentorship — building a community where everyone belongs and everyone can thrive.</p>
       </div>
-      <div class="footer-links">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="about.html">About</a></li>
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="impact.html">Impact</a></li>
-          <li><a href="partner.html">Partner</a></li>
-          <li><a href="donate.html">Donate</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="blog.html">Blog</a></li>
-        </ul>
+      <div class="card reveal">
+        <div class="icon-circle">🎨</div>
+        <h4>Vision</h4>
+        <p>A Norman and Oklahoma City where no one goes hungry, every voice gets a canvas, and every young person has the skills and confidence to navigate whatever the future holds.</p>
       </div>
-      <div class="footer-contact">
-        <h4>Contact</h4>
-        <p>Noble, Oklahoma, USA</p>
-        <p>Email: <a href="mailto:info@tlcministry.org">info@tlcministry.org</a></p>
-        <p>Phone: (555) 123‑4567</p>
-      </div>
-      <div class="footer-social">
-        <h4>Follow Us</h4>
-        <div class="social-icons">
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        </div>
+      <div class="card reveal">
+        <div class="icon-circle">🤝</div>
+        <h4>Approach</h4>
+        <p>We build <em>with</em> our community, not just for it — neighbors, artists, and mentors shape every program from the ground up.</p>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 TLC Ministry. All rights reserved.</p>
+  </div>
+</section>
+
+<!-- PEOPLE FIRST DEEP DIVE -->
+<section class="section-ink">
+  <div class="container grid-2">
+    <div class="reveal">
+      <p class="eyebrow">A People-First Philosophy</p>
+      <h2>Building With People, Not Just For Them</h2>
+      <p class="lede">Organizations like OpenAI have championed a "people-first" approach to technology — investing in efforts where communities lead participatory design, AI strengthens civic life, and trusted local leaders help make new technology accessible to everyone, including those too often left out of digital innovation.</p>
+      <p>TLC Ministry lives by that same philosophy. Our AI Pathways mentors are local leaders — teachers, artists, and neighbors — who help people build the confidence to navigate an AI-driven world. We don't believe technology should replace human work and connection. We believe it should <em>enhance</em> it, and that its benefits should be shared broadly, not concentrated among the few.</p>
     </div>
-  </footer>
-  <script src="assets/js/script.js"></script>
+    <div class="reveal" style="display:flex; flex-direction:column; gap: 1rem;">
+      <div class="value-card"><h4>Community-Led Design</h4><p>Every workshop and mentorship track is shaped by listening to the people it serves.</p></div>
+      <div class="value-card"><h4>Trusted Local Leaders</h4><p>Mentors are educators, artists, and neighbors — not outside experts.</p></div>
+      <div class="value-card"><h4>Inclusion by Design</h4><p>We prioritize families and youth who've historically been left out of digital opportunity.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container text-center reveal">
+    <h2>Join the Movement</h2>
+    <p class="lede" style="margin: 0 auto var(--space-8);">Whether you volunteer an afternoon, become a monthly member, or simply share a meal with us — you become part of the story.</p>
+    <div class="hero-actions flex-center">
+      <a href="membership.html" class="btn btn-primary btn-lg">Become a Member</a>
+      <a href="contact.html" class="btn btn-secondary btn-lg">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand"><img src="assets/img/logo.jpg" alt="TLC Ministry logo">TLC Ministry</div>
+      <p style="max-width: 280px; font-size: 0.9rem;">Tacos, Love and Creation Foundation — a 501(c)(3) nonprofit based in Norman, Oklahoma. EIN 33-2509318.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Explore</h5>
+      <a href="about.html">About Us</a>
+      <a href="programs.html">Programs</a>
+      <a href="membership.html">Membership</a>
+      <a href="donate.html">Donate</a>
+    </div>
+    <div class="footer-col">
+      <h5>Connect</h5>
+      <a href="contact.html">Contact</a>
+      <a href="survey/index.html">Community Survey</a>
+    </div>
+    <div class="footer-col">
+      <h5>Reach Us</h5>
+      <a href="mailto:erik@tacosloveandcreation.org">erik@tacosloveandcreation.org</a>
+      <a href="#">Norman, Oklahoma</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 TLC Ministry. All rights reserved.</span>
+    <span>Built with love (and a lot of tacos) in Norman, OK.</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>

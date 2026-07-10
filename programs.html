@@ -1,128 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programs – TLC Ministry</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Open+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-uXPTCdzqmTTzp7aG+2HPzBd9+5Y7GXU4RFMmeEoU4t1jVviySm/dxN/wucwIF+KMCdRGKNqkWf2wd+8WJX6kdA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Programs — TLC Ministry</title>
+<meta name="description" content="Explore TLC Ministry's three programs: community taco nights, art & creation workshops, and AI Pathways mentorship for future-ready youth.">
+<link rel="icon" href="assets/img/logo.jpg">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="index.html" class="brand"><img src="assets/img/logo.jpg" alt="TLC Ministry logo"><span>TLC <em>Ministry</em></span></a>
     <nav>
-      <div class="nav-logo">TLC Ministry</div>
-      <div class="nav-toggle"><i class="fas fa-bars"></i></div>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="programs.html">Programs</a>
-        <a href="impact.html">Impact</a>
-        <a href="partner.html">Partner</a>
-        <a href="donate.html">Donate</a>
-        <a href="contact.html">Contact</a>
-        <a href="blog.html">Blog</a>
-      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="programs.html" class="active">Programs</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
-  </header>
-  <!-- Page Hero -->
-  <section class="page-hero" style="background-image: url('assets/images/mosaic_bg.png');">
-    <div class="page-hero-overlay"></div>
-    <div class="page-hero-content">
-      <h1>Three Pillars, One Mission</h1>
+    <div class="nav-cta">
+      <a href="donate.html" class="btn btn-secondary">Donate</a>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
-  </section>
-  <!-- Program Sections -->
-  <section id="tacos" class="program-section">
-    <div class="container">
-      <h2>Tacos</h2>
-      <div class="program-flex">
-        <div class="program-text">
-          <p>Food is more than nourishment—it's comfort, culture, and community. Every week we hold taco distributions and community dinners, serving warm meals made with love. Volunteers cook, assemble, and share tacos with neighbors experiencing hardship. The simple act of sharing food breaks down barriers and starts conversations.</p>
-          <p>Want to help prepare or serve tacos? We welcome chefs, home cooks, and anyone who loves to feed people. Join us in the kitchen or at the table and taste the difference a meal can make.</p>
-        </div>
-        <div class="program-icon">
-          <i class="fas fa-utensils fa-4x" style="color: var(--primary);"></i>
-        </div>
+  </div>
+</header>
+
+<div class="page-header reveal">
+  <div class="container">
+    <p class="eyebrow">Three Pillars, One Mission</p>
+    <h1>Our Programs</h1>
+    <p class="lede" style="margin: 0 auto;">Every program is designed with our community, not just for it — feeding bellies, feeding souls, and building futures side by side.</p>
+  </div>
+</div>
+
+<!-- TACOS -->
+<section style="padding-top:0;">
+  <div class="container grid-2">
+    <div class="reveal">
+      <img src="assets/img/program-tacos.png" alt="An extended family laughing and sharing tacos together at an outdoor table under string lights at sunset">
+    </div>
+    <div class="reveal">
+      <span class="program-card tag" style="margin-bottom:1rem;">Pillar One</span>
+      <h2>Tacos: Community Meal Nights</h2>
+      <p class="lede">Every week, we set up tables and griddles in Norman and Oklahoma City and cook for anyone who's hungry — no questions, no forms, no judgment. It's a simple act with a big effect: strangers become neighbors over a shared plate.</p>
+      <ul style="list-style:none; color: var(--ink-soft);">
+        <li style="padding:6px 0;">🌮 Free weekly community meals</li>
+        <li style="padding:6px 0;">🌮 Open to everyone, no eligibility screening</li>
+        <li style="padding:6px 0;">🌮 Powered by volunteer cooks and donated ingredients</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CREATION -->
+<section class="section-cream">
+  <div class="container grid-2">
+    <div class="reveal" style="order:2;">
+      <span class="program-card tag" style="margin-bottom:1rem;">Pillar Two</span>
+      <h2>Creation: Art &amp; Mural Workshops</h2>
+      <p class="lede">Art is healing, and creating something beautiful together builds pride in a place. Our workshops turn blank walls into murals, scraps of denim into new creations, and idle afternoons into moments of shared joy.</p>
+      <ul style="list-style:none; color: var(--ink-soft);">
+        <li style="padding:6px 0;">🎨 Community mural painting days</li>
+        <li style="padding:6px 0;">🎨 Upcycled denim &amp; textile art workshops</li>
+        <li style="padding:6px 0;">🎨 Open studio time for all ages</li>
+      </ul>
+    </div>
+    <div class="reveal" style="order:1;">
+      <img src="assets/img/program-creation.png" alt="A large diverse group of teens and volunteers laughing while painting a colorful community mural together">
+    </div>
+  </div>
+</section>
+
+<!-- AI PATHWAYS -->
+<section style="padding-top:var(--space-24);">
+  <div class="container grid-2">
+    <div class="reveal">
+      <img src="assets/img/program-ai-pathways.png" alt="A warm mentor sitting beside a smiling teenager, both looking at a laptop screen together at a community center">
+    </div>
+    <div class="reveal">
+      <span class="program-card tag" style="margin-bottom:1rem;">Pillar Three</span>
+      <h2>AI Pathways: Future-Ready Mentorship</h2>
+      <p class="lede">As automation and AI reshape the job market, we've seen too many neighbors — especially at-risk youth — get left behind. AI Pathways pairs young people with trusted local mentors who teach digital literacy, practical AI skills, and the confidence to navigate whatever comes next.</p>
+      <ul style="list-style:none; color: var(--ink-soft);">
+        <li style="padding:6px 0;">💡 One-on-one mentorship with local leaders</li>
+        <li style="padding:6px 0;">💡 Hands-on AI &amp; digital literacy training</li>
+        <li style="padding:6px 0;">💡 Built with — not for — the youth we serve</li>
+      </ul>
+      <div class="value-card" style="margin-top: var(--space-6); background: var(--cream); border-color: var(--line);">
+        <p style="margin:0; color: var(--ink-soft); font-size: var(--text-sm);">This program is directly inspired by the people-first principles behind initiatives like OpenAI's People-First AI Fund: technology should enhance human work, and its benefits should reach everyone — not just the few.</p>
       </div>
     </div>
-  </section>
-  <section id="love" class="program-section" style="background-color: var(--secondary); color: #ffffff;">
-    <div class="container">
-      <h2>Love</h2>
-      <div class="program-flex">
-        <div class="program-icon">
-          <i class="fas fa-hands-holding-heart fa-4x" style="color: #ffffff;"></i>
-        </div>
-        <div class="program-text">
-          <p>Human connection is at the heart of what we do. Through outreach, emotional support, and community gatherings, we listen deeply and uplift one another. From wellness check‑ins and counseling referrals to holiday celebrations and neighborhood clean‑ups, our Love programs ensure no one feels alone.</p>
-          <p>If you have a listening ear or a caring heart, we invite you to volunteer. Compassionate conversations and simple acts of kindness make a world of difference.</p>
-        </div>
-      </div>
+  </div>
+</section>
+
+<section class="section-ink text-center reveal">
+  <div class="container">
+    <h2>Want to Get Involved?</h2>
+    <p class="lede" style="margin: 0 auto var(--space-8);">Volunteer at a taco night, join a mural day, or mentor a young person through AI Pathways — there's a role for everyone.</p>
+    <div class="hero-actions flex-center">
+      <a href="contact.html" class="btn btn-primary btn-lg">Volunteer With Us</a>
+      <a href="membership.html" class="btn btn-secondary btn-lg" style="background: transparent; border: 2px solid var(--cream); color: var(--cream);">Support a Program</a>
     </div>
-  </section>
-  <section id="creation" class="program-section">
-    <div class="container">
-      <h2>Creation</h2>
-      <div class="program-flex">
-        <div class="program-text">
-          <p>Art opens doors to self‑expression and empowerment. In our Creation programs, participants paint murals, design denim upcycles, and explore a variety of artistic mediums. We provide supplies, mentorship, and a supportive space to experiment and grow.</p>
-          <p>Whether you're an experienced artist or picking up a brush for the first time, you’re welcome here. Help us beautify our community and discover the joy of creating together.</p>
-        </div>
-        <div class="program-icon">
-          <i class="fas fa-palette fa-4x" style="color: var(--secondary);"></i>
-        </div>
-      </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand"><img src="assets/img/logo.jpg" alt="TLC Ministry logo">TLC Ministry</div>
+      <p style="max-width: 280px; font-size: 0.9rem;">Tacos, Love and Creation Foundation — a 501(c)(3) nonprofit based in Norman, Oklahoma. EIN 33-2509318.</p>
     </div>
-  </section>
-  <!-- CTA -->
-  <section class="cta-section" style="background-color: var(--primary); color: #ffffff;">
-    <div class="container" style="text-align: center;">
-      <h2>Get Involved</h2>
-      <p>Ready to join one of our programs? Reach out to sign up, volunteer, or simply learn more.</p>
-      <a href="contact.html" class="btn">Join a Program</a>
+    <div class="footer-col">
+      <h5>Explore</h5>
+      <a href="about.html">About Us</a>
+      <a href="programs.html">Programs</a>
+      <a href="membership.html">Membership</a>
+      <a href="donate.html">Donate</a>
     </div>
-  </section>
-  <!-- Footer -->
-  <footer>
-    <div class="container footer-grid">
-      <div class="footer-about">
-        <h4>About TLC Ministry</h4>
-        <p>TLC Ministry is a registered 501(c)(3) nonprofit dedicated to providing food, love, and art to those in need. Join us in transforming lives.</p>
-      </div>
-      <div class="footer-links">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="about.html">About</a></li>
-          <li><a href="programs.html">Programs</a></li>
-          <li><a href="impact.html">Impact</a></li>
-          <li><a href="partner.html">Partner</a></li>
-          <li><a href="donate.html">Donate</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="blog.html">Blog</a></li>
-        </ul>
-      </div>
-      <div class="footer-contact">
-        <h4>Contact</h4>
-        <p>Noble, Oklahoma, USA</p>
-        <p>Email: <a href="mailto:info@tlcministry.org">info@tlcministry.org</a></p>
-        <p>Phone: (555) 123‑4567</p>
-      </div>
-      <div class="footer-social">
-        <h4>Follow Us</h4>
-        <div class="social-icons">
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        </div>
-      </div>
+    <div class="footer-col">
+      <h5>Connect</h5>
+      <a href="contact.html">Contact</a>
+      <a href="survey/index.html">Community Survey</a>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 TLC Ministry. All rights reserved.</p>
+    <div class="footer-col">
+      <h5>Reach Us</h5>
+      <a href="mailto:erik@tacosloveandcreation.org">erik@tacosloveandcreation.org</a>
+      <a href="#">Norman, Oklahoma</a>
     </div>
-  </footer>
-  <script src="assets/js/script.js"></script>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 TLC Ministry. All rights reserved.</span>
+    <span>Built with love (and a lot of tacos) in Norman, OK.</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>
